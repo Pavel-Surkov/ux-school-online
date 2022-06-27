@@ -7,6 +7,8 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 
+import RobotoVariableFont from "../assets/fonts/RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.woff2";
+
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
@@ -15,16 +17,16 @@ import PageError from "./page-error";
  *
  * @returns The top-level react component representing the theme.
  */
+
 const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
 
   return (
     <>
-      {/* Add some metatags to the <head> of the HTML. */}
       <Title />
       <Head>
-        <meta name="description" content={state.frontity.description} />
+        {/* <meta name="description" content={state.frontity.description} /> */}
         <html lang="en" />
       </Head>
 
@@ -32,7 +34,6 @@ const Theme = ({ state }) => {
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
       <Global styles={globalStyles} />
 
-      {/* Add the header of the site. */}
       <HeadContainer>
         <Header />
       </HeadContainer>
@@ -54,10 +55,17 @@ const Theme = ({ state }) => {
 export default connect(Theme);
 
 const globalStyles = css`
+  @font-face {
+    font-family: "Roboto Flex";
+    src: url(${RobotoVariableFont}) format("woff2 supports variations"),
+      url(${RobotoVariableFont}) format("woff2-variations");
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+  }
+
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Roboto Flex", Roboto, Arial, sans-serif;
   }
   a,
   a:visited {

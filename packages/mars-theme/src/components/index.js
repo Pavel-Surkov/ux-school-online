@@ -1,13 +1,10 @@
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Header from "./header";
-import List from "./list";
-import Post from "./post";
-import Loading from "./loading";
-import Title from "./title";
-import PageError from "./page-error";
-
-import RobotoVariableFont from "../assets/fonts/RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.woff2";
+import Header from "./Header";
+import Router from "./Router";
+import Loading from "./Loading";
+import PageError from "./PageError";
+import globalStyles from "./base/globalStyles";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -24,7 +21,6 @@ const Theme = ({ state }) => {
 
   return (
     <>
-      <Title />
       <Head>
         {/* <meta name="description" content={state.frontity.description} /> */}
         <html lang="en" />
@@ -43,8 +39,8 @@ const Theme = ({ state }) => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
-          <List when={data.isArchive} />
-          <Post when={data.isPostType} />
+          <Router when={data.isArchive} />
+          {/* <Post when={data.isPostType} /> */}
           <PageError when={data.isError} />
         </Switch>
       </Main>
@@ -53,26 +49,6 @@ const Theme = ({ state }) => {
 };
 
 export default connect(Theme);
-
-const globalStyles = css`
-  @font-face {
-    font-family: "Roboto Flex";
-    src: url(${RobotoVariableFont}) format("woff2 supports variations"),
-      url(${RobotoVariableFont}) format("woff2-variations");
-    font-weight: 100 1000;
-    font-stretch: 25% 151%;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto Flex", Roboto, Arial, sans-serif;
-  }
-  a,
-  a:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
 
 const HeadContainer = styled.div`
   display: flex;

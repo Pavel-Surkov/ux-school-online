@@ -1,6 +1,6 @@
 import { styled, connect, Global, Head } from "frontity";
-import { CloseIcon, HamburgerIcon } from "./menu-icon";
-import MenuModal from "./menu-modal";
+import { CloseIcon, HamburgerIcon } from "./MenuIcon";
+import MenuModal from "./MenuModal";
 
 /**
  * The menu that should be displayed on mobile devices displaying links to

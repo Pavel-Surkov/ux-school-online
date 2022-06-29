@@ -1,7 +1,6 @@
 import { connect, styled } from "frontity";
-import Link from "./link";
-import Nav from "./nav";
-import MobileMenu from "./menu";
+import Link from "./constant/Link";
+import MobileMenu from "./Menu";
 
 const Header = ({ state }) => {
   return (
@@ -13,7 +12,6 @@ const Header = ({ state }) => {
         <Description>{state.frontity.description}</Description>
         <MobileMenu />
       </Container>
-      <Nav />
     </>
   );
 };

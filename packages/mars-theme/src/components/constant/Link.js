@@ -16,7 +16,7 @@ import Link from "@frontity/components/link";
  *
  * @returns A {@link Link} component, which returns an HTML anchor element.
  */
-const MarsLink = ({ children, ...props }) => {
+const LinkComponent = ({ children, ...props }) => {
   const { state, actions } = useConnect();
 
   /**
@@ -35,4 +35,4 @@ const MarsLink = ({ children, ...props }) => {
   );
 };
 
-export default connect(MarsLink, { injectProps: false });
+export default connect(LinkComponent, { injectProps: false });

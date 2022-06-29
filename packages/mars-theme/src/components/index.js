@@ -1,4 +1,4 @@
-import { Global, css, connect, styled, Head } from "frontity";
+import { Global, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./Header";
 import Router from "./Router";
@@ -15,7 +15,7 @@ import globalStyles from "./base/globalStyles";
  * @returns The top-level react component representing the theme.
  */
 
-const Theme = ({ state }) => {
+const Theme = ({ state, actions }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
 
@@ -32,6 +32,7 @@ const Theme = ({ state }) => {
 
       <HeadContainer>
         <Header />
+        {/* Header theme: common || white */}
       </HeadContainer>
 
       {/* Add the main section. It renders a different component depending

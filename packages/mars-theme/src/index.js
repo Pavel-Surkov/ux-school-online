@@ -19,7 +19,12 @@ const marsTheme = {
      */
     theme: {
       autoPrefetch: "in-view",
-      menu: [],
+      menu: [
+        ["Oплатить курс", "/payment"],
+        ["О школе", "/about"],
+        ["Контакты", "/contacts"],
+      ],
+      headerTheme: "white",
       isMobileMenuOpen: false,
       featured: {
         showOnList: false,
@@ -39,6 +44,22 @@ const marsTheme = {
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false;
+      },
+      setHeaderTheme: ({ state }) => {
+        switch (state.router.link) {
+          case "/": {
+            state.theme.headerTheme = "white";
+            break;
+          }
+          case "/about/": {
+            state.theme.headerTheme = "white";
+            break;
+          }
+          default: {
+            state.theme.headerTheme = "common";
+            break;
+          }
+        }
       },
     },
   },

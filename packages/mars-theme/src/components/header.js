@@ -1,11 +1,19 @@
+import { useEffect } from "react";
 import { connect, styled } from "frontity";
 import Link from "./constant/Link";
 import MobileMenu from "./Menu";
 import Container from "./constant/Container";
 
-const Header = ({ state }) => {
+const Header = ({ state, actions }) => {
+  const theme = state.theme.headerTheme;
+
+  useEffect(() => {
+    actions.theme.setHeaderTheme();
+  }, []);
+
   return (
     <>
+      <div>{theme}</div>
       <Container>
         <StyledLink link="/">
           <Title>{state.frontity.title}</Title>

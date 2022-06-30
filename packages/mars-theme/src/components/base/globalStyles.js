@@ -8,6 +8,7 @@ const globalStyles = css`
     --gray-500: #454859;
     --gray-400: #80859a;
     --gray-300: #b0b5cb;
+    --gray-100: #ebedf5;
 
     --gradient-youtube-btn: linear-gradient(180deg, #ff5938 0%, #d31a10 100%);
     --gradient-primary-btn: linear-gradient(180deg, #37c9fe 0%, #0077ff 100%);
@@ -41,6 +42,10 @@ const globalStyles = css`
   a:visited {
     color: inherit;
     text-decoration: none;
+  }
+  ul,
+  li {
+    list-style-type: none;
   }
 `;
 

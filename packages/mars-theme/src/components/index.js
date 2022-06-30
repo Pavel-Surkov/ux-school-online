@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Global, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./Header";
@@ -18,6 +19,11 @@ import globalStyles from "./base/globalStyles";
 const Theme = ({ state, actions }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
+  const theme = state.theme.headerTheme;
+
+  useEffect(() => {
+    actions.theme.setHeaderTheme();
+  }, [state.router.link]);
 
   return (
     <>
@@ -30,10 +36,8 @@ const Theme = ({ state, actions }) => {
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
       <Global styles={globalStyles} />
 
-      <HeadContainer>
-        <Header />
-        {/* Header theme: common || white */}
-      </HeadContainer>
+      {/* Header theme: common || white */}
+      <Header theme={theme} />
 
       {/* Add the main section. It renders a different component depending
       on the type of URL we are in. */}
@@ -50,13 +54,6 @@ const Theme = ({ state, actions }) => {
 };
 
 export default connect(Theme);
-
-const HeadContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: #1f38c5;
-`;
 
 const Main = styled.div`
   display: flex;

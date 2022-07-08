@@ -19,6 +19,7 @@ const marsTheme = {
      */
     theme: {
       autoPrefetch: "in-view",
+      courseModalOpened: false,
       menu: [
         ["Oплатить курс", "/payment"],
         ["О школе", "/about"],
@@ -44,6 +45,12 @@ const marsTheme = {
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false;
+      },
+      toggleCourseModal: ({ state }) => {
+        state.theme.courseModalOpened = !state.theme.courseModalOpened;
+      },
+      closeCourseModal: ({ state }) => {
+        state.theme.courseModalOpened = false;
       },
       setHeaderTheme: ({ state }) => {
         switch (state.router.link) {

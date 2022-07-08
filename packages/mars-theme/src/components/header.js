@@ -1,20 +1,19 @@
-import { useState } from "react";
 import { connect, styled, useConnect, css } from "frontity";
 import Link from "./constant/Link";
 import MobileMenu from "./Menu";
 import Container from "./constant/Container";
 import Image from "@frontity/components/image";
+import DropdownModal from "./constant/DropdownModal";
 import logo from "../assets/images/svg/Logo.svg";
 import whiteLogo from "../assets/images/svg/Logo-white.svg";
 import { flex, font, whiteRgba, grayRgba } from "./base/functions";
 import drop from "../assets/images/svg/drop.svg";
+import whiteDrop from "../assets/images/svg/drop-white.svg";
 import { ListButton } from "./constant/Button";
 
 const Header = ({ theme }) => {
   const { state, actions } = useConnect();
-  const menu = state.theme.menu;
-
-  const [courseModalOpened, setCourseModalOpened] = useState(false);
+  const { menu, courseModalOpened } = state.theme;
 
   return (
     <HeaderWrapper theme={theme}>
@@ -25,23 +24,32 @@ const Header = ({ theme }) => {
         <div
           css={css`
             margin-right: 30px;
+            position: relative;
           `}
         >
           <CourseButton
             theme={theme}
             rotation={"down"}
-            onClick={() => setCourseModalOpened(true)}
+            onClick={() => actions.theme.toggleCourseModal()}
           >
             Онлайн-курсы
           </CourseButton>
           {courseModalOpened && (
             <CourseModal>
-              <CourseListButton>Онлайн-курсы</CourseListButton>
-              <CourseListButton
-              // onClick={(window.location.href = "https://ux-school.by/")}
-              >
-                Занятия в классе
-              </CourseListButton>
+              <DropdownModal>
+                <CourseListButton
+                  onClick={() => actions.theme.closeCourseModal()}
+                >
+                  Онлайн-курсы
+                </CourseListButton>
+                <CourseListButton
+                  onClick={() =>
+                    (window.location.href = "https://ux-school.by/")
+                  }
+                >
+                  Занятия в классе
+                </CourseListButton>
+              </DropdownModal>
             </CourseModal>
           )}
         </div>
@@ -75,7 +83,14 @@ const Header = ({ theme }) => {
 // Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
-const CourseModal = styled.div``;
+const CourseModal = styled.div`
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 184px;
+`;
 
 const HeaderWrapper = styled.div`
   border-bottom: 1px solid rgba(var(--white), 0.1);
@@ -93,7 +108,18 @@ const HeaderWrapper = styled.div`
 const CourseListButton = styled(ListButton)`
   padding: 8px 16px;
   ${font(16, 24)}
-  border-bottom: 1px solid ${grayRgba(0.2)};
+  border-bottom: 1px solid var(--gray-100);
+  width: 100%;
+  text-align: left;
+  &:first-of-type {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  &:last-of-type {
+    border: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
 `;
 
 const CourseButton = styled.button`
@@ -118,6 +144,10 @@ const CourseButton = styled.button`
     width: 20px;
     height: 20px;
     background: url(${drop}) no-repeat 50%;
+  }
+  &::after {
+    ${({ theme }) =>
+      theme === "white" && `background: url(${whiteDrop}) no-repeat 50%`};
   }
 `;
 

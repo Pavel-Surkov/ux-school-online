@@ -1,34 +1,36 @@
-import { connect, styled, useConnect, css } from "frontity";
-import Link from "./constant/Link";
+import { connect, styled, css } from "frontity";
+import Link from "../constant/Link";
 import MobileMenu from "./Menu";
-import Container from "./constant/Container";
+import Container from "../constant/Container";
 import Image from "@frontity/components/image";
-import DropdownModal from "./constant/DropdownModal";
-import logo from "../assets/images/svg/Logo.svg";
-import whiteLogo from "../assets/images/svg/Logo-white.svg";
-import { flex, font, whiteRgba, grayRgba } from "./base/functions";
-import drop from "../assets/images/svg/drop.svg";
-import whiteDrop from "../assets/images/svg/drop-white.svg";
-import { ListButton } from "./constant/Button";
+import DropdownModal from "../constant/DropdownModal";
+import logo from "../../assets/images/svg/Logo.svg";
+import whiteLogo from "../../assets/images/svg/Logo-white.svg";
+import { flex, font, whiteRgba, grayRgba } from "../base/functions";
+import drop from "../../assets/images/svg/drop.svg";
+import whiteDrop from "../../assets/images/svg/drop-white.svg";
+import { ListButton } from "../constant/Button";
 
-const Header = ({ theme }) => {
-  const { state, actions } = useConnect();
-  const { menu, courseModalOpened } = state.theme;
+const Header = ({ state, actions }) => {
+  const { menu, headerTheme, courseModalOpened } = state.theme;
 
   return (
-    <HeaderWrapper theme={theme}>
+    <HeaderWrapper theme={headerTheme}>
       <HeaderContainer>
         <StyledLink link="/">
-          <Image src={theme === "white" ? whiteLogo : logo} alt="logo" />
+          <Image src={headerTheme === "white" ? whiteLogo : logo} alt="logo" />
         </StyledLink>
         <div
           css={css`
             margin-right: 30px;
             position: relative;
+            @media screen and (max-width: 991px) {
+              display: none;
+            }
           `}
         >
           <CourseButton
-            theme={theme}
+            theme={headerTheme}
             rotation={"down"}
             onClick={() => actions.theme.toggleCourseModal()}
           >
@@ -56,12 +58,17 @@ const Header = ({ theme }) => {
         <nav
           css={css`
             margin-left: auto;
+            @media screen and (max-width: 991px) {
+              display: none;
+            }
           `}
         >
           <ul
             css={css`
               ${flex("row", "center")}
-              color: ${theme === "white" ? "var(--white)" : "var(--black-900)"};
+              color: ${headerTheme === "white"
+                ? "var(--white)"
+                : "var(--black-900)"};
             `}
           >
             {menu &&
@@ -93,6 +100,7 @@ const CourseModal = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
+  padding: 28px 0;
   border-bottom: 1px solid rgba(var(--white), 0.1);
   position: ${({ theme }) => (theme === "white" ? "absolute" : "relative")};
   top: 0;
@@ -103,6 +111,10 @@ const HeaderWrapper = styled.div`
 
   /* TODO: Remove */
   background: orangered;
+
+  @media screen and (max-width: 991px) {
+    padding: 16px 0;
+  }
 `;
 
 const CourseListButton = styled(ListButton)`
@@ -166,7 +178,6 @@ const NavLink = styled.li`
 
 const HeaderContainer = styled(Container)`
   ${flex("row", "center")}
-  padding: 28px 0;
 `;
 
 const StyledLink = styled(Link)`

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Global, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Header from "./Header";
+import Header from "./Header/Header";
 import Router from "./Router";
 import Loading from "./Loading";
 import PageError from "./PageError";
@@ -37,7 +37,7 @@ const Theme = ({ state, actions }) => {
       <Global styles={globalStyles} />
 
       {/* Header theme: common || white */}
-      <Header theme={theme} />
+      <Header />
 
       {/* Add the main section. It renders a different component depending
       on the type of URL we are in. */}

@@ -81,11 +81,62 @@ const Header = ({ state, actions }) => {
               })}
           </ul>
         </nav>
+        <div
+          css={css`
+            display: none;
+            margin-left: auto;
+            @media screen and (max-width: 991px) {
+              display: block;
+            }
+          `}
+        >
+          <MenuButton onClick={() => actions.theme.openMobileMenu()}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </MenuButton>
+        </div>
         <MobileMenu />
       </HeaderContainer>
     </HeaderWrapper>
   );
 };
+
+const MenuButton = styled.button`
+  position: relative;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  &:hover {
+    background: ${grayRgba(0.07)};
+  }
+  &:active {
+    opacity: 0.8;
+  }
+  & span {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+    &:first-of-type {
+      transform: translate(-50%, calc(-50% - 6px));
+    }
+    &:last-of-type {
+      transform: translate(calc(-50% - 2.5px), calc(-50% + 6px));
+      width: 15px;
+    }
+  }
+`;
 
 // Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);

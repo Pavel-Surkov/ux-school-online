@@ -1,5 +1,5 @@
 import { styled, connect, css } from "frontity";
-import { CloseIcon, HamburgerIcon } from "../MenuIcon";
+
 import logo from "../../assets/images/svg/Logo.svg";
 import Image from "@frontity/components/image";
 import Link from "../constant/Link";
@@ -161,6 +161,7 @@ const NavLink = styled(Link)`
 
 const MenuList = styled.div`
   padding: 36px 0;
+  padding-bottom: 54px;
   ${flex("column")};
 `;
 

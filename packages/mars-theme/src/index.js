@@ -26,7 +26,7 @@ const marsTheme = {
         ["Контакты", "/contacts"],
       ],
       headerTheme: "white",
-      isMobileMenuOpened: true,
+      isMobileMenuOpened: false,
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -40,13 +40,13 @@ const marsTheme = {
    */
   actions: {
     theme: {
-      toggleMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpened = !state.theme.isMobileMenuOpened;
+      openMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpened = true;
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpened = false;
       },
-      toggleCourseModal: ({ state }) => {
+      openCourseModal: ({ state }) => {
         state.theme.courseModalOpened = !state.theme.courseModalOpened;
       },
       closeCourseModal: ({ state }) => {

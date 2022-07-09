@@ -5,6 +5,7 @@ import PrimaryButton from "../../constant/PrimaryButton";
 import { connect, styled } from "frontity";
 import { font } from "../../base/functions";
 
+// import video from "../../../assets/videos/hero-video.mov";
 import bg from "../../../assets/images/Bg.png";
 import check from "../../../assets/images/svg/list-check.svg";
 
@@ -27,11 +28,27 @@ const Hero = ({ state }) => {
             {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
           </AdvantagesList>
           <PrimaryButton content={"Записаться на курс"} />
+          {/* <VideoWrapper>
+            <video width="728" height="728">
+              <source src={video} />
+            </video>
+          </VideoWrapper> */}
         </Content>
       </Container>
     </HeroWrapper>
   );
 };
+
+const VideoWrapper = styled.div`
+  width: auto;
+  height: 728px;
+  position: absolute;
+  top: -23px;
+  right: -112px;
+  & video {
+    width: 100%;
+  }
+`;
 
 const AdvantagesList = styled.ul`
   margin: 0;

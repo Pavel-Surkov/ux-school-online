@@ -13,6 +13,11 @@ const globalStyles = css`
 
     --gradient-youtube-btn: linear-gradient(180deg, #ff5938 0%, #d31a10 100%);
     --gradient-primary-btn: linear-gradient(180deg, #37c9fe 0%, #0077ff 100%);
+    --gradient-primary-btn-hover: linear-gradient(
+      180deg,
+      #37c9fe 0%,
+      #3392ff 100%
+    );
     --gradient-header: linear-gradient(90.29deg, #6b5cf8 5.37%, #2c93fe 71.74%);
     --dark-item-gradient: linear-gradient(
       0deg,
@@ -38,6 +43,8 @@ const globalStyles = css`
   body {
     margin: 0;
     font-family: "Roboto Flex", Roboto, Arial, sans-serif;
+    font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 509, "XOPQ" 96,
+      "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   }
   a,
   a:visited {

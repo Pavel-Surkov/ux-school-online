@@ -90,7 +90,10 @@ const Header = ({ state, actions }) => {
             }
           `}
         >
-          <MenuButton onClick={() => actions.theme.openMobileMenu()}>
+          <MenuButton
+            theme={headerTheme}
+            onClick={() => actions.theme.openMobileMenu()}
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -122,7 +125,8 @@ const MenuButton = styled.button`
     display: inline-block;
     width: 20px;
     height: 2px;
-    background: var(--white);
+    background: ${({ theme }) =>
+      theme === "white" ? "var(--white)" : "var(--link-500)"};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -152,7 +156,9 @@ const CourseModal = styled.div`
 
 const HeaderWrapper = styled.div`
   padding: 28px 0;
-  border-bottom: 1px solid rgba(var(--white), 0.1);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid ${whiteRgba(0.1)};
   position: ${({ theme }) => (theme === "white" ? "absolute" : "relative")};
   top: 0;
   left: 0;
@@ -161,7 +167,7 @@ const HeaderWrapper = styled.div`
     theme === "white" ? "var(--white)" : "var(--black-900)"};
 
   /* TODO: Remove */
-  background: orangered;
+  /* background: orangered; */
 
   @media screen and (max-width: 991px) {
     padding: 16px 0;

@@ -197,6 +197,7 @@ const MobileMenu = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
+  z-index: 5;
   top: 0;
   left: 0;
   background: var(--white);

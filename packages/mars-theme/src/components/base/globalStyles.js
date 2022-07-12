@@ -43,6 +43,7 @@ const globalStyles = css`
   body {
     margin: 0;
     font-family: "Roboto Flex", Roboto, Arial, sans-serif;
+    font-stretch: 122%;
     font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 509, "XOPQ" 96,
       "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   }

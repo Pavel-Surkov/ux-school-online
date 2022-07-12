@@ -3,9 +3,9 @@ import Container from "../../constant/Container";
 import { TitleSizeL } from "../../constant/Title";
 import PrimaryButton from "../../constant/PrimaryButton";
 import { connect, styled } from "frontity";
-import { font } from "../../base/functions";
+import { font, whiteRgba, stretch } from "../../base/functions";
 
-// import video from "../../../assets/videos/hero-video.mov";
+import video from "../../../assets/videos/hero-video.mov";
 import bg from "../../../assets/images/Bg.png";
 import check from "../../../assets/images/svg/list-check.svg";
 
@@ -28,16 +28,42 @@ const Hero = ({ state }) => {
             {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
           </AdvantagesList>
           <PrimaryButton content={"Записаться на курс"} />
-          {/* <VideoWrapper>
-            <video width="728" height="728">
-              <source src={video} />
+          <VideoWrapper>
+            <video width="728" height="728" autoPlay>
+              <source src={video} type="video/mp4" />
+              Тег video не поддерживается вашим браузером.
             </video>
-          </VideoWrapper> */}
+          </VideoWrapper>
+          <Quote>
+            <p>
+              Сделай крутой шаг в карьере и получи современную,
+              высооплачиваемую профессию
+            </p>
+          </Quote>
         </Content>
       </Container>
     </HeroWrapper>
   );
 };
+
+const Quote = styled.div`
+  padding: 7px 15px;
+  position: absolute;
+  z-index: 3;
+  top: 530px;
+  left: 50%;
+  transform: translateX(calc(-50% + 66px)) rotate(10deg);
+  backdrop-filter: blur(24px);
+  background: ${whiteRgba(0.1)};
+  max-width: 380px;
+  border-radius: 12px;
+  & p {
+    ${font(16, 24)};
+    color: var(--white);
+    margin: 0;
+    ${stretch(122)};
+  }
+`;
 
 const VideoWrapper = styled.div`
   width: auto;
@@ -46,7 +72,6 @@ const VideoWrapper = styled.div`
   top: -23px;
   right: -112px;
   & video {
-    width: 100%;
   }
 `;
 

@@ -49,6 +49,12 @@ const PrimaryButton = styled.button`
       opacity: 1;
     }
   }
+  @media screen and (max-width: 991px) {
+    ${font(21, 36)};
+    padding: 0.476em 2em;
+    width: 100%;
+    max-width: 325px;
+  }
 `;
 
 export default Button;

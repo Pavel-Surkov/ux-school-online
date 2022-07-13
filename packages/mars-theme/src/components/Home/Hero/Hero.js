@@ -36,7 +36,7 @@ const Hero = ({ state }) => {
           </VideoWrapper>
           <Quote>
             <p>
-              Сделай крутой шаг в карьере и получи современную,
+              Сделай крутой шаг в карьере и получи современную,
               высооплачиваемую профессию
             </p>
           </Quote>
@@ -49,7 +49,7 @@ const Hero = ({ state }) => {
 const Quote = styled.div`
   padding: 7px 15px;
   position: absolute;
-  z-index: 3;
+  z-index: 1;
   top: 530px;
   left: 50%;
   transform: translateX(calc(-50% + 66px)) rotate(10deg);
@@ -63,6 +63,19 @@ const Quote = styled.div`
     margin: 0;
     ${stretch(122)};
   }
+  @media screen and (max-width: 1400px) {
+    transform: translateX(calc(-50% + 126px)) rotate(10deg);
+  }
+  @media screen and (max-width: 991px) {
+    transform: rotate(-5deg);
+    left: 5px;
+    bottom: 188px;
+    top: auto;
+    & p {
+      ${font(14, 20)};
+      ${stretch(110)};
+    }
+  }
 `;
 
 const VideoWrapper = styled.div`
@@ -71,7 +84,24 @@ const VideoWrapper = styled.div`
   position: absolute;
   top: -23px;
   right: -112px;
-  & video {
+  @media screen and (max-width: 1400px) {
+    height: auto;
+    right: 0;
+    top: 240px;
+    & video {
+      width: 500px;
+      height: 500px;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    position: relative;
+    top: initial;
+    left: initial;
+    margin-top: 46px;
+    width: 100%;
+    & video {
+      width: 100%;
+    }
   }
 `;
 
@@ -97,9 +127,8 @@ const AdvantagesList = styled.ul`
       position: absolute;
       width: 20px;
       height: 20px;
-      top: 50%;
+      top: 2px;
       left: 0;
-      transform: translateY(-50%);
       background: url(${check}) no-repeat 50%;
     }
   }
@@ -108,7 +137,7 @@ const AdvantagesList = styled.ul`
 const HeroTitle = styled(TitleSizeL)`
   line-height: calc(128 / 112);
   position: relative;
-  z-index: 2;
+  z-index: 1;
   margin-bottom: 16px;
 `;
 
@@ -116,6 +145,10 @@ const Content = styled.div`
   position: relative;
   padding-top: 182px;
   padding-bottom: 416px;
+  @media screen and (max-width: 991px) {
+    padding-top: calc(71px + 54px);
+    padding-bottom: 135px;
+  }
 `;
 
 const HeroWrapper = styled.div`

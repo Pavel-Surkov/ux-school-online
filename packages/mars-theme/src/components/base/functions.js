@@ -25,6 +25,15 @@ export const grayRgba = (opacity) => {
   return `rgba(14, 16, 41, ${opacity});`;
 };
 
+export const gradient = () => {
+  return `
+	background: linear-gradient(90.29deg, #6B5CF8 5.37%, #2C93FE 71.74%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;`;
+};
+
 export const stretch = (stretch) => {
   return `font-stretch: ${stretch}%;
 	font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96,

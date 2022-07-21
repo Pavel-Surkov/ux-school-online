@@ -6,6 +6,7 @@ import Router from "./Router";
 import Loading from "./Loading";
 import PageError from "./PageError";
 import globalStyles from "./base/globalStyles";
+import { setSwiperCssBundle } from "./functions/functions";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -22,6 +23,7 @@ const Theme = ({ state, actions }) => {
   const theme = state.theme.headerTheme;
 
   useEffect(() => {
+    setSwiperCssBundle();
     actions.theme.setHeaderTheme();
   }, [state.router.link]);
 
@@ -29,6 +31,10 @@ const Theme = ({ state, actions }) => {
     <>
       <Head>
         {/* <meta name="description" content={state.frontity.description} /> */}
+        {/* <link
+          rel="stylesheet"
+          href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+        /> */}
         <html lang="en" />
       </Head>
 

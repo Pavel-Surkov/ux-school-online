@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../../constant/Container";
-import { TitleSizeL } from "../../constant/Title";
+import { TitleL } from "../../constant/Title";
 import PrimaryButton from "../../constant/PrimaryButton";
 import { connect, styled } from "frontity";
 import { font, whiteRgba, stretch } from "../../base/functions";
@@ -134,7 +134,7 @@ const AdvantagesList = styled.ul`
   }
 `;
 
-const HeroTitle = styled(TitleSizeL)`
+const HeroTitle = styled(TitleL)`
   line-height: calc(128 / 112);
   position: relative;
   z-index: 1;

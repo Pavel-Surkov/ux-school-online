@@ -111,15 +111,16 @@ const Skills = () => {
           <TitleM>Чему вы&nbsp;научитесь</TitleM>
           <Content>
             <Swiper
+              className="info-slider"
               loop={true}
               modules={[Pagination, EffectFade]}
               pagination={{ clickable: true }}
-              // effect="fade"
+              effect="fade"
             >
               {slides.map((slide) => {
                 return (
                   <SwiperSlide key={slide.id}>
-                    <SlideContent>
+                    <SlideContent className="slide-content">
                       <Note>
                         <SlideTitle>{slide.title}</SlideTitle>
                         <Text>
@@ -148,10 +149,7 @@ const Skills = () => {
   );
 };
 
-const Text = styled.div`
-  & p {
-  }
-`;
+const Text = styled.div``;
 
 const SlideTitle = styled(TitleS)`
   margin-bottom: 15px;
@@ -171,16 +169,27 @@ const ImageContainer = styled.div`
 `;
 
 const SlideContent = styled.div`
+  background: var(--white);
+  border-radius: 48px;
+  padding: 38px 48px 40px;
+
   display: grid;
   grid-template-columns: 288px 1fr;
   grid-gap: 46px;
 `;
 
 const Content = styled.div`
-  border-radius: 48px;
-  box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
-    0px 48px 64px rgba(0, 0, 0, 0.05);
-  padding: 38px 48px 40px;
+  & .info-slider {
+    padding: 30px;
+    background: var(--white);
+    position: relative;
+    & .swiper-slide-active {
+      & .slide-content {
+        box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03),
+          0px 1px 1px rgba(0, 0, 0, 0.1), 0px 48px 64px rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
 `;
 
 const Play = styled.button`
@@ -225,6 +234,8 @@ const SkillsBlock = styled.div`
   display: grid;
   grid-template-columns: calc((408 / 1200) * 100%) calc((792 / 1200) * 100%);
   padding-top: 552px;
+  padding-bottom: 200px;
+  border-bottom: 1px solid #0e102933;
 `;
 
 const SkillsContainer = styled(Container)`

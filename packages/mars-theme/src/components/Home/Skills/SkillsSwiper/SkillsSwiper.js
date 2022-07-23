@@ -66,8 +66,6 @@ const slides = [
 ];
 
 const SkillsSwiper = ({ state }) => {
-  const { isMobile } = state.theme;
-
   const [infoSwiper, setInfoSwiper] = useState(null);
   const [infoImgSwiper, setInfoImgSwiper] = useState(null);
 
@@ -97,41 +95,38 @@ const SkillsSwiper = ({ state }) => {
                   </Text>
                 </Note>
                 <ImageContainer>
-                  {isMobile && (
-                    <ImageWrapper>
-                      <img wdith="400" height="400" src={slide.image} alt="" />
-                    </ImageWrapper>
-                  )}
+                  <ImageWrapper className="image-wrapper">
+                    <img wdith="400" height="400" src={slide.image} alt="" />
+                  </ImageWrapper>
                 </ImageContainer>
               </SlideContent>
             </SwiperSlide>
           );
         })}
       </Swiper>
-      {!isMobile && (
-        <ImageSwiperWrapper>
-          <Swiper
-            className="info-img-slider"
-            loop={true}
-            modules={[EffectFade, Controller]}
-            effect="fade"
-            controller={{ control: infoSwiper }}
-            onSwiper={(swiper) => {
-              setInfoImgSwiper(swiper);
-            }}
-          >
-            {slides.map((slide) => {
-              return (
-                <SwiperSlide key={slide.id}>
-                  <ImageWrapper>
-                    <img wdith="400" height="400" src={slide.image} alt="" />
-                  </ImageWrapper>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </ImageSwiperWrapper>
-      )}
+
+      <ImageSwiperWrapper>
+        <Swiper
+          className="info-img-slider"
+          loop={true}
+          modules={[EffectFade, Controller]}
+          effect="fade"
+          controller={{ control: infoSwiper }}
+          onSwiper={(swiper) => {
+            setInfoImgSwiper(swiper);
+          }}
+        >
+          {slides.map((slide) => {
+            return (
+              <SwiperSlide key={slide.id}>
+                <ImageWrapper>
+                  <img wdith="400" height="400" src={slide.image} alt="" />
+                </ImageWrapper>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </ImageSwiperWrapper>
     </Content>
   );
 };
@@ -141,36 +136,77 @@ const ImageSwiperWrapper = styled.div`
   top: -70px;
   right: 10px;
   max-width: 400px;
+  & .swiper-slide {
+    opacity: 0 !important;
+    &-active {
+      opacity: 1 !important;
+    }
+  }
+  @media screen and (max-width: 1400px) {
+    max-width: 280px;
+    max-height: 280px;
+    top: 20px;
+  }
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  max-width: 360px;
+  margin: 0 auto;
+`;
 
 const SlideTitle = styled(TitleS)`
   margin: 0;
   margin-bottom: 15px;
   @media screen and (max-width: 991px) {
     margin-bottom: 8px;
+    text-align: center;
   }
 `;
 
 const Note = styled.div``;
 
 const ImageWrapper = styled.div`
-  background: var(--white);
+  @media screen and (max-width: 1400px) {
+    & img {
+      max-width: 280px;
+      max-height: 280px;
+    }
+  }
 `;
 
 const ImageContainer = styled.div`
   position: relative;
+  & .image-wrapper {
+    display: none;
+  }
+  @media screen and (max-width: 991px) {
+    order: -1;
+    & .image-wrapper {
+      display: grid;
+      place-items: center;
+    }
+  }
 `;
 
 const SlideContent = styled.div`
-  background: var(--white);
   display: grid;
   grid-template-columns: 288px 1fr;
   grid-gap: 46px;
   padding: 38px 48px 40px;
   min-height: 360px;
   box-sizing: border-box;
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: 50% 50%;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 24px;
+    padding-bottom: 29px;
+    grid-template-columns: 100%;
+    grid-gap: 35px;
+  }
 `;
 
 const Content = styled.div`
@@ -199,6 +235,21 @@ const Content = styled.div`
       &-active {
         background: var(--gradient-primary-btn);
       }
+    }
+  }
+  & .swiper-slide {
+    opacity: 0 !important;
+    &-active {
+      opacity: 1 !important;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    & .info-slider {
+      border-radius: 32px;
+    }
+    & div.swiper-pagination {
+      top: calc(100%);
+      bottom: auto;
     }
   }
 `;

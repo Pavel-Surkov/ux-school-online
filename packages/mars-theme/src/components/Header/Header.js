@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { connect, styled, css } from "frontity";
 import Link from "../constant/Link";
 import MobileMenu from "./Menu";

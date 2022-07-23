@@ -26,6 +26,7 @@ const marsTheme = {
         ["Контакты", "/contacts"],
       ],
       headerTheme: "white",
+      isMobile: false,
       isMobileMenuOpened: false,
       featured: {
         showOnList: false,

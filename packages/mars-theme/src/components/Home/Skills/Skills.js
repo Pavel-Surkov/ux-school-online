@@ -1,9 +1,9 @@
 import React from "react";
 import Container from "../../constant/Container";
 import SkillsSwiper from "./SkillsSwiper/SkillsSwiper";
-
 import { TitleM } from "../../constant/Title";
 import { connect, styled, css } from "frontity";
+import { font } from "../../base/functions";
 
 import poster from "../../../assets/images/about-video.png";
 
@@ -53,13 +53,23 @@ const Skills = () => {
           </div>
         </VideoWrapper>
         <SkillsBlock>
-          <TitleM>Чему вы&nbsp;научитесь</TitleM>
+          <SkillsTitleM>Чему вы&nbsp;научитесь</SkillsTitleM>
           <SkillsSwiper />
         </SkillsBlock>
       </SkillsContainer>
     </SkillsSection>
   );
 };
+
+const SkillsTitleM = styled(TitleM)`
+  @media screen and (max-width: 1400px) {
+    ${font(38, 46)};
+  }
+  @media screen and (max-width: 991px) {
+    text-align: center;
+    margin-bottom: 34px;
+  }
+`;
 
 const Play = styled.button`
   display: flex;
@@ -105,6 +115,9 @@ const SkillsBlock = styled.div`
   padding-top: 552px;
   padding-bottom: 200px;
   border-bottom: 1px solid #0e102933;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const SkillsContainer = styled(Container)`

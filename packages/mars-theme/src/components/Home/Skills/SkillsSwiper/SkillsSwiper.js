@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import P from "../../../constant/Paragraph";
 import { TitleS } from "../../../constant/Title";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
-import { Pagination, EffectFade, Navigation } from "swiper";
+import {
+  Pagination,
+  EffectFade,
+  Navigation,
+  Controller,
+  Autoplay,
+} from "swiper";
 import { connect, styled } from "frontity";
 import { flex } from "../../../base/functions";
 
@@ -70,10 +76,15 @@ const SkillsSwiper = ({ state }) => {
       <Swiper
         className="info-slider"
         loop={true}
-        modules={[Pagination, EffectFade, Navigation]}
+        modules={[Pagination, EffectFade, Navigation, Controller, Autoplay]}
         pagination={{ clickable: true }}
         effect="fade"
+        controller={{ control: infoImgSwiper }}
         onSwiper={(swiper) => setInfoSwiper(swiper)}
+        speed={1000}
+        autoplay={{
+          delay: 3000,
+        }}
       >
         {slides.map((slide) => {
           return (
@@ -97,9 +108,40 @@ const SkillsSwiper = ({ state }) => {
           );
         })}
       </Swiper>
+      {!isMobile && (
+        <ImageSwiperWrapper>
+          <Swiper
+            className="info-img-slider"
+            loop={true}
+            modules={[EffectFade, Controller]}
+            effect="fade"
+            controller={{ control: infoSwiper }}
+            onSwiper={(swiper) => {
+              setInfoImgSwiper(swiper);
+            }}
+          >
+            {slides.map((slide) => {
+              return (
+                <SwiperSlide key={slide.id}>
+                  <ImageWrapper>
+                    <img wdith="400" height="400" src={slide.image} alt="" />
+                  </ImageWrapper>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </ImageSwiperWrapper>
+      )}
     </Content>
   );
 };
+
+const ImageSwiperWrapper = styled.div`
+  position: absolute;
+  top: -70px;
+  right: 10px;
+  max-width: 400px;
+`;
 
 const Text = styled.div``;
 
@@ -114,7 +156,7 @@ const SlideTitle = styled(TitleS)`
 const Note = styled.div``;
 
 const ImageWrapper = styled.div`
-  transform: translateY(-111px);
+  background: var(--white);
 `;
 
 const ImageContainer = styled.div`

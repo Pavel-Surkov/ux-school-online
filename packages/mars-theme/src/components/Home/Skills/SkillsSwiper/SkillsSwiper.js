@@ -305,7 +305,7 @@ const Content = styled.div`
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
     0px 48px 64px rgba(0, 0, 0, 0.05);
   &::before {
-    content: "";
+    content: none;
     position: absolute;
     top: 50%;
     left: -12px;
@@ -352,6 +352,9 @@ const Content = styled.div`
     margin: 0 auto;
     box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
       0px 48px 64px rgba(0, 0, 0, 0.05);
+    &::before {
+      content: "";
+    }
     & .info-slider {
       border-radius: 32px;
     }

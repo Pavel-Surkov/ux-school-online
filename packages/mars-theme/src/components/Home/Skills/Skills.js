@@ -114,9 +114,10 @@ const SkillsBlock = styled.div`
   grid-template-columns: calc((408 / 1200) * 100%) calc((792 / 1200) * 100%);
   padding-top: 552px;
   padding-bottom: 200px;
-  border-bottom: 1px solid #0e102933;
+  border-bottom: 1px dashed #0e102933;
   @media screen and (max-width: 991px) {
     grid-template-columns: 100%;
+    padding-bottom: 104px;
   }
 `;
 

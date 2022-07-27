@@ -12,10 +12,10 @@ const ProgramSectionEl = () => {
       <Bg>
         <img src={bg} alt="background" />
       </Bg>
-      <Container>
+      <ProgramContainer>
         <Course />
         <Program />
-      </Container>
+      </ProgramContainer>
     </ProgramSection>
   );
 };
@@ -28,6 +28,15 @@ const Bg = styled.div`
   & img {
     width: inherit;
     height: 1440px;
+  }
+`;
+
+const ProgramContainer = styled(Container)`
+  @media screen and (max-width: 991px) {
+    max-width: 100%;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 0;
   }
 `;
 

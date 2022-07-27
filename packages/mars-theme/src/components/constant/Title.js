@@ -43,6 +43,7 @@ export const TitleS = styled.h3`
   letter-spacing: -0.01em;
   font-stretch: 121%;
   color: var(--black-900);
+  margin: 0;
   font-variation-settings: "wdth" 121, "GRAD" 0, "slnt" 0, "XTRA" 509, "XOPQ" 96,
     "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   @media screen and (max-width: 991px) {

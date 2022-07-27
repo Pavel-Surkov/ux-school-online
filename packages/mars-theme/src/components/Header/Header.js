@@ -15,6 +15,16 @@ import { ListButton } from "../constant/Button";
 const Header = ({ state, actions }) => {
   const { menu, headerTheme, courseModalOpened } = state.theme;
 
+  useEffect(() => {
+    actions.theme.checkIsMobile();
+
+    window.addEventListener("resize", () => actions.theme.checkIsMobile());
+
+    return () => {
+      window.removeEventListener("resize", () => actions.theme.checkIsMobile());
+    };
+  }, []);
+
   return (
     <HeaderWrapper theme={headerTheme}>
       <HeaderContainer>

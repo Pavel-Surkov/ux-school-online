@@ -27,6 +27,11 @@ const globalStyles = css`
 
     --link-500: #289ef3;
     --link-200: #75faff;
+
+    --container-padding-xl: calc((100vw - 1200px) / 2);
+    --container-padding-lg: calc((100vw - 950px) / 2);
+    --container-padding-md: calc((100vw - 730px) / 2);
+    --container-padding-xs: calc((100vw - 528px) / 2);
   }
 
   @font-face {

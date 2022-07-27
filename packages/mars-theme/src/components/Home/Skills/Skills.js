@@ -10,7 +10,7 @@ import poster from "../../../assets/images/about-video.png";
 const Skills = () => {
   return (
     <SkillsSection>
-      <SkillsContainer>
+      <VideoContainer>
         <VideoWrapper>
           <div
             css={css`
@@ -52,6 +52,8 @@ const Skills = () => {
             </Play>
           </div>
         </VideoWrapper>
+      </VideoContainer>
+      <SkillsContainer>
         <SkillsBlock>
           <SkillsTitleM>Чему вы&nbsp;научитесь</SkillsTitleM>
           <SkillsSwiper />
@@ -121,8 +123,25 @@ const SkillsBlock = styled.div`
   }
 `;
 
-const SkillsContainer = styled(Container)`
+const VideoContainer = styled(Container)`
   position: relative;
+`;
+
+const SkillsContainer = styled.div`
+  padding: 0 var(--container-padding-xl);
+  overflow: hidden;
+  @media screen and (max-width: 1400px) {
+    padding: 0 var(--container-padding-lg);
+  }
+  @media screen and (max-width: 991px) {
+    padding: 0 var(--container-padding-md);
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0 var(--container-padding-xs);
+  }
+  @media screen and (max-width: 1400px) {
+    padding: 0 24px;
+  }
 `;
 
 const SkillsSection = styled.section`

@@ -41,6 +41,15 @@ const marsTheme = {
    */
   actions: {
     theme: {
+      checkIsMobile: ({ state }) => {
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth > 991) {
+          state.theme.isMobile = false;
+        } else {
+          state.theme.isMobile = true;
+        }
+      },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpened = true;
       },

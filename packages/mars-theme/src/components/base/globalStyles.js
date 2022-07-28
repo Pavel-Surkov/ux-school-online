@@ -25,8 +25,12 @@ const globalStyles = css`
       rgba(0, 0, 0, 0) 100%
     );
 
+    --link-700: #2c5ba8;
     --link-500: #289ef3;
+    --link-400: #76bdf2;
     --link-200: #75faff;
+    --link-100: #daf5fd;
+    --link-visited: #cd1fd1;
 
     --container-padding-xl: calc((100vw - 1200px) / 2);
     --container-padding-lg: calc((100vw - 950px) / 2);

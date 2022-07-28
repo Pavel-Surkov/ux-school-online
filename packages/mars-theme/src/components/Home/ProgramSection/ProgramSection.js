@@ -5,17 +5,22 @@ import Program from "./Program/Program";
 import { connect, styled } from "frontity";
 
 import bg from "../../../assets/images/program-section-bg.png";
+import mobileBg from "../../../assets/images/program-section-mobile-bg.png";
 
-const ProgramSectionEl = () => {
+const ProgramSectionEl = ({ state }) => {
+  const { isMobile } = state.theme;
+
   return (
     <ProgramSection>
       <Bg>
-        <img src={bg} alt="background" />
+        <img src={isMobile ? mobileBg : bg} alt="background" />
       </Bg>
       <ProgramContainer>
         <Course />
-        <Program />
       </ProgramContainer>
+      <Container>
+        <Program />
+      </Container>
     </ProgramSection>
   );
 };
@@ -28,6 +33,12 @@ const Bg = styled.div`
   & img {
     width: inherit;
     height: 1440px;
+  }
+  @media screen and (max-width: 991px) {
+    top: 176px;
+    & img {
+      object-position: 50% 50%;
+    }
   }
 `;
 

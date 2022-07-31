@@ -200,6 +200,7 @@ const NextBtn = styled.button`
 
 const PaginationElement = styled.div`
   position: absolute;
+  z-index: 2;
   left: 48px;
   bottom: 40px;
 `;

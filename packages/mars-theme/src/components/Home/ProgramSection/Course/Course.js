@@ -166,6 +166,9 @@ const Question = styled(P)`
 
 const CourseWrapper = styled.div`
   padding-top: 65px;
+  @media screen and (max-width: 991px) {
+    padding-top: 47px;
+  }
 `;
 
 export default connect(Course);

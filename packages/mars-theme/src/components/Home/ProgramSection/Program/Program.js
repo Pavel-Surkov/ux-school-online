@@ -267,29 +267,45 @@ const ProgramList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-`;
-
-const Block = styled.div`
   border-radius: 48px;
   background: var(--white);
   overflow: hidden;
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
     0px 48px 64px rgba(0, 0, 0, 0.05);
+  @media screen and (max-width: 991px) {
+    border-radius: 32px;
+  }
 `;
+
+const Block = styled.div``;
 
 const ContentWrapper = styled.div`
   display: grid;
   grid-gap: 24px;
   grid-template-columns: calc(67% - 12px) calc(33% - 12px);
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: calc(60% - 12px) calc(40% - 12px);
+  }
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    grid-gap: 32px;
+  }
 `;
 
 const ProgramTitleM = styled(TitleM)`
   margin-bottom: 46px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 26px;
+    text-align: center;
+  }
 `;
 
 const ProgramWrapper = styled.div`
   padding-top: 178px;
   position: relative;
+  @media screen and (max-width: 991px) {
+    padding-top: 122px;
+  }
 `;
 
 export default connect(Program);

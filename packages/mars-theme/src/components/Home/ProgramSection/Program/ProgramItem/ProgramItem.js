@@ -2,16 +2,24 @@ import React, { useState } from "react";
 import P from "../../../../constant/Paragraph";
 import Link from "../../../../constant/TextLink";
 import { font, flex, grayRgba } from "../../../../base/functions";
-import { styled } from "frontity";
+import { styled, connect, useConnect } from "frontity";
 
 import play from "../../../../../assets/images/svg/play.svg";
 
 const ProgramItem = ({ data }) => {
+  const { state } = useConnect();
+
   const [isOpened, setIsOpened] = useState(false);
 
   return (
     <Item onClick={() => setIsOpened((prev) => !prev)}>
-      <BtnWrapper>
+      <BtnWrapper
+        style={
+          isOpened && state.theme.isMobile
+            ? { outline: "1px dashed rgba(14, 16, 41, 0.2)" }
+            : { outline: "none" }
+        }
+      >
         <Title>
           <P size="l">{data.title}</P>
         </Title>
@@ -65,7 +73,7 @@ const ProgramItem = ({ data }) => {
                   ) : (
                     <VideoInfo>
                       <VideoLink link={item.videoLink}>
-                        Бесплатно ({item.videoLength})
+                        <span>Бесплатно ({item.videoLength})</span>
                         <img src={play} width="24" height="24" alt="play" />
                       </VideoLink>
                     </VideoInfo>
@@ -83,6 +91,11 @@ const ProgramItem = ({ data }) => {
 const VideoLink = styled(Link)`
   ${flex("row", "center")};
   text-decoration: none;
+  @media screen and (max-width: 991px) {
+    & span {
+      display: none;
+    }
+  }
 `;
 
 const VideoInfo = styled.div`
@@ -111,23 +124,39 @@ const VideoItem = styled.div`
 
 const ContentWrapper = styled.div`
   padding: 0 48px 16px;
+  @media screen and (max-width: 991px) {
+    padding: 0 24px 4px;
+  }
 `;
 
 const BtnWrapper = styled.div`
   ${flex("row", "center", "space-between")};
   cursor: pointer;
   padding: 20px 48px;
+  @media screen and (max-width: 991px) {
+    padding: 12px 24px;
+  }
 `;
 
 const Drop = styled.div``;
 
 const Title = styled.div`
   max-width: calc(100% - 24px - 16px);
-  color: var(--black-900);
+  & p {
+    color: var(--black-900);
+  }
+  @media screen and (max-width: 991px) {
+    & p {
+      font-stretch: 122%;
+    }
+  }
 `;
 
 const Item = styled.li`
   border-bottom: 1px dashed ${grayRgba(0.2)};
+  &:last-child {
+    border: none;
+  }
 `;
 
-export default ProgramItem;
+export default connect(ProgramItem);

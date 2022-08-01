@@ -38,6 +38,7 @@ const Bg = styled.div`
     top: 176px;
     & img {
       object-position: 50% 50%;
+      max-height: 1104px;
     }
   }
 `;

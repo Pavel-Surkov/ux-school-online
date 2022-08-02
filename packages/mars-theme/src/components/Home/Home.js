@@ -3,6 +3,7 @@ import Hero from "./Hero/Hero";
 import Skills from "./Skills/Skills";
 import Program from "./ProgramSection/ProgramSection";
 import Roadmap from "./Roadmap/Roadmap";
+import Projects from "./Projects/Projects";
 import { connect, styled } from "frontity";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <Skills />
       <Program />
       <Roadmap />
+      <Projects />
     </HomeElement>
   );
 };

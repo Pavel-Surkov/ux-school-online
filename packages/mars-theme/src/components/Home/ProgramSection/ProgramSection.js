@@ -54,6 +54,10 @@ const ProgramContainer = styled(Container)`
 
 const ProgramSection = styled.section`
   position: relative;
+  min-height: 1656px;
+  @media screen and (max-width: 991px) {
+    min-height: auto;
+  }
 `;
 
 export default connect(ProgramSectionEl);

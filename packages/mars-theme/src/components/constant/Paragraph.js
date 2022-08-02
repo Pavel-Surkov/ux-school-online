@@ -36,6 +36,9 @@ const P = styled.p`
   }
   @media screen and (max-width: 991px) {
     ${font(16, 24)};
+    font-stretch: 122%;
+    font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96,
+      "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   }
 `;
 

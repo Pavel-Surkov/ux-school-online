@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
-import { TitleM } from "../../constant/Title";
+import { TitleM, TitleS } from "../../constant/Title";
 import { font, flex, grayRgba, whiteRgba } from "../../base/functions";
 import { styled, connect } from "frontity";
 
@@ -39,7 +39,9 @@ const roadmap = [
   },
 ];
 
-const Roadmap = () => {
+const Roadmap = ({ state }) => {
+  const { isMobile } = state.theme;
+
   const [activeSlide, setActiveSlide] = useState(roadmap[0]);
 
   return (
@@ -50,31 +52,50 @@ const Roadmap = () => {
             <TitleM>Как проходит обучение</TitleM>
           </div>
           <Slides>
-            <Pagination>
-              {roadmap.map((item) => (
-                <PaginationItem
-                  active={activeSlide.id === item.id}
-                  key={item.id}
-                  onClick={() => setActiveSlide(item)}
-                >
-                  <Number>{item.id}</Number>
-                  <P>{item.title}</P>
-                </PaginationItem>
-              ))}
-            </Pagination>
-            <Slide>
-              {activeSlide.paragraphs.map((paragraph) => (
-                <P size="l" key={paragraph}>
-                  {paragraph}
-                </P>
-              ))}
-            </Slide>
+            {!isMobile && (
+              <Pagination>
+                {roadmap.map((item) => (
+                  <PaginationItem
+                    active={activeSlide.id === item.id}
+                    key={item.id}
+                    onClick={() => setActiveSlide(item)}
+                  >
+                    <Number>{item.id}</Number>
+                    <P>{item.title}</P>
+                  </PaginationItem>
+                ))}
+              </Pagination>
+            )}
+            {isMobile ? (
+              roadmap.map((item) => (
+                <Slide key={item.id}>
+                  <SlideTitle>{item.title}</SlideTitle>
+                  {item.paragraphs.map((paragraph) => (
+                    <P size="l" key={paragraph}>
+                      {paragraph}
+                    </P>
+                  ))}
+                </Slide>
+              ))
+            ) : (
+              <Slide>
+                {activeSlide.paragraphs.map((paragraph) => (
+                  <P size="l" key={paragraph}>
+                    {paragraph}
+                  </P>
+                ))}
+              </Slide>
+            )}
           </Slides>
         </Content>
       </Container>
     </Section>
   );
 };
+
+const SlideTitle = styled(TitleS)`
+  margin-bottom: 8px;
+`;
 
 const Number = styled.span`
   color: var(--gray-300);
@@ -142,6 +163,12 @@ const Slide = styled.div`
   & p {
     letter-spacing: 0;
     color: var(--gray-900);
+  }
+  @media screen and (max-width: 991px) {
+    margin-bottom: 40px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 

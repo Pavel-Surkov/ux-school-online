@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TitleM } from "../../constant/Title";
 import Link from "../../constant/Link";
 import { grayRgba, flex, font } from "../../base/functions";
@@ -101,23 +101,40 @@ const projects = [
   },
 ];
 
-const Projects = () => {
+const Projects = ({ state }) => {
+  const { isMobile } = state.theme;
+
+  const [isAllProjectsShown, setIsAllProjectsShown] = useState(false);
+
   return (
     <Section>
       <ProjectsTitle>Проекты наших выпускников</ProjectsTitle>
       <Content>
-        {projects.map((project) => (
-          <ProjectBlock key={project.id}>
-            <Bg>
-              <img src={project.image} alt="project image" />
-              <Shadow />
-            </Bg>
-            <BtnLinkWrapper>
-              <BtnLink link={project.link}>{project.title}</BtnLink>
-            </BtnLinkWrapper>
-          </ProjectBlock>
-        ))}
+        {projects.map((project, idx) => {
+          if (isMobile && idx > 2 && !isAllProjectsShown) {
+            return null;
+          }
+
+          return (
+            <ProjectBlock key={project.id}>
+              <Bg>
+                <img src={project.image} alt="project image" />
+                <Shadow />
+              </Bg>
+              <BtnLinkWrapper>
+                <BtnLink link={project.link}>{project.title}</BtnLink>
+              </BtnLinkWrapper>
+            </ProjectBlock>
+          );
+        })}
       </Content>
+      {isMobile && !isAllProjectsShown && (
+        <ShowMore>
+          <ShowMoreBtn onClick={() => setIsAllProjectsShown(true)}>
+            Показать ещё
+          </ShowMoreBtn>
+        </ShowMore>
+      )}
       <AllProjects>
         <AllProjectsBtn
           rel="noopenner noreferrer"
@@ -132,6 +149,27 @@ const Projects = () => {
     </Section>
   );
 };
+
+const ShowMore = styled.div`
+  margin-top: 16px;
+  text-align: center;
+`;
+
+const ShowMoreBtn = styled.button`
+  color: var(--link-500);
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  ${font(16, 24)};
+  padding: 0.4375em 1em;
+  width: 100%;
+  max-width: 325px;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-stretch: 122%;
+  font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,
+    "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
+`;
 
 const AllProjectsBtn = styled(Link)`
   display: inline-block;
@@ -174,16 +212,28 @@ const AllProjectsBtn = styled(Link)`
     }
   }
   @media screen and (max-width: 991px) {
-    ${font(21, 36)};
-    padding: 0.476em 2em;
+    ${font(16, 24)};
+    padding: 0.5em 1em;
+    padding-right: 40px;
+    border-radius: 8px;
     width: 100%;
     max-width: 325px;
+    box-sizing: border-box;
+    &::before {
+      right: 43px;
+      width: 20px;
+      height: 20px;
+      background-size: 20px 20px;
+    }
   }
 `;
 
 const AllProjects = styled.div`
   text-align: center;
   margin-top: 148px;
+  @media screen and (max-width: 991px) {
+    margin-top: 32px;
+  }
 `;
 
 const BtnLink = styled(Link)`
@@ -215,6 +265,10 @@ const BtnLink = styled(Link)`
   &:active {
     color: var(--link-700);
   }
+  @media screen and (max-width: 991px) {
+    font-stretch: 110%;
+    ${font(14, 20)};
+  }
 `;
 
 const BtnLinkWrapper = styled.div`
@@ -223,6 +277,13 @@ const BtnLinkWrapper = styled.div`
   z-index: 2;
   margin-top: auto;
   width: 100%;
+  @media screen and (max-width: 991px) {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    width: 100%;
+    max-width: calc(100% - 32px);
+  }
 `;
 
 const Shadow = styled.div`
@@ -250,6 +311,13 @@ const Bg = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  @media screen and (max-width: 991px) {
+    position: static;
+    & img {
+      height: auto;
+      max-height: 300px;
+    }
+  }
 `;
 
 const ProjectBlock = styled.div`
@@ -274,6 +342,20 @@ const ProjectBlock = styled.div`
   &:nth-of-type(9) {
     transform: none;
   }
+  @media screen and (max-width: 991px) {
+    border-radius: 32px;
+    min-width: auto;
+    min-height: auto;
+    &:nth-of-type(2n - 1) {
+      transform: none;
+    }
+    &:nth-of-type(6),
+    &:nth-of-type(8),
+    &:nth-of-type(10) {
+      transform: none;
+    }
+    padding: 0;
+  }
 `;
 
 const Content = styled.div`
@@ -284,6 +366,17 @@ const Content = styled.div`
   min-width: 2016px;
   left: 50%;
   transform: translateX(calc(-50% - 50px));
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    grid-gap: 16px;
+    min-width: auto;
+    position: static;
+    transform: none;
+    padding: 0 var(--container-padding-xs);
+  }
+  @media screen and (max-width: 576px) {
+    padding: 0 24px;
+  }
 `;
 
 const ProjectsTitle = styled(TitleM)`
@@ -291,6 +384,9 @@ const ProjectsTitle = styled(TitleM)`
   margin: 0 auto;
   max-width: 407px;
   margin-bottom: 53px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 34px;
+  }
 `;
 
 const Section = styled.section`

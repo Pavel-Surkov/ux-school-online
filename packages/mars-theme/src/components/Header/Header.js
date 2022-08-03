@@ -85,7 +85,7 @@ const Header = ({ state, actions }) => {
             {menu &&
               menu.map(([text, link]) => {
                 return (
-                  <NavLink theme key={link}>
+                  <NavLink theme={headerTheme} key={link}>
                     <Link link={link}>{text}</Link>
                   </NavLink>
                 );
@@ -232,7 +232,6 @@ const CourseButton = styled.button`
 `;
 
 const NavLink = styled.li`
-  color: inherit;
   margin-right: 32px;
   ${font(16, 24)}
   font-weight: 400;
@@ -241,6 +240,10 @@ const NavLink = styled.li`
     "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   &:last-child {
     margin-right: 0;
+  }
+  & a {
+    color: ${({ theme }) =>
+      theme === "white" ? "var(--white)" : "var(--black-900)"};
   }
 `;
 

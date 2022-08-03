@@ -1,8 +1,12 @@
 import React from "react";
 import { TitleM } from "../../constant/Title";
+import Link from "../../constant/Link";
+import { grayRgba, flex, font } from "../../base/functions";
 import { styled, connect } from "frontity";
 
 import archi from "../../../assets/images/projects/archi.png";
+import link from "../../../assets/images/svg/Link.svg";
+import whitelink from "../../../assets/images/svg/whitelink.svg";
 
 const projects = [
   {
@@ -103,32 +107,188 @@ const Projects = () => {
       <ProjectsTitle>Проекты наших выпускников</ProjectsTitle>
       <Content>
         {projects.map((project) => (
-          <ProjectBlock key={project.id}></ProjectBlock>
+          <ProjectBlock key={project.id}>
+            <Bg>
+              <img src={project.image} alt="project image" />
+              <Shadow />
+            </Bg>
+            <BtnLinkWrapper>
+              <BtnLink link={project.link}>{project.title}</BtnLink>
+            </BtnLinkWrapper>
+          </ProjectBlock>
         ))}
       </Content>
+      <AllProjects>
+        <AllProjectsBtn
+          rel="noopenner noreferrer"
+          target="_blank"
+          link={
+            "https://www.behance.net/collection/181601277/itogovye-raboty-uchenikov-UX-Mind-School"
+          }
+        >
+          Все проекты на Behance
+        </AllProjectsBtn>
+      </AllProjects>
     </Section>
   );
 };
 
+const AllProjectsBtn = styled(Link)`
+  display: inline-block;
+  color: var(--white);
+  position: relative;
+  border: none;
+  background: var(--gradient-primary-btn);
+  padding: 0.7857em 2.2857em;
+  padding-right: 98px;
+  ${font(28, 36)};
+  border-radius: 20px;
+  font-stretch: 121%;
+  letter-spacing: -0.02em;
+  font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,
+    "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
+  backdrop-filter: blur(50px);
+  box-shadow: 0px 1px 1px rgba(55, 61, 67, 0.1),
+    0px -30px 100px rgba(255, 255, 255, 0.3),
+    0px 70px 90px rgba(55, 61, 67, 0.3),
+    inset 0.5px 1px 0px rgba(255, 255, 255, 0.35);
+  &::before {
+    content: "";
+    position: absolute;
+    right: 64px;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(${whitelink}) no-repeat 50%;
+  }
+  &:disabled {
+    background: var(--gray-300);
+  }
+  &:hover {
+    background: var(--gradient-primary-btn-hover);
+  }
+  &:active {
+    & div {
+      opacity: 1;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    ${font(21, 36)};
+    padding: 0.476em 2em;
+    width: 100%;
+    max-width: 325px;
+  }
+`;
+
+const AllProjects = styled.div`
+  text-align: center;
+  margin-top: 148px;
+`;
+
+const BtnLink = styled(Link)`
+  display: inline-block;
+  padding: 8px 16px;
+  padding-right: 42px;
+  backdrop-filter: blur(20px);
+  background: ${grayRgba(0.1)};
+  position: relative;
+  color: var(--white);
+  ${font(16, 24)};
+  font-stretch: 122%;
+  font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,
+    "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
+  border-radius: 12px;
+  &::before {
+    content: "";
+    position: absolute;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(${link}) no-repeat 50%;
+  }
+  &:hover {
+    color: var(--link-400);
+  }
+  &:active {
+    color: var(--link-700);
+  }
+`;
+
+const BtnLinkWrapper = styled.div`
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  width: 100%;
+`;
+
+const Shadow = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+`;
+
+const Bg = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 const ProjectBlock = styled.div`
   min-width: 384px;
-  &:nth-child(1),
-  &:nth-child(3),
-  &:nth-child(5) {
-    margin-top: 62px;
+  min-height: 288px;
+  border-radius: 48px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  ${flex("column")};
+  &:nth-of-type(2n - 1) {
+    transform: translateY(62px);
+  }
+  &:nth-of-type(6),
+  &:nth-of-type(8),
+  &:nth-of-type(10) {
+    transform: translateY(62px);
+  }
+  &:nth-of-type(7),
+  &:nth-of-type(9) {
+    transform: none;
   }
 `;
 
 const Content = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, calc(100% / 5));
+  grid-gap: 24px;
+  min-width: 2016px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% - 50px));
 `;
 
 const ProjectsTitle = styled(TitleM)`
   text-align: center;
+  margin: 0 auto;
   max-width: 407px;
   margin-bottom: 53px;
 `;
@@ -136,6 +296,7 @@ const ProjectsTitle = styled(TitleM)`
 const Section = styled.section`
   padding-top: 179px;
   position: relative;
+  overflow: hidden;
   @media screen and (max-width: 991px) {
     padding-top: 110px;
   }

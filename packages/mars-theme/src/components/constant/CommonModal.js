@@ -38,7 +38,7 @@ const Blocker = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: ${grayRgba(0.2)};
+  background: ${grayRgba(0.25)};
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;

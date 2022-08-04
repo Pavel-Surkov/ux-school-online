@@ -21,7 +21,7 @@ const AdditionalBlock = ({ state }) => {
               <img width="24" height="24" src={people} alt="" />
             </Icon>
             <Note>
-              <P color={isMobile ? `black` : `white`}>
+              <P color="white">
                 Если вы являетесь представителем компании, которой нужны хорошие
                 дизайнеры, напишите нам
               </P>
@@ -32,7 +32,7 @@ const AdditionalBlock = ({ state }) => {
               <img width="24" height="24" src={lighting} alt="" />
             </Icon>
             <Note>
-              <P color={isMobile ? `black` : `white`}>
+              <P color="white">
                 Вот так будет выглядеть
                 <PopupBtn onClick={() => setResumeOpened(true)}>
                   ваше резюме
@@ -113,13 +113,18 @@ const Wrapper = styled.div`
   border: 1px dashed ${whiteRgba(0.3)};
   border-radius: 48px;
   padding: 31px 64px 25px;
-  @media screen and (max-width: 991px) {
-    border: 1px dashed ${grayRgba(0.2)};
+  @media screen and (max-width: 1400px) {
     padding: 31px 24px 25px;
-    background: var(--white);
+  }
+  @media screen and (max-width: 991px) {
+    padding: 31px 24px 25px;
   }
 `;
 
-const Additional = styled.div``;
+const Additional = styled.div`
+  @media screen and (max-width: 991px) {
+    order: 1;
+  }
+`;
 
 export default connect(AdditionalBlock);

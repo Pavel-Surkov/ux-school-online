@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import P from "../../../constant/Paragraph";
 import { TitleS } from "../../../constant/Title";
 import { grayRgba, flex, font, stretch } from "../../../base/functions";
-import { styled } from "frontity";
+import { styled, connect } from "frontity";
 
 const afterList = [
   {
@@ -43,7 +43,7 @@ const afterList = [
   },
 ];
 
-const AfterCourseList = () => {
+const AfterCourseList = ({ state }) => {
   const [openedItem, setOpenedItem] = useState(1);
 
   return (
@@ -60,7 +60,27 @@ const AfterCourseList = () => {
             {!isOpened && (
               <ClosedItem>
                 <Number>{item.id}</Number>
-                <ClosedItemTitle>{item.title}</ClosedItemTitle>
+                <ClosedItemTitle>
+                  <span>{item.title}</span>
+                  {state.theme.isMobile && (
+                    <Drop>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M19.1704 8.3295C19.6098 8.76884 19.6098 9.48116 19.1704 9.92049L12.7955 16.2954C12.3562 16.7348 11.6438 16.7348 11.2045 16.2954L4.8295 9.92049C4.39017 9.48116 4.39017 8.76884 4.8295 8.3295C5.26884 7.89017 5.98116 7.89017 6.42049 8.3295L12 13.909L17.5795 8.3295C18.0189 7.89017 18.7311 7.89017 19.1704 8.3295Z"
+                          fill="#B0B5CB"
+                        />
+                      </svg>
+                    </Drop>
+                  )}
+                </ClosedItemTitle>
               </ClosedItem>
             )}
             {isOpened && (
@@ -87,6 +107,10 @@ const AfterCourseList = () => {
   );
 };
 
+const Drop = styled.div`
+  margin-left: 8px;
+`;
+
 const OpenedItemText = styled.div`
   & p {
     margin-bottom: 10px;
@@ -94,10 +118,16 @@ const OpenedItemText = styled.div`
       margin-bottom: 0;
     }
   }
+  @media screen and (max-width: 991px) {
+    color: var(--black-900);
+  }
 `;
 
 const OpenedItemTitle = styled(TitleS)`
   margin-bottom: 19px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 12px;
+  }
 `;
 
 const OpenedItemContent = styled.div`
@@ -105,6 +135,10 @@ const OpenedItemContent = styled.div`
   height: 100%;
   max-height: calc(100% - 40px - 16px);
   ${flex("column", "flex-end", "flex-end")};
+  @media screen and (max-width: 991px) {
+    display: block;
+    margin: 0;
+  }
 `;
 
 const OpenedItem = styled.div`
@@ -112,14 +146,24 @@ const OpenedItem = styled.div`
   height: 100%;
   box-sizing: border-box;
   position: relative;
+  @media screen and (max-width: 991px) {
+    padding: 19px 24px 17px;
+  }
 `;
 
 const ClosedItemTitle = styled(P)`
+  position: relative;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   margin: 0 auto;
   margin-top: 24px;
   color: var(--black-900);
+  @media screen and (max-width: 991px) {
+    writing-mode: horizontal-tb;
+    text-orientation: auto;
+    margin: 0;
+    ${flex("row", "center", "space-between")};
+  }
 `;
 
 const Number = styled.div`
@@ -132,6 +176,9 @@ const Number = styled.div`
   ${font(28, 36)};
   ${stretch(122)};
   color: var(--gray-400);
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
 `;
 
 const ClosedItem = styled.div`
@@ -139,6 +186,9 @@ const ClosedItem = styled.div`
   height: 100%;
   box-sizing: border-box;
   position: relative;
+  @media screen and (max-width: 991px) {
+    padding: 12px 24px;
+  }
 `;
 
 const AfterItem = styled.li`
@@ -153,11 +203,19 @@ const AfterItem = styled.li`
   &:last-of-type {
     border-right: none;
   }
+  @media screen and (max-width: 991px) {
+    max-width: 100%;
+    border: none;
+    border-bottom: 1px dashed ${grayRgba(0.2)};
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
 `;
 
 const AfterList = styled.ul`
   list-style: none;
-  margin: none;
+  margin: 0;
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
     0px 48px 64px rgba(0, 0, 0, 0.05);
   border-radius: 48px;
@@ -167,6 +225,13 @@ const AfterList = styled.ul`
   ${flex("row", "stretch")};
 
   min-height: 576px;
+  @media screen and (max-width: 991px) {
+    min-height: auto;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 32px;
+    margin-bottom: 48px;
+  }
 `;
 
-export default AfterCourseList;
+export default connect(AfterCourseList);

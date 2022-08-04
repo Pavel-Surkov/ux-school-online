@@ -56,11 +56,18 @@ const Close = styled.button`
   right: 24px;
   width: 32px;
   height: 32px;
+  @media screen and (max-width: 991px) {
+    top: 8px;
+    right: 8px;
+  }
 `;
 
 const Wrapper = styled.div`
   padding: ${({ padding }) => (padding ? padding : "40px 96px")};
   position: relative;
+  @media screen and (max-width: 991px) {
+    padding: 24px;
+  }
 `;
 
 const Modal = styled.div`
@@ -69,15 +76,19 @@ const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
   width: 100%;
   max-width: 792px;
   background: var(--white);
   border-radius: ${({ border }) => (border ? `${border}px` : "24px")};
-  overflow: hidden;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
   ${({ isOpened }) => isOpened && `pointer-events: auto; opacity: 1;`}
+  @media screen and (max-width: 991px) {
+    max-width: calc(100% - 48px);
+  }
 `;
 
 export default CommonModal;

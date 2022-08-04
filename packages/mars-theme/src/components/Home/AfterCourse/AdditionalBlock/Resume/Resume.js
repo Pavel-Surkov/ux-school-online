@@ -119,6 +119,10 @@ const SkillsWrapper = styled.div`
   display: grid;
   grid-template-columns: calc(50% - 5px) calc(50% - 5px);
   grid-gap: 10px;
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 100%;
+    grid-gap: 10px;
+  }
 `;
 
 const SkillsItem = styled.li`
@@ -158,11 +162,18 @@ const Info = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: calc(75.33% - 5px) calc(24.67% - 5px);
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    grid-gap: 31px;
+  }
 `;
 
 const JobTitle = styled(P)`
   color: var(--gray-400);
   margin-bottom: -6px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: -3px;
+  }
 `;
 
 const Descrition = styled.div``;
@@ -172,6 +183,12 @@ const ImageWrapper = styled.div`
   & img {
     border-radius: 16px;
   }
+  @media screen and (max-width: 991px) {
+    & img {
+      width: 48px;
+      height: 48px;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -179,6 +196,10 @@ const Header = styled.div`
   grid-template-columns: 64px 1fr;
   grid-gap: 20px;
   margin-bottom: 28px;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 48px 1fr;
+    grid-gap: 16px;
+  }
 `;
 
 export default Resume;

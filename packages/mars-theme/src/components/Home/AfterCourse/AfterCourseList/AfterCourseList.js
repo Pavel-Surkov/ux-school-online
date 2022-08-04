@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import P from "../../../constant/Paragraph";
+import { TitleS } from "../../../constant/Title";
 import { grayRgba, flex, font, stretch } from "../../../base/functions";
 import { styled } from "frontity";
 
@@ -51,12 +52,33 @@ const AfterCourseList = () => {
         const isOpened = openedItem === item.id;
 
         return (
-          <AfterItem onClick={() => setOpenedItem(item.id)} key={item.id}>
+          <AfterItem
+            isOpened={isOpened}
+            onClick={() => setOpenedItem(item.id)}
+            key={item.id}
+          >
             {!isOpened && (
               <ClosedItem>
                 <Number>{item.id}</Number>
                 <ClosedItemTitle>{item.title}</ClosedItemTitle>
               </ClosedItem>
+            )}
+            {isOpened && (
+              <OpenedItem>
+                <Number>{item.id}</Number>
+                <OpenedItemContent>
+                  <OpenedItemTitle>{item.title}</OpenedItemTitle>
+                  <OpenedItemText>
+                    {item.paragraphs.map((paragraph) => (
+                      <P
+                        size="l"
+                        key={paragraph}
+                        dangerouslySetInnerHTML={{ __html: paragraph }}
+                      />
+                    ))}
+                  </OpenedItemText>
+                </OpenedItemContent>
+              </OpenedItem>
             )}
           </AfterItem>
         );
@@ -64,6 +86,33 @@ const AfterCourseList = () => {
     </AfterList>
   );
 };
+
+const OpenedItemText = styled.div`
+  & p {
+    margin-bottom: 10px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+`;
+
+const OpenedItemTitle = styled(TitleS)`
+  margin-bottom: 19px;
+`;
+
+const OpenedItemContent = styled.div`
+  margin-top: 16px;
+  height: 100%;
+  max-height: calc(100% - 40px - 16px);
+  ${flex("column", "flex-end", "flex-end")};
+`;
+
+const OpenedItem = styled.div`
+  padding: 24px 48px;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+`;
 
 const ClosedItemTitle = styled(P)`
   writing-mode: vertical-rl;
@@ -75,7 +124,7 @@ const ClosedItemTitle = styled(P)`
 
 const Number = styled.div`
   height: 40px;
-  min-width: 48px;
+  width: 48px;
   border-radius: 12px;
   background: var(--gray-100);
   display: grid;
@@ -95,6 +144,12 @@ const ClosedItem = styled.div`
 const AfterItem = styled.li`
   border-right: 1px dashed ${grayRgba(0.2)};
   flex-shrink: 0;
+  ${({ isOpened }) =>
+    isOpened &&
+    `
+			flex-grow: 1;
+			max-width: calc(100% - (80px * 4));
+		`}
   &:last-of-type {
     border-right: none;
   }
@@ -107,7 +162,8 @@ const AfterList = styled.ul`
     0px 48px 64px rgba(0, 0, 0, 0.05);
   border-radius: 48px;
   background: var(--white);
-  padding: 0 20px 0 48px;
+  padding: 0;
+  padding-right: 20px;
   ${flex("row", "stretch")};
 
   min-height: 576px;

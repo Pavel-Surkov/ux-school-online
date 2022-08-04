@@ -310,6 +310,7 @@ const Bg = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.2s;
   }
   @media screen and (max-width: 991px) {
     position: static;
@@ -341,6 +342,11 @@ const ProjectBlock = styled.div`
   &:nth-of-type(7),
   &:nth-of-type(9) {
     transform: none;
+  }
+  &:hover {
+    & img {
+      transform: scale(1.2);
+    }
   }
   @media screen and (max-width: 991px) {
     border-radius: 32px;
@@ -391,10 +397,12 @@ const ProjectsTitle = styled(TitleM)`
 
 const Section = styled.section`
   padding-top: 179px;
+  padding-bottom: 200px;
   position: relative;
   overflow: hidden;
   @media screen and (max-width: 991px) {
     padding-top: 110px;
+    padding-bottom: 128px;
   }
 `;
 

@@ -1,8 +1,17 @@
 import React from "react";
 import { TitleM } from "../../../constant/Title";
-import AdditionalBlock from "./AdditionalBlock/AdditionalBlock";
+import AdditionalBlock from "../../../constant/AdditionalBlock";
 import ProgramItem from "./ProgramItem/ProgramItem";
 import { connect, styled } from "frontity";
+
+import education from "../../../../assets/images/svg/Education.svg";
+import clock from "../../../../assets/images/svg/Clock.svg";
+import figma from "../../../../assets/images/svg/Figma.svg";
+import pc from "../../../../assets/images/svg/PC.svg";
+import mobileEducation from "../../../../assets/images/svg/Education-mobile.svg";
+import mobileClock from "../../../../assets/images/svg/Clock-mobile.svg";
+import mobileFigma from "../../../../assets/images/svg/Figma-mobile.svg";
+import mobilePC from "../../../../assets/images/svg/PC-mobile.svg";
 
 const program = [
   {
@@ -245,6 +254,35 @@ const program = [
   },
 ];
 
+const additionalItems = [
+  {
+    id: 1,
+    icon: education,
+    mobileIcon: mobileEducation,
+    content:
+      "Учиться можно в своём темпе, а в среднем ученики проходят курс примерно за 2,5 месяца",
+  },
+  {
+    id: 2,
+    icon: clock,
+    mobileIcon: mobileClock,
+    content:
+      "Чтобы получился хороший результат, в неделю надо выделять около 10 часов",
+  },
+  {
+    id: 3,
+    icon: figma,
+    mobileIcon: mobileFigma,
+    content: "Вы будете учиться в Figma и немножко Photoshop",
+  },
+  {
+    id: 4,
+    icon: pc,
+    mobileIcon: mobilePC,
+    content: `Сомневаетесь, подойдёт ли ваш компьютер для учёбы? Откройте этот <a target="_blank" rel="noopenner noreferrer" href="https://www.figma.com/file/0oN6YlYZd91ow76uH11put/%D0%9D%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%B0%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82-(%D0%9E%D0%BB%D1%8F-%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D0%B7%D0%B0)?node-id=162%3A124">Figma-файл</a>. Если компьютер не тормозит, значит можно нормально заниматься`,
+  },
+];
+
 const Program = () => {
   return (
     <ProgramWrapper>
@@ -257,7 +295,7 @@ const Program = () => {
             })}
           </ProgramList>
         </Block>
-        <AdditionalBlock />
+        <AdditionalBlock additionalItems={additionalItems} />
       </ContentWrapper>
     </ProgramWrapper>
   );

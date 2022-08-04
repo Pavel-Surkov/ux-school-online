@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../constant/Container";
 import AdditionalBlock from "./AdditionalBlock/AdditionalBlock";
+import AfterCourseList from "./AfterCourseList/AfterCourseList";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
@@ -13,6 +14,7 @@ const AfterCourse = () => {
         <Content>
           <AfterTitleM color="white">Что будет после курса</AfterTitleM>
           <AdditionalBlock />
+          <AfterCourseList />
         </Content>
       </Container>
     </Section>
@@ -27,6 +29,7 @@ const Content = styled.div`
   display: grid;
   grid-template-columns: calc(33% - 12px) calc(67% - 12px);
   padding: 178px 0 424px;
+  grid-gap: 46px 24px;
   @media screen and (max-width: 991px) {
     padding: 110px 0 132px;
   }

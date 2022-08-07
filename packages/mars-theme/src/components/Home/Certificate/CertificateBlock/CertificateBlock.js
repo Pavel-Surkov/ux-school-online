@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import P from "../../../constant/Paragraph";
 import PrimaryBtn from "../../../constant/PrimaryButton";
 import Emoji from "./Emoji/Emoji";
+import { useFormik } from "formik";
+import CommonModal from "../../../constant/CommonModal";
 import { styled, connect } from "frontity";
 import {
   flex,
@@ -18,6 +20,20 @@ import certificateMobile from "../../../../assets/images/certificate-mobile.svg"
 const CertificateBlock = ({ state }) => {
   const [checkModalOpened, setCheckModalOpened] = useState(false);
   const [confirmModalOpened, setConfirmModalOpened] = useState(false);
+  // const [firstRender, setFirstRender] = useState(true);
+
+  const formik = useFormik();
+
+  // useEffect(() => {
+  //   if (firstRender) {
+  //     setFirstRender(false);
+  //     return;
+  //   }
+
+  //   if (!checkModalOpened) {
+  //     setConfirmModalOpened(true);
+  //   }
+  // }, [checkModalOpened]);
 
   return (
     <Wrapper>
@@ -40,8 +56,11 @@ const CertificateBlock = ({ state }) => {
           </CertificateBorderInner>
           <CertificateCheck>
             <P>
-              Мы внедрили <CheckBtn on>проверку сертификатов</CheckBtn>.
-              Вы можете посмотреть кому и когда выдавали
+              Мы внедрили{" "}
+              <CheckBtn onClick={() => setCheckModalOpened(true)}>
+                проверку сертификатов
+              </CheckBtn>
+              . Вы можете посмотреть кому и когда выдавали
             </P>
           </CertificateCheck>
           {/* <Emoji /> */}
@@ -50,9 +69,42 @@ const CertificateBlock = ({ state }) => {
       <CourseBtnWrapper>
         <PrimaryBtn content="Записаться на курс" />
       </CourseBtnWrapper>
+      <CommonModal
+        isOpened={checkModalOpened}
+        setIsOpened={setCheckModalOpened}
+      >
+        <ModalTitle>Проверить сертификат</ModalTitle>
+        <ModalText>
+          <P size="l">
+            Оставьте ваши контактные данные. Мы свяжемся с вами и уточним
+            информацию для проверки подлинности сертификата.
+          </P>
+        </ModalText>
+        <CheckForm></CheckForm>
+      </CommonModal>
+      <CommonModal
+        isOpened={confirmModalOpened}
+        setIsOpened={setConfirmModalOpened}
+      >
+        <ModalTitle>Заявка отправлена</ModalTitle>
+        <P size="l">
+          Наш менеджер скоро свяжется с вами для уточнения данных, необходимых
+          чтобы проверить сертификат на подлинность
+        </P>
+      </CommonModal>
     </Wrapper>
   );
 };
+
+const CheckForm = styled.form``;
+
+const ModalText = styled.div`
+  margin-bottom: 31px;
+`;
+
+const ModalTitle = styled(TitleM)`
+  margin-bottom: 23px;
+`;
 
 const CheckBtn = styled.button`
   padding: 0;
@@ -238,9 +290,17 @@ const Wrapper = styled.div`
   padding: 178px 0 88px;
   border-bottom: 1px dashed ${whiteRgba(0.3)};
   margin-bottom: -496px;
+  & .modal {
+    max-width: 670px;
+    box-sizing: border-box;
+  }
+
   @media screen and (max-width: 991px) {
     padding: 110px 0 104px;
     margin-bottom: -372px;
+    & .modal-wrapper {
+      padding: 22px 24px 24px;
+    }
   }
 `;
 

@@ -7,6 +7,7 @@ import Projects from "./Projects/Projects";
 import AfterCourse from "./AfterCourse/AfterCourse";
 import Certificate from "./Certificate/Certificate";
 import Lecturers from "./Lecturers/Lecturers";
+import Testimonials from "./Testimonials/Testimonials";
 import { connect, styled } from "frontity";
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
       <AfterCourse />
       <Certificate />
       <Lecturers />
+      <Testimonials />
     </HomeElement>
   );
 };

@@ -8,6 +8,13 @@ import { TitleM } from "../../../constant/Title";
 import certificate from "../../../../assets/images/certificate.svg";
 import certificateMobile from "../../../../assets/images/certificate-mobile.svg";
 
+import emoji1 from "../../../../assets/images/emoji/Emoji1.png";
+import emoji2 from "../../../../assets/images/emoji/Emoji2.png";
+import emoji3 from "../../../../assets/images/emoji/Emoji3.png";
+import emoji4 from "../../../../assets/images/emoji/Emoji4.png";
+import emoji5 from "../../../../assets/images/emoji/Emoji5.png";
+import emoji6 from "../../../../assets/images/emoji/Emoji6.png";
+
 const CertificateBlock = ({ state }) => {
   return (
     <Wrapper>
@@ -28,6 +35,54 @@ const CertificateBlock = ({ state }) => {
               />
             </Certificate>
           </CertificateBorderInner>
+          <CertificateCheck>
+            <P>
+              Мы внедрили <CheckBtn>проверку сертификатов</CheckBtn>. Вы можете
+              посмотреть кому и когда выдавали
+            </P>
+          </CertificateCheck>
+          {/* <Emoji
+            transform="translate(calc(-50% - 722px)) rotate(-23deg)"
+            top={195}
+            zIndex={0}
+          >
+            <img src={emoji1} alt="emoji" />
+          </Emoji>
+          <Emoji
+            transform="translate(calc(-50% - 483px)) rotate(10deg)"
+            top={-16}
+            zIndex={0}
+          >
+            <img src={emoji3} alt="emoji" />
+          </Emoji>
+          <Emoji
+            transform="translate(calc(-50% - 352px)) rotate(-20deg)"
+            top={371}
+            zIndex={1}
+          >
+            <img src={emoji4} alt="emoji" />
+          </Emoji>
+          <Emoji
+            transform="translate(calc(-50% + 348px)) rotate(11deg)"
+            top={413}
+            zIndex={1}
+          >
+            <img src={emoji5} alt="emoji" />
+          </Emoji>
+          <Emoji
+            transform="translate(calc(-50% + 474px)) rotate(-26deg)"
+            top={18}
+            zIndex={0}
+          >
+            <img src={emoji6} alt="emoji" />
+          </Emoji>
+          <Emoji
+            transform="translate(calc(-50% + 727px)) rotate(30deg)"
+            top={225}
+            zIndex={0}
+          >
+            <img src={emoji2} alt="emoji" />
+          </Emoji> */}
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
@@ -36,6 +91,72 @@ const CertificateBlock = ({ state }) => {
     </Wrapper>
   );
 };
+
+const Emoji = styled.div`
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  top: ${({ top }) => (top ? `${top}px` : `0`)};
+  left: 50%;
+  transform: ${({ transform }) => (transform ? transform : "translateX(-50%)")};
+  z-index: ${({ zIndex }) => `${zIndex}`};
+  & img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+`;
+
+const CheckBtn = styled.button`
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--link-500);
+  text-decoration: underline;
+  font-size: inherit;
+  line-height: inherit;
+  font-stretch: inherit;
+  font-variation-settings: inherit;
+  &:visited {
+    color: var(--link-visited);
+  }
+  &:hover {
+    color: var(--link-400);
+  }
+  &:focus {
+    color: var(--link-500);
+  }
+  &:active {
+    color: var(--link-700);
+  }
+  ${({ style }) =>
+    style === "dark" &&
+    `
+  &:hover {
+    color: var(--link-100);
+  }
+  &:focus {
+    color: var(--link-200);
+  }
+  &:active {
+    color: var(--link-500);
+  }`}
+`;
+
+const CertificateCheck = styled.div`
+  position: absolute;
+  z-index: 3;
+  right: -232px;
+  top: 248px;
+  padding: 8px 16px;
+  background: ${whiteRgba(0.01)};
+  backdrop-filter: blur(24px);
+  max-width: 333px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  & p {
+    color: var(--gray-800);
+  }
+`;
 
 const CourseBtnWrapper = styled.div`
   position: relative;
@@ -87,6 +208,7 @@ const CertificateBorder = styled.div`
   max-width: 100%;
   box-sizing: border-box;
   position: relative;
+  z-index: 1;
   padding: 22px;
   padding-bottom: 28px;
   background: var(--white);
@@ -101,7 +223,6 @@ const CertificateBorder = styled.div`
 const CertificateWrapper = styled.div`
   ${flex()};
   z-index: 1;
-  position: relative;
   &::before {
     content: "";
     position: absolute;

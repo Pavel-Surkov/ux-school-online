@@ -2,7 +2,13 @@ import React from "react";
 import P from "../../../constant/Paragraph";
 import PrimaryBtn from "../../../constant/PrimaryButton";
 import { styled, connect } from "frontity";
-import { flex, whiteRgba } from "../../../base/functions";
+import {
+  flex,
+  font,
+  whiteRgba,
+  grayRgba,
+  stretch,
+} from "../../../base/functions";
 import { TitleM } from "../../../constant/Title";
 
 import certificate from "../../../../assets/images/certificate.svg";
@@ -156,6 +162,24 @@ const CertificateCheck = styled.div`
   & p {
     color: var(--gray-800);
   }
+  @media screen and (max-width: 1400px) {
+    top: 290px;
+    right: -150px;
+  }
+  @media screen and (max-width: 991px) {
+    background: ${grayRgba(0.1)};
+    right: auto;
+    left: 8px;
+    max-width: calc(100% - 16px);
+    top: auto;
+    bottom: -50px;
+    padding: 9px 16px 7px;
+    color: var(--white);
+    & p {
+      ${font(14, 20)};
+      ${stretch(110)};
+    }
+  }
 `;
 
 const CourseBtnWrapper = styled.div`
@@ -223,6 +247,7 @@ const CertificateBorder = styled.div`
 const CertificateWrapper = styled.div`
   ${flex()};
   z-index: 1;
+  position: relative;
   &::before {
     content: "";
     position: absolute;

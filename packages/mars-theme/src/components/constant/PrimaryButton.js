@@ -1,9 +1,9 @@
 import { styled } from "frontity";
 import { font } from "../base/functions";
 
-const Button = ({ content }) => {
+const Button = ({ content, onClick }) => {
   return (
-    <PrimaryButton>
+    <PrimaryButton onClick={onClick}>
       {content}
       <Border></Border>
     </PrimaryButton>

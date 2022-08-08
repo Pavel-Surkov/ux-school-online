@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import P from "../../../constant/Paragraph";
 import PrimaryBtn from "../../../constant/PrimaryButton";
+import Input from "../../../constant/Input";
+import CheckboxItem from "../../../constant/CheckboxItem";
 import Emoji from "./Emoji/Emoji";
 import { useFormik } from "formik";
 import CommonModal from "../../../constant/CommonModal";
@@ -20,20 +22,17 @@ import certificateMobile from "../../../../assets/images/certificate-mobile.svg"
 const CertificateBlock = ({ state }) => {
   const [checkModalOpened, setCheckModalOpened] = useState(false);
   const [confirmModalOpened, setConfirmModalOpened] = useState(false);
-  // const [firstRender, setFirstRender] = useState(true);
+  const [isUserAgree, setIsUserAgree] = useState(false);
 
-  const formik = useFormik();
+  const formik = useFormik({
+    initialValues: { name: "", tel: "", email: "" },
+    onSubmit: (values) => {
+      setCheckModalOpened(false);
+      setConfirmModalOpened(true);
 
-  // useEffect(() => {
-  //   if (firstRender) {
-  //     setFirstRender(false);
-  //     return;
-  //   }
-
-  //   if (!checkModalOpened) {
-  //     setConfirmModalOpened(true);
-  //   }
-  // }, [checkModalOpened]);
+      console.log(values);
+    },
+  });
 
   return (
     <Wrapper>
@@ -63,6 +62,7 @@ const CertificateBlock = ({ state }) => {
               . Вы можете посмотреть кому и когда выдавали
             </P>
           </CertificateCheck>
+          {/* TODO: Add Emoji */}
           {/* <Emoji /> */}
         </CertificateBorder>
       </CertificateWrapper>
@@ -80,7 +80,51 @@ const CertificateBlock = ({ state }) => {
             информацию для проверки подлинности сертификата.
           </P>
         </ModalText>
-        <CheckForm></CheckForm>
+        <CheckForm onSubmit={formik.handleSubmit}>
+          <InputWrapper>
+            <Input
+              type="text"
+              placeholder="Имя и Фамилия"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              name="name"
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Input
+              type="tel"
+              placeholder="Телефон"
+              value={formik.values.tel}
+              onChange={formik.handleChange}
+              name="tel"
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              name="email"
+            />
+          </InputWrapper>
+          <SubmitWrapper>
+            <PrimaryBtn
+              disabled={isUserAgree ? true : false}
+              content="Отправить заявку"
+              type="submit"
+            />
+          </SubmitWrapper>
+          <CheckboxWrapper>
+            <CheckboxItem
+              checked={isUserAgree}
+              setChecked={() => setIsUserAgree((prev) => !prev)}
+            >
+              Я согласен с условиями обработки{" "}
+              <a href="/">персональных данных</a>
+            </CheckboxItem>
+          </CheckboxWrapper>
+        </CheckForm>
       </CommonModal>
       <CommonModal
         isOpened={confirmModalOpened}
@@ -96,14 +140,44 @@ const CertificateBlock = ({ state }) => {
   );
 };
 
+const CheckboxWrapper = styled.div`
+  margin-top: 17px;
+`;
+
+const SubmitWrapper = styled.div`
+  margin-top: 32px;
+  & button {
+    max-width: 100%;
+    width: 100%;
+    ${font(21, 36)};
+    letter-spacing: -0.01em;
+    padding: 0.476em;
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+  }
+`;
+
+const InputWrapper = styled.div`
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 const CheckForm = styled.form``;
 
 const ModalText = styled.div`
   margin-bottom: 31px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 17px;
+  }
 `;
 
 const ModalTitle = styled(TitleM)`
   margin-bottom: 23px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
+  }
 `;
 
 const CheckBtn = styled.button`

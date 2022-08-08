@@ -1,6 +1,6 @@
 import React from "react";
 import P from "./Paragraph";
-import { flex } from "../base/functions";
+import { flex, font } from "../base/functions";
 import { styled } from "frontity";
 
 const CheckboxItem = ({ checked, setChecked, children }) => {
@@ -40,7 +40,8 @@ const Checkbox = styled.div`
   width: 14px;
   height: 14px;
   left: 3px;
-  top: 3px;
+  top: 50%;
+  transform: translateY(-50%);
   border: 2px solid var(--gray-300);
   border-radius: 4px;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.35);
@@ -56,6 +57,11 @@ const CheckboxWrapper = styled.div`
   padding-left: 32px;
   position: relative;
   ${flex()};
+  @media screen and (max-width: 991px) {
+    & p {
+      ${font(14, 20)};
+    }
+  }
 `;
 
 export default CheckboxItem;

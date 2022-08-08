@@ -88,7 +88,7 @@ const CertificateBlock = ({ state }) => {
           <InputWrapper>
             <Input
               type="text"
-              placeholder="Имя и Фамилия"
+              placeholder="Имя и фамилия"
               value={formik.values.name}
               onChange={formik.handleChange}
               name="name"
@@ -376,6 +376,13 @@ const Wrapper = styled.div`
   @media screen and (max-width: 991px) {
     padding: 110px 0 104px;
     margin-bottom: -372px;
+
+    @media screen and (max-width: 991px) {
+      & .modal {
+        max-width: calc(100% - 32px);
+      }
+    }
+
     & .modal-wrapper {
       padding: 22px 24px 24px;
     }

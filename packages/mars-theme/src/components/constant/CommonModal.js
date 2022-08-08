@@ -87,7 +87,7 @@ const Modal = styled.div`
   transition: opacity 0.2s;
   ${({ isOpened }) => isOpened && `pointer-events: auto; opacity: 1;`}
   @media screen and (max-width: 991px) {
-    max-width: calc(100% - 48px);
+    max-width: calc(100% - 32px);
   }
 `;
 

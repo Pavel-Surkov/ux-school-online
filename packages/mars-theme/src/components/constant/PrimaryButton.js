@@ -42,9 +42,6 @@ const PrimaryButton = styled.button`
     0px -30px 100px rgba(255, 255, 255, 0.3),
     0px 70px 90px rgba(55, 61, 67, 0.3),
     inset 0.5px 1px 0px rgba(255, 255, 255, 0.35);
-  &:disabled {
-    background: var(--gray-300);
-  }
   &:hover {
     background: var(--gradient-primary-btn-hover);
   }
@@ -52,6 +49,9 @@ const PrimaryButton = styled.button`
     & div {
       opacity: 1;
     }
+  }
+  &:disabled {
+    background: var(--gray-300);
   }
   @media screen and (max-width: 991px) {
     ${font(21, 36)};

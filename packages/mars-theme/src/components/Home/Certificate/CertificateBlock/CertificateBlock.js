@@ -34,6 +34,10 @@ const CertificateBlock = ({ state }) => {
     },
   });
 
+  React.useEffect(() => {
+    console.log(isUserAgree);
+  }, [isUserAgree]);
+
   return (
     <Wrapper>
       <CertificateTitle>Сертификат</CertificateTitle>
@@ -110,7 +114,7 @@ const CertificateBlock = ({ state }) => {
           </InputWrapper>
           <SubmitWrapper>
             <PrimaryBtn
-              disabled={isUserAgree ? true : false}
+              disabled={isUserAgree ? false : true}
               content="Отправить заявку"
               type="submit"
             />

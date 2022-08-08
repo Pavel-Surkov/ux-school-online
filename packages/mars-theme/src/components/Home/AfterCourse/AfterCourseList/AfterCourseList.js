@@ -107,8 +107,9 @@ const AfterCourseList = ({ state }) => {
   );
 };
 
-const Drop = styled.div`
+const Drop = styled.span`
   margin-left: 8px;
+  display: block;
 `;
 
 const OpenedItemText = styled.div`

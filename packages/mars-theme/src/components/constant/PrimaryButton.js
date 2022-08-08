@@ -1,9 +1,13 @@
 import { styled } from "frontity";
 import { font } from "../base/functions";
 
-const Button = ({ type, content, onClick }) => {
+const Button = ({ disabled, type, content, onClick }) => {
   return (
-    <PrimaryButton type={type ? type : "button"} onClick={onClick}>
+    <PrimaryButton
+      disabled={disabled}
+      type={type ? type : "button"}
+      onClick={onClick}
+    >
       {content}
       <Border></Border>
     </PrimaryButton>

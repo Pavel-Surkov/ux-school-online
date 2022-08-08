@@ -1,11 +1,12 @@
 import React from "react";
 import P from "./Paragraph";
+import { flex } from "../base/functions";
 import { styled } from "frontity";
 
 const CheckboxItem = ({ checked, setChecked, children }) => {
   return (
-    <CheckboxWrapper>
-      <CheckboxInput checked={checked} onChange={setChecked} />
+    <CheckboxWrapper onClick={setChecked}>
+      <CheckboxInput />
       <Checkbox checked={checked}>
         {checked && (
           <svg
@@ -38,6 +39,8 @@ const Checkbox = styled.div`
   position: absolute;
   width: 14px;
   height: 14px;
+  left: 3px;
+  top: 3px;
   border: 2px solid var(--gray-300);
   border-radius: 4px;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.35);
@@ -45,12 +48,14 @@ const Checkbox = styled.div`
   display: grid;
   place-items: center;
   ${({ checked }) =>
-    checked && `background: var(--gradient-primary-btn); border: none;`};
+    checked &&
+    `background: var(--gradient-primary-btn); border: none; width: 18px; height: 18px;`};
 `;
 
-const CheckboxWrapper = styled.label`
+const CheckboxWrapper = styled.div`
   padding-left: 32px;
   position: relative;
+  ${flex()};
 `;
 
 export default CheckboxItem;

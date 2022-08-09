@@ -277,7 +277,7 @@ const TestimonialsTitle = styled(TitleM)`
   }
 `;
 
-const Section = styled.div`
+const Section = styled.section`
   background: var(--white);
   padding-top: 322px;
   & .modal {

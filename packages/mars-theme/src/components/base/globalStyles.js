@@ -11,6 +11,7 @@ const globalStyles = css`
     --gray-300: #b0b5cb;
     --gray-200: #d8dcec;
     --gray-100: #ebedf5;
+    --gray-50: #f8f9fc;
 
     --gradient-youtube-btn: linear-gradient(180deg, #ff5938 0%, #d31a10 100%);
     --gradient-primary-btn: linear-gradient(180deg, #37c9fe 0%, #0077ff 100%);

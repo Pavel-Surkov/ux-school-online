@@ -11,8 +11,14 @@ const WhiteButton = styled.button`
   border-radius: 12px;
   width: 100%;
   background: var(--white);
-	cursor: pointer;
+  cursor: pointer;
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "auto")};
+  @media screen and (max-width: 991px) {
+    ${font(16, 24)};
+    ${stretch(122)};
+    font-weight: 500;
+    padding: 0.4375em 1em;
+  }
 `;
 
 export default WhiteButton;

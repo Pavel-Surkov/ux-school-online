@@ -49,6 +49,10 @@ const TestimonialModal = ({ isOpened, setIsOpened, testimonial }) => {
 const Social = styled.div`
   margin-top: 9px;
   ${flex("row", "center")}
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    margin-top: 17px;
+  }
 `;
 
 const SocialLink = styled(Link)`
@@ -65,6 +69,14 @@ const SocialLink = styled(Link)`
   }
   &:last-child {
     margin-right: 0;
+  }
+  @media screen and (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+    & img {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
 
@@ -83,9 +95,17 @@ const Avatar = styled.div`
   overflow: hidden;
   border-radius: 48px;
   max-width: 192px;
+  max-height: 192px;
   margin-bottom: 15px;
   & img {
     width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 64px;
+    max-height: 64px;
+    border-radius: 16px;
+    margin: 0 auto;
+    margin-bottom: 7px;
   }
 `;
 
@@ -98,6 +118,14 @@ const Text = styled.div`
       margin-bottom: 0;
     }
   }
+  @media screen and (max-width: 768px) {
+    & p {
+      margin-bottom: 6px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 `;
 
 const ModalWrapper = styled.div`
@@ -106,6 +134,9 @@ const ModalWrapper = styled.div`
   grid-gap: 48px;
   @media screen and (max-width: 1400px) {
     grid-gap: 24px;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
   }
 `;
 

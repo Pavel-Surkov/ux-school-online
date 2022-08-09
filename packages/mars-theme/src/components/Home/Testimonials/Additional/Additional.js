@@ -109,6 +109,9 @@ const Title = styled.div`
   & p {
     text-align: center;
   }
+  @media screen and (max-width: 991px) {
+    margin-bottom: 25px;
+  }
 `;
 
 const YtBtnWrapper = styled.div`
@@ -139,9 +142,16 @@ const YtContent = styled.div`
     text-align: center;
     margin-bottom: 9px;
   }
+  @media screen and (max-width: 991px) {
+    padding: 15px 24px 24px;
+  }
 `;
 
-const Poster = styled.div``;
+const Poster = styled.div`
+  & img {
+    width: 100%;
+  }
+`;
 
 const YtBlock = styled.div`
   width: 100%;
@@ -150,6 +160,11 @@ const YtBlock = styled.div`
   overflow: hidden;
   margin-bottom: 24px;
   box-shadow: 0 4px 50px rgba(0, 0, 0, 0.1);
+  @media screen and (max-width: 991px) {
+    border-radius: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.08);
+  }
 `;
 
 const MoreTestimonials = styled.div`
@@ -158,6 +173,10 @@ const MoreTestimonials = styled.div`
   box-sizing: border-box;
   border-radius: 48px;
   border: 1px dashed ${grayRgba(0.2)};
+  @media screen and (max-width: 991px) {
+    border-radius: 32px;
+    padding: 23px 24px 28px;
+  }
 `;
 
 const Wrapper = styled.div`

@@ -237,6 +237,7 @@ const CertificateCheck = styled.div`
   @media screen and (max-width: 1400px) {
     top: 290px;
     right: -150px;
+    color: var(--white);
   }
   @media screen and (max-width: 991px) {
     background: ${grayRgba(0.1)};
@@ -246,7 +247,6 @@ const CertificateCheck = styled.div`
     top: auto;
     bottom: -50px;
     padding: 9px 16px 7px;
-    color: var(--white);
     & p {
       ${font(14, 20)};
       ${stretch(110)};

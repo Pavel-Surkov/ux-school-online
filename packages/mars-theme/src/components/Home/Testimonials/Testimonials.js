@@ -4,6 +4,7 @@ import P from "../../constant/Paragraph";
 import Additional from "./Additional/Additional";
 import WhiteBtn from "../../constant/WhiteButton";
 import TestimonialModal from "./TestimonialModal/TestimonialModal";
+import { font, stretch } from "../../base/functions";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
@@ -87,6 +88,7 @@ const testimonials = [
     ],
     avatar: sasha,
     avatar2x: sasha2x,
+    social: [],
   },
   {
     id: 5,
@@ -99,6 +101,7 @@ const testimonials = [
     ],
     avatar: sasha,
     avatar2x: sasha2x,
+    social: [],
   },
 ];
 
@@ -175,6 +178,9 @@ const Testimonials = () => {
 
 const ShowMore = styled.div`
   margin-top: 64px;
+  @media screen and (max-width: 991px) {
+    margin-top: 36px;
+  }
 `;
 
 const TestimonialsBlock = styled.div``;
@@ -183,22 +189,45 @@ const Name = styled.div`
   & p {
     color: var(--gray-400);
   }
+  @media screen and (max-width: 768px) {
+    & p {
+      ${font(12, 16)};
+      ${stretch(105)};
+    }
+  }
 `;
 
 const InfoText = styled.div`
   margin-bottom: 6px;
+  cursor: pointer;
+  & p {
+    color: var(--black-900);
+  }
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
+  }
 `;
 
-const Info = styled.div``;
+const Info = styled.div`
+  @media screen and (max-width: 991px) {
+    padding-top: 3px;
+  }
+`;
 
 const Avatar = styled.div`
   overflow: hidden;
   max-width: 192px;
+  max-height: 192px;
   border-radius: 48px;
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 64px;
+    max-height: 64px;
+    border-radius: 16px;
   }
 `;
 
@@ -209,6 +238,14 @@ const TestimonialItem = styled.li`
   grid-gap: 24px;
   &:last-child {
     margin-bottom: 0;
+  }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    grid-template-columns: 64px 1fr;
+    grid-gap: 16px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -224,20 +261,43 @@ const Content = styled.div`
       (4 / 12) * 100% - 12px
     );
   grid-gap: 24px;
+  @media screen and (max-width: 991px) {
+    grid-gap: 64px;
+    grid-template-columns: 100%;
+  }
 `;
 
 const TestimonialsTitle = styled(TitleM)`
   margin-bottom: 78px;
   max-width: 350px;
+  @media screen and (max-width: 991px) {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
 `;
 
 const Section = styled.div`
   background: var(--white);
   padding-top: 322px;
   & .modal {
-    max-width: 984px;
+    max-width: calc(100% - 48px);
+    width: 984px;
     &-wrapper {
       padding: 48px 96px 55px;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    & .modal-wrapper {
+      padding: 32px 48px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-top: 110px;
+    & .modal {
+      &-wrapper {
+        padding: 24px;
+      }
     }
   }
 `;

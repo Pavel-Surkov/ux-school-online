@@ -32,6 +32,7 @@ export const TitleM = styled.h2`
     ${font(34, 44)};
     letter-spacing: -0.01em;
     font-stretch: 121%;
+    font-weight: 573;
     font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 509, "XOPQ" 96,
       "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   }

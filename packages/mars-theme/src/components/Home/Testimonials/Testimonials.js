@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
+import Additional from "./Additional/Additional";
+import WhiteBtn from "../../constant/WhiteButton";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
@@ -62,51 +64,84 @@ const testimonials = [
     avatar: sasha,
     avatar2x: sasha2x,
   },
+  {
+    id: 5,
+    name: "Саша Груша",
+    agee: "25 лет",
+    shortText:
+      "Выбрал вас и ни разу не пожалел. Уже после первого занятия понял, что это моё. Вы даёте не только крутой пинок (я горел этим делом все два месяца обучения)",
+    paragraphs: [
+      "Выбрал вас и ни разу не пожалел. Уже после первого занятия понял, что это моё. Вы даёте не только крутой пинок (я горел этим делом все два месяца обучения)",
+    ],
+    avatar: sasha,
+    avatar2x: sasha2x,
+  },
 ];
 
 const Testimonials = () => {
+  const [allTestimonialsShown, setAllTestimonialsShown] = useState(false);
+
   return (
     <Section>
       <Container>
         <TestimonialsTitle>Отзывы выпускников</TestimonialsTitle>
         <Content>
-          <TestimonialsList>
-            {testimonials.map((testimonial) => {
-              return (
-                <TestimonialItem key={testimonial.id}>
-                  <Avatar>
-                    <img
-                      src={testimonial.avatar}
-                      srcSet={`${testimonial.avatar} 1x, ${
-                        testimonial.avatar2x
-                          ? testimonial.avatar2x
-                          : testimonial.avatar
-                      } 2x`}
-                      alt="avatar"
-                    />
-                  </Avatar>
-                  <Info>
-                    <InfoText>
-                      <P size="l">{testimonial.shortText}</P>
-                    </InfoText>
-                    <Name>
-                      {testimonial.age ? (
-                        <P>{`${testimonial.name}, ${testimonial.age}`}</P>
-                      ) : (
-                        <P>{testimonial.name}</P>
-                      )}
-                    </Name>
-                  </Info>
-                </TestimonialItem>
-              );
-            })}
-          </TestimonialsList>
-          {/* <Additional></Additional> */}
+          <TestimonialsBlock>
+            <TestimonialsList>
+              {testimonials.map((testimonial, idx) => {
+                if (!allTestimonialsShown && idx > 3) {
+                  return null;
+                }
+
+                return (
+                  <TestimonialItem key={testimonial.id}>
+                    <Avatar>
+                      <img
+                        src={testimonial.avatar}
+                        srcSet={`${testimonial.avatar} 1x, ${
+                          testimonial.avatar2x
+                            ? testimonial.avatar2x
+                            : testimonial.avatar
+                        } 2x`}
+                        alt="avatar"
+                      />
+                    </Avatar>
+                    <Info>
+                      <InfoText>
+                        <P size="l">{testimonial.shortText}</P>
+                      </InfoText>
+                      <Name>
+                        {testimonial.age ? (
+                          <P>{`${testimonial.name}, ${testimonial.age}`}</P>
+                        ) : (
+                          <P>{testimonial.name}</P>
+                        )}
+                      </Name>
+                    </Info>
+                  </TestimonialItem>
+                );
+              })}
+            </TestimonialsList>
+            {!allTestimonialsShown && (
+              <ShowMore>
+                <WhiteBtn onClick={() => setAllTestimonialsShown(true)}>
+                  Показать еще
+                </WhiteBtn>
+              </ShowMore>
+            )}
+          </TestimonialsBlock>
+          <Additional />
         </Content>
       </Container>
     </Section>
   );
 };
+
+const ShowMore = styled.div`
+  margin-top: 64px;
+`;
+
+const TestimonialsBlock = styled.div``;
 
 const Name = styled.div`
   & p {

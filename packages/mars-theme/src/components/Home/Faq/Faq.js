@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Container from "../../constant/Container";
 import Additional from "./Additional/Additional";
+import WhiteBtn from "../../constant/WhiteButton";
 import FaqItem from "./FaqItem/FaqItem";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
@@ -97,20 +98,38 @@ const Faq = () => {
         <Content>
           <FaqTitleM color="white">Часто задаваемые вопросы</FaqTitleM>
           <Additional />
-          <FaqBlock>
-            {faq.map((item, idx) => {
-              if (!isAllFaqShown && idx > 8) {
-                return null;
-              }
+          <FaqContent>
+            <FaqBlock>
+              {faq.map((item, idx) => {
+                if (!isAllFaqShown && idx > 8) {
+                  return null;
+                }
 
-              return <FaqItem key={item.id} data={item} />;
-            })}
-          </FaqBlock>
+                return <FaqItem key={item.id} data={item} />;
+              })}
+            </FaqBlock>
+            {!isAllFaqShown && (
+              <ShowMore>
+                <WhiteBtn onClick={() => setIsAllFaqShown(true)}>
+                  Показать ещё
+                </WhiteBtn>
+              </ShowMore>
+            )}
+          </FaqContent>
         </Content>
       </Container>
     </Section>
   );
 };
+
+const FaqContent = styled.div``;
+
+const ShowMore = styled.div`
+  margin-top: 24px;
+  & button {
+    background: transparent;
+  }
+`;
 
 const FaqBlock = styled.ul`
   list-style: none;

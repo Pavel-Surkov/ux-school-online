@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import Additional from "./Additional/Additional";
 import WhiteBtn from "../../constant/WhiteButton";
+import TestimonialModal from "./TestimonialModal/TestimonialModal";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
@@ -14,6 +15,11 @@ import nikita from "../../../assets/images/testimonials/testimonial3.png";
 import nikita2x from "../../../assets/images/testimonials/testimonial3@2x.png";
 import sasha from "../../../assets/images/testimonials/testimonial4.png";
 import sasha2x from "../../../assets/images/testimonials/testimonial4@2x.png";
+
+import instaGray from "../../../assets/images/svg/instagram-gray.svg";
+import behanceGray from "../../../assets/images/svg/behance-gray.svg";
+import dribbleGray from "../../../assets/images/svg/dribble-gray.svg";
+import linkedinGray from "../../../assets/images/svg/linkedin-gray.svg";
 
 const testimonials = [
   {
@@ -29,6 +35,12 @@ const testimonials = [
     ],
     avatar: pasha,
     avatar2x: pasha2x,
+    social: [
+      { id: 1, icon: instaGray, link: "/" },
+      { id: 2, icon: behanceGray, link: "/" },
+      { id: 3, icon: dribbleGray, link: "/" },
+      { id: 4, icon: linkedinGray, link: "/" },
+    ],
   },
   {
     id: 2,
@@ -40,6 +52,12 @@ const testimonials = [
     ],
     avatar: tanya,
     avatar2x: tanya2x,
+    social: [
+      { id: 1, icon: instaGray, link: "/" },
+      { id: 2, icon: behanceGray, link: "/" },
+      { id: 3, icon: dribbleGray, link: "/" },
+      { id: 4, icon: linkedinGray, link: "/" },
+    ],
   },
   {
     id: 3,
@@ -51,6 +69,12 @@ const testimonials = [
     ],
     avatar: nikita,
     avatar2x: nikita2x,
+    social: [
+      { id: 1, icon: instaGray, link: "/" },
+      { id: 2, icon: behanceGray, link: "/" },
+      { id: 3, icon: dribbleGray, link: "/" },
+      { id: 4, icon: linkedinGray, link: "/" },
+    ],
   },
   {
     id: 4,
@@ -79,6 +103,8 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const [testimonialModalOpened, setTestimonialModalOpened] = useState(false);
+  const [openedTestimonial, setOpenedTestimonial] = useState(null);
   const [allTestimonialsShown, setAllTestimonialsShown] = useState(false);
 
   return (
@@ -107,7 +133,12 @@ const Testimonials = () => {
                       />
                     </Avatar>
                     <Info>
-                      <InfoText>
+                      <InfoText
+                        onClick={() => {
+                          setOpenedTestimonial(testimonial);
+                          setTestimonialModalOpened(true);
+                        }}
+                      >
                         <P size="l">{testimonial.shortText}</P>
                       </InfoText>
                       <Name>
@@ -132,6 +163,11 @@ const Testimonials = () => {
           </TestimonialsBlock>
           <Additional />
         </Content>
+        <TestimonialModal
+          isOpened={testimonialModalOpened}
+          setIsOpened={setTestimonialModalOpened}
+          testimonial={openedTestimonial}
+        />
       </Container>
     </Section>
   );
@@ -198,6 +234,12 @@ const TestimonialsTitle = styled(TitleM)`
 const Section = styled.div`
   background: var(--white);
   padding-top: 322px;
+  & .modal {
+    max-width: 984px;
+    &-wrapper {
+      padding: 48px 96px 55px;
+    }
+  }
 `;
 
 export default Testimonials;

@@ -5,6 +5,7 @@ const globalStyles = css`
   :root {
     --white: #fff;
     --black-900: #0e1029;
+    --black-700: #23263e;
     --gray-500: #454859;
     --gray-400: #80859a;
     --gray-300: #b0b5cb;

@@ -9,6 +9,7 @@ import Certificate from "./Certificate/Certificate";
 import Lecturers from "./Lecturers/Lecturers";
 import Testimonials from "./Testimonials/Testimonials";
 import CompaniesSwiper from "./CompaniesSwiper/CompaniesSwiper";
+import Faq from "./Faq/Faq";
 import { connect, styled } from "frontity";
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
       <Lecturers />
       <Testimonials />
       <CompaniesSwiper />
+      <Faq />
     </HomeElement>
   );
 };

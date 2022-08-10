@@ -115,56 +115,38 @@ const Testimonials = () => {
       <Container>
         <TestimonialsTitle>Отзывы выпускников</TestimonialsTitle>
         <Content>
-          <TestimonialsBlock>
-            <TestimonialsList>
-              {testimonials.map((testimonial, idx) => {
-                if (!allTestimonialsShown && idx > 3) {
-                  return null;
-                }
-
-                return (
-                  <TestimonialItem key={testimonial.id}>
-                    <Avatar>
-                      <img
-                        src={testimonial.avatar}
-                        srcSet={`${testimonial.avatar} 1x, ${
-                          testimonial.avatar2x
-                            ? testimonial.avatar2x
-                            : testimonial.avatar
-                        } 2x`}
-                        alt="avatar"
-                      />
-                    </Avatar>
-                    <Info>
-                      <InfoText
-                        onClick={() => {
-                          setOpenedTestimonial(testimonial);
-                          setTestimonialModalOpened(true);
-                        }}
-                      >
-                        <P size="l">{testimonial.shortText}</P>
-                      </InfoText>
-                      <Name>
-                        {testimonial.age ? (
-                          <P>{`${testimonial.name}, ${testimonial.age}`}</P>
-                        ) : (
-                          <P>{testimonial.name}</P>
-                        )}
-                      </Name>
-                    </Info>
-                  </TestimonialItem>
-                );
-              })}
-            </TestimonialsList>
-            {!allTestimonialsShown && (
-              <ShowMore>
-                <WhiteBtn onClick={() => setAllTestimonialsShown(true)}>
-                  Показать еще
-                </WhiteBtn>
-              </ShowMore>
-            )}
-          </TestimonialsBlock>
-          <Additional />
+          <TestimonialsList>
+            {testimonials.map((testimonial) => {
+              return (
+                <TestimonialItem key={testimonial.id}>
+                  <Avatar>
+                    <img
+                      src={testimonial.avatar}
+                      srcSet={`${testimonial.avatar} 1x, ${
+                        testimonial.avatar2x
+                          ? testimonial.avatar2x
+                          : testimonial.avatar
+                      } 2x`}
+                      alt="avatar"
+                    />
+                  </Avatar>
+                  <Info>
+                    <InfoText>
+                      <P size="l">{testimonial.shortText}</P>
+                    </InfoText>
+                    <Name>
+                      {testimonial.age ? (
+                        <P>{`${testimonial.name}, ${testimonial.age}`}</P>
+                      ) : (
+                        <P>{testimonial.name}</P>
+                      )}
+                    </Name>
+                  </Info>
+                </TestimonialItem>
+              );
+            })}
+          </TestimonialsList>
+          {/* <Additional></Additional> */}
         </Content>
         <TestimonialModal
           isOpened={testimonialModalOpened}

@@ -56,6 +56,7 @@ const ContentWrapper = styled.div`
   padding: 0 48px 16px;
   @media screen and (max-width: 991px) {
     padding: 0 24px 4px;
+    padding: 10px 24px;
   }
 `;
 

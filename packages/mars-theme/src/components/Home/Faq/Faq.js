@@ -96,7 +96,7 @@ const Faq = () => {
     <Section>
       <Container>
         <Content>
-          <FaqTitleM color="white">Часто задаваемые вопросы</FaqTitleM>
+          <FaqTitleM color="white">Часто задаваемые вопросы</FaqTitleM>
           <Additional />
           <FaqContent>
             <FaqBlock>
@@ -122,12 +122,22 @@ const Faq = () => {
   );
 };
 
-const FaqContent = styled.div``;
+const FaqContent = styled.div`
+  @media screen and (max-width: 991px) {
+    margin-bottom: 48px;
+  }
+`;
 
 const ShowMore = styled.div`
   margin-top: 24px;
   & button {
     background: transparent;
+  }
+  @media screen and (max-width: 991px) {
+    margin-top: 16px;
+    & button {
+      background: var(--white);
+    }
   }
 `;
 
@@ -148,6 +158,11 @@ const FaqBlock = styled.ul`
 const FaqTitleM = styled(TitleM)`
   grid-column-start: 2;
   max-width: 651px;
+  @media screen and (max-width: 991px) {
+    grid-column-start: 1;
+    margin-bottom: 30px;
+    max-width: none;
+  }
 `;
 
 const Content = styled.div`
@@ -158,11 +173,19 @@ const Content = styled.div`
     );
   grid-column-gap: 24px;
   grid-row-gap: 46px;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    padding: 110px 0 152px;
+    grid-gap: 0;
+  }
 `;
 
 const Section = styled.section`
   background: url(${bg}) no-repeat 50% 0;
   background-size: 100% 936px;
+  @media screen and (max-width: 991px) {
+    background-size: auto 936px;
+  }
 `;
 
 export default Faq;

@@ -158,15 +158,6 @@ const Testimonials = () => {
   );
 };
 
-const ShowMore = styled.div`
-  margin-top: 64px;
-  @media screen and (max-width: 991px) {
-    margin-top: 36px;
-  }
-`;
-
-const TestimonialsBlock = styled.div``;
-
 const Name = styled.div`
   & p {
     color: var(--gray-400);

@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import Additional from "./Additional/Additional";
 import WhiteBtn from "../../constant/WhiteButton";
 import FaqItem from "./FaqItem/FaqItem";
+import { grayRgba } from "../../base/functions";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
@@ -173,6 +174,7 @@ const Content = styled.div`
     );
   grid-column-gap: 24px;
   grid-row-gap: 46px;
+  border-bottom: 1px solid ${grayRgba(0.2)};
   @media screen and (max-width: 991px) {
     grid-template-columns: 100%;
     padding: 110px 0 152px;

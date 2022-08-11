@@ -7,6 +7,7 @@ const P = styled.p`
   ${({ size }) => (size === "l" ? `${font(21, 32)}` : `${font(16, 24)}`)};
   color: ${({ color }) =>
     color === "white" ? "var(--white)" : "var(--gray-500)"};
+  text-align: ${({ align }) => (align ? align : "left")};
   font-weight: 400;
   font-stretch: ${({ size }) => (size === "l" ? `109%` : `122%`)};
   font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,

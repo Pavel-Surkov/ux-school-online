@@ -15,7 +15,7 @@ import { styled } from "frontity";
 import bg from "../../../../assets/images/rate-item-bg.png";
 import check from "../../../../assets/images/svg/Check.svg";
 
-const RateItem = ({ type, availableContent }) => {
+const RateItem = ({ type, availableContent, openModalFunc }) => {
   return (
     <Item className="rateItem" type={type}>
       <RateTitle
@@ -74,7 +74,7 @@ const RateItem = ({ type, availableContent }) => {
         {type === "free" ? (
           <WhiteBtn link="/">Смотреть курс</WhiteBtn>
         ) : (
-          <PrimaryBtn content="Записаться" />
+          <PrimaryBtn content="Записаться" onClick={openModalFunc} />
         )}
       </BtnWrapper>
     </Item>

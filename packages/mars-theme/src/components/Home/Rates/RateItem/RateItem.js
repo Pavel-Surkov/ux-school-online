@@ -17,7 +17,7 @@ import check from "../../../../assets/images/svg/Check.svg";
 
 const RateItem = ({ type, availableContent }) => {
   return (
-    <Item type={type}>
+    <Item className="rateItem" type={type}>
       <RateTitle
         type={type}
         color={type === "max" ? "white" : type === "free" ? "gray" : "black"}
@@ -44,10 +44,10 @@ const RateItem = ({ type, availableContent }) => {
           <Price align="center" color={type === "max" ? "white" : "black"}>
             {type === "max" ? "29 500 ₽" : "14 900 ₽"}
           </Price>
-          {type === "max" && (
+          {(type === "max" || type === "self") && (
             <Installment>
-              <Or>или</Or>
-              <InstallmentP color="white">
+              <Or type={type}>или</Or>
+              <InstallmentP color={type === "max" ? `white` : `black`}>
                 Рассрочка 9 850 ₽ на 3 месяца
                 <InfoIcon>
                   <svg
@@ -61,7 +61,7 @@ const RateItem = ({ type, availableContent }) => {
                       fillRule="evenodd"
                       clipRule="evenodd"
                       d="M8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5ZM0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8ZM6.5 7.75C6.5 7.33579 6.83579 7 7.25 7H8.25C8.66421 7 9 7.33579 9 7.75V10.5H9.25C9.66421 10.5 10 10.8358 10 11.25C10 11.6642 9.66421 12 9.25 12H7.25C6.83579 12 6.5 11.6642 6.5 11.25C6.5 10.8358 6.83579 10.5 7.25 10.5H7.5V8.5H7.25C6.83579 8.5 6.5 8.16421 6.5 7.75ZM8 6C8.55229 6 9 5.55228 9 5C9 4.44772 8.55229 4 8 4C7.44772 4 7 4.44772 7 5C7 5.55228 7.44772 6 8 6Z"
-                      fill="white"
+                      fill={type === "max" ? `white` : `#454859`}
                     />
                   </svg>
                 </InfoIcon>
@@ -107,6 +107,7 @@ const WhiteBtn = styled(Link)`
 const BtnWrapper = styled.div`
   width: 100%;
   margin-top: ${({ type }) => (type === "free" ? "auto" : "0")};
+  text-align: center;
   & button,
   & a {
     width: 100%;
@@ -121,13 +122,20 @@ const BtnWrapper = styled.div`
 			border-radius: 12px;
 		}
 	`}
+  @media screen and (max-width: 991px) {
+    & button {
+      ${font(16, 24)};
+      padding: 8px 20px;
+    }
+  }
 `;
 
 const Or = styled.span`
   display: block;
   ${font(16, 24)};
   ${stretch(122)};
-  color: ${whiteRgba(0.4)};
+  color: ${({ type }) =>
+    type === "max" ? `${whiteRgba(0.4)}` : `var(--black-900)`};
 `;
 
 const InfoIcon = styled.span`
@@ -153,6 +161,9 @@ const PriceWrapper = styled.div`
   width: 100%;
   text-align: center;
   margin-bottom: 25px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 11px;
+  }
 `;
 
 const ListItem = styled.li`
@@ -182,6 +193,10 @@ const List = styled.ul`
   margin-bottom: 41px;
   padding: 0;
   list-style: none;
+  width: 100%;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const RateTitle = styled(TitleS)`
@@ -190,6 +205,9 @@ const RateTitle = styled(TitleS)`
   position: relative;
   border-bottom: 1px dashed
     ${({ type }) => (type === "max" ? `${whiteRgba(0.2)}` : `${grayRgba(0.2)}`)};
+  @media screen and (max-width: 991px) {
+    padding-bottom: 9px;
+  }
 `;
 
 const Item = styled.div`
@@ -202,17 +220,29 @@ const Item = styled.div`
     type === "max"
       ? `
 		background: url(${bg}) no-repeat 50% / cover;
+		@media screen and (max-width: 991px) {
+			order: 1;
+		}
 	`
       : type === "self"
       ? `
 		border: 1px dashed ${grayRgba(0.2)};
 		background: var(--white);
 		box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 48px 64px rgba(0, 0, 0, 0.05);;
+		@media screen and (max-width: 991px) {
+			box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 48px 64px rgba(0, 0, 0, 0.05);
+		}
 	`
       : `
 		border: 1px dashed ${grayRgba(0.2)};
 		background: transparent;
 	`}
+  @media screen and (max-width: 991px) {
+    border-radius: 32px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 19px 24px 24px;
+  }
 `;
 
 export default RateItem;

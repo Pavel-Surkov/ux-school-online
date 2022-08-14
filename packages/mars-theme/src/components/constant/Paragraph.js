@@ -6,7 +6,11 @@ const P = styled.p`
   margin-bottom: 8px;
   ${({ size }) => (size === "l" ? `${font(21, 32)}` : `${font(16, 24)}`)};
   color: ${({ color }) =>
-    color === "white" ? "var(--white)" : "var(--gray-500)"};
+    color === "white"
+      ? "var(--white)"
+      : color === "black"
+      ? "var(black-900)"
+      : "var(--gray-500)"};
   text-align: ${({ align }) => (align ? align : "left")};
   font-weight: 400;
   font-stretch: ${({ size }) => (size === "l" ? `109%` : `122%`)};

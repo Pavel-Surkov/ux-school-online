@@ -3,7 +3,7 @@ import P from "../../constant/Paragraph";
 import Container from "../../constant/Container";
 import RateItem from "./RateItem/RateItem";
 import { TitleM } from "../../constant/Title";
-import { styled } from "frontity";
+import { styled, connect } from "frontity";
 
 const freeContent = ["Базовые уроки", "Некоторые дополнительные материалы"];
 
@@ -24,11 +24,11 @@ const selfContent = [
   "Сертификат об окончании",
 ];
 
-const Rates = () => {
+const Rates = ({ state }) => {
   return (
     <Section>
       <Container>
-        <TitleM align="center" mb={23}>
+        <TitleM align="center" mb={state.theme.isMobile ? 13 : 23}>
           Тарифы
         </TitleM>
         <Subtitle>
@@ -65,16 +65,32 @@ const Content = styled.div`
     filter: blur(128px);
     pointer-events: none;
   }
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+    &::before {
+      content: none;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    grid-gap: 16px;
+  }
 `;
 
 const Subtitle = styled.div`
   max-width: 842px;
   margin: 0 auto;
   margin-bottom: 55px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 33px;
+  }
 `;
 
 const Section = styled.section`
   padding: 178px 0 264px;
+  @media screen and (max-width: 991px) {
+    padding: 110px 0 256px;
+  }
 `;
 
-export default Rates;
+export default connect(Rates);

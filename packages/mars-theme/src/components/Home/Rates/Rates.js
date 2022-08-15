@@ -42,7 +42,7 @@ const Rates = ({ state }) => {
   const { isMobile } = state.theme;
 
   const [signupModalOpened, setSignupModalOpened] = useState(false);
-  const [sendModalOpened, setSendModalOpened] = useState(true);
+  const [sendModalOpened, setSendModalOpened] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
 
   const formik = useFormik({

@@ -11,6 +11,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import CompaniesSwiper from "./CompaniesSwiper/CompaniesSwiper";
 import Faq from "./Faq/Faq";
 import Rates from "./Rates/Rates";
+import Consultation from "./Consultation/Consultation";
 import { connect, styled } from "frontity";
 
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
       <CompaniesSwiper />
       <Faq />
       <Rates />
+      <Consultation />
     </HomeElement>
   );
 };

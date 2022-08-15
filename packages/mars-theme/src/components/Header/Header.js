@@ -177,9 +177,6 @@ const HeaderWrapper = styled.div`
   color: ${({ theme }) =>
     theme === "white" ? "var(--white)" : "var(--black-900)"};
 
-  /* TODO: Remove */
-  /* background: orangered; */
-
   @media screen and (max-width: 991px) {
     padding: 16px 0;
   }

@@ -2,7 +2,7 @@ import React from "react";
 import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import Link from "../../constant/Link";
-import { font, stretch, gradient } from "../../base/functions";
+import { font, stretch, gradient, grayRgba } from "../../base/functions";
 import { styled } from "frontity";
 
 import igor from "../../../assets/images/Igor.png";
@@ -106,11 +106,23 @@ const WhiteBtn = styled(Link)`
     ${stretch(122)};
     font-weight: 500;
     padding: 0.4375em 1em;
+    border-radius: 8px;
   }
 `;
 
 const BtnWrapper = styled.div`
   margin-top: 47px;
+  @media screen and (max-width: 991px) {
+    margin-top: 33px;
+  }
+  @media screen and (max-width: 576px) {
+    & a {
+      box-sizing: border-box;
+      text-align: center;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
 `;
 
 const LargeText = styled.div`
@@ -130,7 +142,14 @@ const SmallText = styled.div`
 
 const Large = styled.div``;
 
-const Small = styled.div``;
+const Small = styled.div`
+  @media screen and (max-width: 991px) {
+    padding: 24px;
+    padding-bottom: 20px;
+    border: 1px dashed ${grayRgba(0.2)};
+    border-radius: 32px;
+  }
+`;
 
 const Content = styled.div`
   display: grid;
@@ -139,6 +158,11 @@ const Content = styled.div`
     );
   grid-gap: 76px;
   padding: 185px 0 216px;
+  @media screen and (max-width: 991px) {
+    padding: 72px 0;
+    grid-template-columns: 100%;
+    grid-gap: 87px;
+  }
 `;
 
 const Section = styled.section``;

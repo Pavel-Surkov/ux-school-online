@@ -6,6 +6,8 @@ import { font, stretch, gradient, grayRgba } from "../../base/functions";
 import { styled } from "frontity";
 
 import igor from "../../../assets/images/Igor.png";
+import poster from "../../../assets/images/about-poster.png";
+import poster2x from "../../../assets/images/about-poster@2x.png";
 
 const smallContent = [
   "«Сейчас знания быстро устаревают, и учиться имеет смысл только у тех, кто в этом «варится». Мы каждый день на передовой и знаем, что сейчас в тренде, какие технологии лучше использовать, что стоит делать, а что — нет. Наша команда UX Mind имеет большой опыт работы с клиентами из Европы и Америки»",
@@ -52,9 +54,33 @@ const About = () => {
           </Large>
         </Content>
       </Container>
+      <Poster>
+        <img
+          src={poster}
+          srcSet={`${poster} 1x, ${poster2x ? poster2x : poster}`}
+          alt="poster"
+        />
+      </Poster>
     </Section>
   );
 };
+
+const Poster = styled.div`
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(5, 46, 74, 0.3),
+      rgba(5, 46, 74, 0.3)
+    );
+  }
+`;
 
 const Position = styled(P)`
   font-stretch: 105%;

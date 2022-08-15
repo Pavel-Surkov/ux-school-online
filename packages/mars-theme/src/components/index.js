@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Global, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import Router from "./Router";
 import Loading from "./Loading";
 import PageError from "./PageError";
@@ -55,6 +56,9 @@ const Theme = ({ state, actions }) => {
           <PageError when={data.isError} />
         </Switch>
       </Main>
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 };

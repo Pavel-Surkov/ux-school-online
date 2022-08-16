@@ -62,6 +62,9 @@ const marsTheme = {
       closeCourseModal: ({ state }) => {
         state.theme.courseModalOpened = false;
       },
+      toggleCourseModal: ({ state }) => {
+        state.theme.courseModalOpened = !state.theme.courseModalOpened;
+      },
       setHeaderTheme: ({ state }) => {
         switch (state.router.link) {
           case "/": {

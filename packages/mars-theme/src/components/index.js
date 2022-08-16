@@ -23,6 +23,8 @@ const Theme = ({ state, actions }) => {
   const data = state.source.get(state.router.link);
   const theme = state.theme.headerTheme;
 
+  console.log(data);
+
   useEffect(() => {
     setSwiperCssBundle();
     actions.theme.setHeaderTheme();
@@ -51,7 +53,7 @@ const Theme = ({ state, actions }) => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
-          <Router when={data.isArchive} />
+          <Router when={data.isArchive || data.isPage} />
           {/* <Post when={data.isPostType} /> */}
           <PageError when={data.isError} />
         </Switch>

@@ -163,6 +163,7 @@ const Mission = styled(P)`
   ${stretch(110)}
 	color: var(--gray-500);
   @media screen and (max-width: 991px) {
+    ${font(14, 20)}
     position: absolute;
     top: 25px;
     left: 0;

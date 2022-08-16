@@ -108,6 +108,7 @@ const Content = styled.div`
   @media screen and (max-width: 991px) {
     padding-top: 144px;
     padding-bottom: 40px;
+    margin-bottom: 144px;
     & .swiper-slide {
       max-width: 730px;
     }

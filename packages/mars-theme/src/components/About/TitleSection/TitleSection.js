@@ -93,6 +93,7 @@ const Who = styled(P)`
   ${stretch(110)}
 	color: ${whiteRgba(0.7)};
   @media screen and (max-width: 991px) {
+    ${font(14, 20)}
     position: absolute;
     top: 25px;
     left: 0;

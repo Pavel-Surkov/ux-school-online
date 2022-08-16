@@ -1,6 +1,7 @@
 import React from "react";
 import HeroVideo from "./HeroVideo/HeroVideo";
 import TitleSection from "./TitleSection/TitleSection";
+import Lecturers from "./Lecturers/Lecturers";
 import { styled } from "frontity";
 
 const About = () => {
@@ -8,6 +9,7 @@ const About = () => {
     <AboutElement>
       <HeroVideo />
       <TitleSection />
+      <Lecturers />
     </AboutElement>
   );
 };

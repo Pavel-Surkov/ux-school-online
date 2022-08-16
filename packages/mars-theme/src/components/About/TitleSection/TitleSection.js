@@ -135,7 +135,7 @@ const TitleBlock = styled.div`
   position: relative;
   padding: 102px 0 98px;
   ${flex("column")};
-  border-bottom: 1px solid ${whiteRgba(0.3)};
+  border-bottom: 1px dashed ${whiteRgba(0.3)};
   @media screen and (max-width: 991px) {
     padding: 0;
     border: none;

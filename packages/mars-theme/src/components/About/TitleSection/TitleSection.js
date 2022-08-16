@@ -61,6 +61,10 @@ const InfoLink = styled(Link)`
   & img {
     margin-left: 10px;
   }
+  @media screen and (max-width: 576px) {
+    max-width: 100%;
+    justify-content: center;
+  }
 `;
 
 const InfoText = styled.div`
@@ -74,14 +78,25 @@ const InfoText = styled.div`
       margin-bottom: 0;
     }
   }
+  @media screen and (max-width: 991px) {
+    & p {
+      ${font(21, 32)};
+    }
+  }
 `;
 
 const Info = styled.div``;
 
 const Who = styled(P)`
+  margin: 0;
   ${font(14, 20)}
   ${stretch(110)}
 	color: ${whiteRgba(0.7)};
+  @media screen and (max-width: 991px) {
+    position: absolute;
+    top: 25px;
+    left: 0;
+  }
 `;
 
 const InfoBlock = styled.div`
@@ -89,15 +104,24 @@ const InfoBlock = styled.div`
   display: grid;
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
+  @media screen and (max-width: 991px) {
+    padding: 0;
+    grid-template-columns: 100%;
+  }
 `;
 
 const TitleBottom = styled(TitleL)`
   position: relative;
   margin: 0;
-  right: 64px;
   display: inline-block;
   margin-left: auto;
   margin-right: 64px;
+  @media screen and (max-width: 1400px) {
+    margin-right: 0;
+  }
+  @media screen and (max-width: 991px) {
+    margin-left: 0;
+  }
 `;
 
 const TitleTop = styled(TitleL)`
@@ -112,10 +136,16 @@ const TitleBlock = styled.div`
   padding: 102px 0 98px;
   ${flex("column")};
   border-bottom: 1px solid ${whiteRgba(0.3)};
+  @media screen and (max-width: 991px) {
+    padding: 0;
+    border: none;
+    margin-bottom: 27px;
+  }
 `;
 
 const Content = styled.div`
   position: relative;
+  padding: 126px 0 144px;
 `;
 
 const Section = styled.section`

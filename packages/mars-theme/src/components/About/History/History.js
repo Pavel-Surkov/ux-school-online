@@ -50,6 +50,24 @@ const History = () => {
 
                   return (
                     <InfoItem key={item.date}>
+                      <Decorative className="decorative">
+                        <svg
+                          width="1"
+                          height="100%"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <line
+                            x1="0.5"
+                            y1="2.18557e-08"
+                            x2="0.499981"
+                            y2="438"
+                            stroke="#D8DCEC"
+                            stroke-dasharray="3 3"
+                          />
+                        </svg>
+                        <Point />
+                      </Decorative>
                       <Date>{item.date}</Date>
                       <P size="l">{item.content}</P>
                     </InfoItem>
@@ -71,6 +89,23 @@ const History = () => {
   );
 };
 
+const Point = styled.div`
+  width: 9px;
+  height: 9px;
+  background: var(--gray-200);
+  border-radius: 50%;
+  left: -4.5px;
+  top: -4px;
+  position: absolute;
+`;
+
+const Decorative = styled.div`
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  height: 100%;
+`;
+
 const ShowMore = styled.div`
   padding-left: 32px;
   margin-top: 32px;
@@ -90,10 +125,14 @@ const Date = styled(P)`
 `;
 
 const InfoItem = styled.li`
+  position: relative;
   padding-left: 32px;
-  margin-bottom: 39px;
+  padding-bottom: 39px;
   &:last-child {
-    margin-bottom: 0;
+    padding-bottom: 0;
+    & .decorative svg {
+      display: none;
+    }
   }
 `;
 

@@ -12,8 +12,15 @@ import bg from "../../../assets/images/consultation-bg.png";
 import like from "../../../assets/images/Like.png";
 import like2x from "../../../assets/images/Like@2x.png";
 
+import { useFormik } from "formik";
+
 const Consultation = () => {
   const [isUserAgree, setIsUserAgree] = useState(true);
+
+  const formik = useFormik({
+    initialValues: { name: "", tel: "" },
+    onSubmit: (values) => console.log(values),
+  });
 
   return (
     <Section>
@@ -29,15 +36,30 @@ const Consultation = () => {
                 выбор-)`}
               </P>
             </Subtitle>
-            <Form>
+            <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
-                <Input placeholder="Имя" name="name" />
+                <Input
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  placeholder="Имя"
+                  name="name"
+                />
               </FormBlock>
               <FormBlock>
-                <Input placeholder="Телефон" name="tel" type="tel" />
+                <Input
+                  value={formik.values.tel}
+                  onChange={formik.handleChange}
+                  placeholder="Телефон"
+                  name="tel"
+                  type="tel"
+                />
               </FormBlock>
               <SubmitWrapper>
-                <PrimaryBtn content="Отправить" disabled={!isUserAgree} />
+                <PrimaryBtn
+                  type="submit"
+                  content="Отправить"
+                  disabled={!isUserAgree}
+                />
               </SubmitWrapper>
             </Form>
             <Agreement>

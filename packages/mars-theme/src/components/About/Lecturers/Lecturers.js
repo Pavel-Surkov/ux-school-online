@@ -95,7 +95,7 @@ const Lecturers = ({ state }) => {
               }
 
               return (
-                <Lecturer>
+                <Lecturer key={lecturer.name}>
                   <ImgWrapper>
                     <img
                       src={lecturer.image}

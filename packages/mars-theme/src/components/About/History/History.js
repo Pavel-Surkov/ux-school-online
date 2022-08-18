@@ -164,6 +164,9 @@ const InfoBlock = styled.div`
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
   position: relative;
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: 4fr 8fr;
+  }
   @media screen and (max-width: 991px) {
     padding-top: 152px;
     grid-template-columns: 100%;

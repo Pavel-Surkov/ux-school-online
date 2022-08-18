@@ -105,6 +105,9 @@ const InfoBlock = styled.div`
   display: grid;
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: 4fr 8fr;
+  }
   @media screen and (max-width: 991px) {
     padding: 0;
     grid-template-columns: 100%;

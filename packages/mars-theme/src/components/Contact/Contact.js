@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "../constant/Container";
 import Link from "../constant/TextLink";
+import Input from "../constant/Input";
+import CheckboxItem from "../constant/CheckboxItem";
+import PrimaryBtn from "../constant/PrimaryButton";
 import { flex, font, grayRgba, stretch } from "../base/functions";
-import { TitleM } from "../constant/Title";
+import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
 import P from "../constant/Paragraph";
+
+import { useFormik } from "formik";
 
 import telegram from "../../assets/images/social/Telegram-large.svg";
 import tel from "../../assets/images/social/Phone-large.svg";
@@ -48,6 +53,15 @@ const socials = [
 const Contact = ({ state }) => {
   const { isMobile } = state.theme;
 
+  const [isUserAgree, setIsUserAgree] = useState(true);
+
+  const formik = useFormik({
+    initialValues: { name: "", tel: "", email: "" },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <ContactsWrapper>
       <Content>
@@ -84,10 +98,91 @@ const Contact = ({ state }) => {
             })}
           </SocialList>
         </MapBlock>
+        <FormBlock onSubmit={formik.handleSubmit}>
+          <FormTitle>Связаться с нами</FormTitle>
+          <FormSubtitle>
+            <P>
+              Оставьте ваши контактные данные. Мы свяжемся с вами
+              и проконсультируем вас по любым вопросам.
+            </P>
+          </FormSubtitle>
+          <ContactForm>
+            <div>
+              <Input
+                type="text"
+                placeholder="Имя и фамилия"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                name="name"
+              />
+            </div>
+            <div>
+              <Input
+                type="tel"
+                placeholder="Телефон"
+                value={formik.values.tel}
+                onChange={formik.handleChange}
+                name="tel"
+              />
+            </div>
+            <div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                name="email"
+              />
+            </div>
+            <SubmitWrapper>
+              <PrimaryBtn
+                disabled={isUserAgree ? false : true}
+                content="Отправить заявку"
+                type="submit"
+              />
+            </SubmitWrapper>
+            <div>
+              <CheckboxItem
+                checked={isUserAgree}
+                setChecked={() => setIsUserAgree((prev) => !prev)}
+              >
+                Я согласен с условиями обработки{" "}
+                <a href="/">персональных данных</a>
+              </CheckboxItem>
+            </div>
+          </ContactForm>
+        </FormBlock>
       </Content>
     </ContactsWrapper>
   );
 };
+
+const SubmitWrapper = styled.div`
+  padding-top: 16px;
+  & button {
+    max-width: 100%;
+    width: 100%;
+    ${font(21, 36)};
+    letter-spacing: -0.01em;
+    padding: 0.476em;
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+  }
+`;
+
+const ContactForm = styled.form`
+  display: grid;
+  grid-gap: 16px;
+`;
+
+const FormSubtitle = styled.div`
+  margin-bottom: 25px;
+`;
+
+const FormTitle = styled(TitleS)`
+  ${font(21, 28)}
+  margin-bottom: 8px;
+`;
 
 const SocialLink = styled(Link)`
   ${font(21, 32)};
@@ -137,6 +232,11 @@ const MapBlock = styled.div`
   background: var(--gray-50);
   border-radius: 12px;
   overflow: hidden;
+  margin-bottom: 16px;
+`;
+
+const FormBlock = styled(MapBlock)`
+  padding: 35px 52px 41px;
 `;
 
 const Content = styled(Container)`

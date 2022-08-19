@@ -65,7 +65,9 @@ const Contact = ({ state }) => {
   return (
     <ContactsWrapper>
       <Content>
-        <TitleM mb={isMobile ? 30 : 46}>Контакты</TitleM>
+        <TitleM color="black" mb={isMobile ? 30 : 46}>
+          Контакты
+        </TitleM>
         <MapBlock>
           <Map>
             <iframe
@@ -110,7 +112,7 @@ const Contact = ({ state }) => {
             <div>
               <Input
                 type="text"
-                placeholder="Имя и фамилия"
+                placeholder="Имя"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 name="name"
@@ -123,15 +125,6 @@ const Contact = ({ state }) => {
                 value={formik.values.tel}
                 onChange={formik.handleChange}
                 name="tel"
-              />
-            </div>
-            <div>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                name="email"
               />
             </div>
             <SubmitWrapper>
@@ -212,6 +205,9 @@ const SocialList = styled.ul`
   margin: 0;
   list-style: none;
   padding: 32px 52px 40px;
+  @media screen and (max-width: 991px) {
+    padding: 32px 16px 40px;
+  }
 `;
 
 const Office = styled.span`
@@ -224,6 +220,12 @@ const Office = styled.span`
 const Address = styled.div`
   padding: 28px 51px 30px;
   border-bottom: 1px dashed ${grayRgba(0.2)};
+  @media screen and (max-width: 991px) {
+    padding: 28px 24px 31px;
+    & p {
+      ${font(21, 32)};
+    }
+  }
 `;
 
 const Map = styled.div``;
@@ -237,14 +239,22 @@ const MapBlock = styled.div`
 
 const FormBlock = styled(MapBlock)`
   padding: 35px 52px 41px;
+  @media screen and (max-width: 768px) {
+    padding: 19px 16px 29px;
+  }
 `;
 
 const Content = styled(Container)`
-  max-width: 588px;
+  && {
+    max-width: 588px;
+  }
 `;
 
 const ContactsWrapper = styled.div`
   padding: 98px 0 184px;
+  @media screen and (max-width: 991px) {
+    padding-top: 54px;
+  }
 `;
 
 export default connect(Contact);

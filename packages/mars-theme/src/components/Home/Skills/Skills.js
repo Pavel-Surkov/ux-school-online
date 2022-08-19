@@ -120,6 +120,13 @@ const SkillsBlock = styled.div`
   @media screen and (max-width: 991px) {
     grid-template-columns: 100%;
     padding-bottom: 104px;
+    padding-top: 400px;
+  }
+  @media screen and (max-width: 768px) {
+    padding-top: 300px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-top: 198px;
   }
 `;
 

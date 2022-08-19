@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./Home/Home";
 import About from "./About/About";
+import Contact from "./Contact/Contact";
 import PageError from "./PageError";
 import { connect } from "frontity";
 
@@ -12,6 +13,8 @@ const Router = ({ state }) => {
       return <Home />;
     case "/about/":
       return <About />;
+    case "/contacts/":
+      return <Contact />;
     default:
       return <PageError />;
   }

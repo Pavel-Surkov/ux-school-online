@@ -27,8 +27,8 @@ const socialLinks = [
     text: "Instagram",
     link: "https://www.instagram.com/ux_mind_school/",
   },
-  { icon: whatsapp, text: "WhatsApp", link: "https://wa.me/79200000000" },
-  { icon: viber, text: "Viber", link: "viber://chat/?number=%2B79200000000" },
+  { icon: whatsapp, text: "WhatsApp", link: "https://wa.me/375298630657" },
+  { icon: viber, text: "Viber", link: "viber://chat/?number=%2B375298630657" },
 ];
 
 const Footer = ({ state }) => {

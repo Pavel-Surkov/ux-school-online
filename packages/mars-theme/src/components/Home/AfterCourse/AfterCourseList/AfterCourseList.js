@@ -126,6 +126,9 @@ const OpenedItemText = styled.div`
 
 const OpenedItemTitle = styled(TitleS)`
   margin-bottom: 19px;
+  @media screen and (max-width: 1400px) {
+    ${font(21, 28)};
+  }
   @media screen and (max-width: 991px) {
     margin-bottom: 12px;
   }

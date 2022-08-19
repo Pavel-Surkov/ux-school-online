@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import { TitleM } from "../../constant/Title";
 import P from "../../constant/Paragraph";
 import Input from "../../constant/Input";
+import CommonModal from "../../constant/CommonModal";
 import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import CheckboxItem from "../../constant/CheckboxItem";
 import { flex, whiteRgba, font } from "../../base/functions";
@@ -16,10 +17,14 @@ import { useFormik } from "formik";
 
 const Consultation = () => {
   const [isUserAgree, setIsUserAgree] = useState(true);
+  const [consultationModalOpened, setConsultationModalOpened] = useState(false);
 
   const formik = useFormik({
     initialValues: { name: "", tel: "" },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      setConsultationModalOpened(true);
+      console.log(values);
+    },
   });
 
   return (
@@ -81,9 +86,36 @@ const Consultation = () => {
           alt=""
         />
       </Like>
+      <ModalWrapper>
+        <CommonModal
+          isOpened={consultationModalOpened}
+          setIsOpened={setConsultationModalOpened}
+        >
+          <ModalTitle>Заявка отправлена</ModalTitle>
+          <P size="l">Наш менеджер совсем скоро свяжется с вами</P>
+        </CommonModal>
+      </ModalWrapper>
     </Section>
   );
 };
+
+const ModalWrapper = styled.div`
+  & .modal {
+    max-width: 670px;
+  }
+  @media screen and (max-width: 991px) {
+    & .modal {
+      max-width: calc(100% - 32px);
+    }
+  }
+`;
+
+const ModalTitle = styled(TitleM)`
+  margin-bottom: 23px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
+  }
+`;
 
 const ConsultationTitle = styled(TitleM)`
   margin-bottom: 15px;

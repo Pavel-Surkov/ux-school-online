@@ -16,6 +16,10 @@ const advantages = [
 ];
 
 const Hero = ({ state }) => {
+  const scrollToRates = () => {
+    state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <HeroWrapper>
       <Container>
@@ -27,7 +31,10 @@ const Hero = ({ state }) => {
           <AdvantagesList>
             {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
           </AdvantagesList>
-          <PrimaryButton content={"Записаться на курс"} />
+          <PrimaryButton
+            onClick={scrollToRates}
+            content={"Записаться на курс"}
+          />
           <VideoWrapper>
             <video width="728" height="728" autoPlay>
               <source src={video} type="video/mp4" />

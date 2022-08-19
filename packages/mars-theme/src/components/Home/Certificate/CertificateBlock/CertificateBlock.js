@@ -34,9 +34,9 @@ const CertificateBlock = ({ state }) => {
     },
   });
 
-  React.useEffect(() => {
-    console.log(isUserAgree);
-  }, [isUserAgree]);
+  const scrollToRates = () => {
+    state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <Wrapper>
@@ -71,7 +71,7 @@ const CertificateBlock = ({ state }) => {
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
-        <PrimaryBtn content="Записаться на курс" />
+        <PrimaryBtn onClick={scrollToRates} content="Записаться на курс" />
       </CourseBtnWrapper>
       <CommonModal
         isOpened={checkModalOpened}

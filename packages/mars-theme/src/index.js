@@ -28,6 +28,7 @@ const marsTheme = {
       headerTheme: "white",
       isMobile: false,
       isMobileMenuOpened: false,
+      ratesElement: null,
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -65,6 +66,11 @@ const marsTheme = {
       toggleCourseModal: ({ state }) => {
         state.theme.courseModalOpened = !state.theme.courseModalOpened;
       },
+      setRatesElement:
+        ({ state }) =>
+        (el) => {
+          state.theme.ratesElement = el;
+        },
       setHeaderTheme: ({ state }) => {
         switch (state.router.link) {
           case "/": {

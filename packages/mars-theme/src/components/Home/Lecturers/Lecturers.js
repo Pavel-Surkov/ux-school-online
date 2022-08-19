@@ -111,6 +111,7 @@ const SlideImage = styled.div`
   position: relative;
   border-radius: 48px;
   overflow: hidden;
+  display: flex;
   & img {
     width: 100%;
     object-fit: cover;

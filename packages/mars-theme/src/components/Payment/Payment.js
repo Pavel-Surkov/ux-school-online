@@ -9,6 +9,8 @@ import { font, stretch, flex } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
 
+import { useFormik } from "formik";
+
 import envelope from "../../assets/images/svg/Envelope.svg";
 
 const Payment = ({ state }) => {
@@ -16,12 +18,40 @@ const Payment = ({ state }) => {
 
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [selectedRate, setSelectedRate] = useState(null);
+
+  const [promocodeValues, setPromocodeValues] = useState(["DESIGN"]);
+  const [promocodeFieldOpened, setPromocodeFieldOpened] = useState(false);
+  const [isPromocodeCorrect, setIsPromocodeCorrect] = useState(null);
+
   const [priceInRubles, setPriceInRubles] = useState(29500);
   const [priceString, setPriceString] = useState("29 500");
+  const [salePriceInRubles, setSalePriceInRubles] = useState(0);
+  const [salePriceString, setSalePriceString] = useState("26 500");
+
   const [installmentCheckbox, setInstallmentCheckbox] = useState(false);
   const [graduateCheckbox, setGraduateCheckbox] = useState(false);
-  const [name, setName] = useState("");
   const [isUserAgree, setIsUserAgree] = useState(true);
+
+  const formik = useFormik({ initialValues: { name: "", promocode: "" } });
+
+  useEffect(() => {
+    const priceString = salePriceInRubles.toString();
+
+    const newPrice = priceString
+      .split("")
+      .reverse()
+      .map((num, index) => {
+        if (!((index + 1) % 3)) {
+          return ` ${num}`;
+        }
+
+        return num;
+      })
+      .reverse()
+      .join("");
+
+    setSalePriceString(newPrice);
+  }, [salePriceInRubles]);
 
   useEffect(() => {
     const priceString = priceInRubles.toString();
@@ -41,6 +71,25 @@ const Payment = ({ state }) => {
 
     setPriceString(newPrice);
   }, [priceInRubles]);
+
+  useEffect(() => {
+    setSalePriceInRubles(priceInRubles - 3000);
+  }, [isPromocodeCorrect]);
+
+  const handlePromocodeCheck = () => {
+    const value = formik.values.promocode;
+
+    const isPromocodeCorrect = Boolean(
+      promocodeValues.find((item) => item === value)
+    );
+
+    setIsPromocodeCorrect(isPromocodeCorrect);
+  };
+
+  const handlePromocodeClear = () => {
+    formik.setFieldValue("promocode", "");
+    setIsPromocodeCorrect(null);
+  };
 
   return (
     <PaymentWrapper>
@@ -74,12 +123,72 @@ const Payment = ({ state }) => {
         <PaymentBlock>
           <Price>
             <SumTitle>Сумма для оплаты</SumTitle>
-            <Sum color="black">{`${priceString} ₽`}</Sum>
+            <Sum color="black">
+              {isPromocodeCorrect ? (
+                <>
+                  <OldPrice>{priceString}</OldPrice>
+                  {`${salePriceString} ₽`}
+                </>
+              ) : (
+                `${priceString} ₽`
+              )}
+            </Sum>
             <Promocode htmlFor="switch">
-              <SwitchInput type="checkbox" id="switch" />
+              <SwitchInput
+                checked={promocodeFieldOpened}
+                onChange={() => setPromocodeFieldOpened((prev) => !prev)}
+                type="checkbox"
+                id="switch"
+              />
               <Toggle />
               <P>У меня есть промокод</P>
             </Promocode>
+            {promocodeFieldOpened && (
+              <div>
+                <PromocodeBlock>
+                  <PromocodeInputWrapper>
+                    <PromocodeInput
+                      isEmpty={formik.values.promocode === ""}
+                      name="promocode"
+                      value={formik.values.promocode}
+                      onChange={formik.handleChange}
+                      placeholder="Промокод"
+                    />
+                    {formik.values.promocode !== "" && (
+                      <Close onClick={handlePromocodeClear}>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M5.57901 5.57998C5.78994 5.36931 6.07589 5.25097 6.37401 5.25097C6.67214 5.25097 6.95807 5.36931 7.16901 5.57998L11.999 10.41L16.829 5.57998C16.9321 5.46945 17.0563 5.3808 17.1943 5.31931C17.3323 5.25783 17.4812 5.22477 17.6323 5.2221C17.7833 5.21943 17.9333 5.24722 18.0734 5.3038C18.2135 5.36038 18.3407 5.44459 18.4475 5.55142C18.5545 5.65825 18.6386 5.78551 18.6952 5.92558C18.7517 6.06567 18.7796 6.21571 18.7769 6.36676C18.7742 6.51783 18.7412 6.66679 18.6797 6.80479C18.6182 6.94279 18.5296 7.06699 18.419 7.16998L13.589 12L18.419 16.83C18.5296 16.933 18.6182 17.0572 18.6797 17.1952C18.7412 17.3332 18.7742 17.4822 18.7769 17.6332C18.7796 17.7843 18.7517 17.9343 18.6952 18.0744C18.6386 18.2145 18.5545 18.3417 18.4475 18.4485C18.3407 18.5554 18.2135 18.6396 18.0734 18.6961C17.9333 18.7527 17.7833 18.7806 17.6323 18.7779C17.4812 18.7752 17.3323 18.7422 17.1943 18.6807C17.0563 18.6192 16.9321 18.5305 16.829 18.42L11.999 13.59L7.16901 18.42C6.95574 18.6187 6.67366 18.7269 6.38221 18.7218C6.09076 18.7165 5.8127 18.5985 5.60656 18.3924C5.40045 18.1863 5.28239 17.9082 5.27724 17.6167C5.2721 17.3253 5.38029 17.0433 5.57901 16.83L10.409 12L5.57901 7.16998C5.36834 6.95905 5.25 6.67311 5.25 6.37498C5.25 6.07686 5.36834 5.79093 5.57901 5.57998Z"
+                            fill="#B0B5CB"
+                          />
+                        </svg>
+                      </Close>
+                    )}
+                    {formik.values.promocode !== "" && (
+                      <InputTitle isPromocodeCorrect={isPromocodeCorrect}>
+                        Промокод
+                      </InputTitle>
+                    )}
+                  </PromocodeInputWrapper>
+                  <PrimaryBtn
+                    onClick={handlePromocodeCheck}
+                    disabled={isPromocodeCorrect}
+                    content="Применить"
+                  />
+                </PromocodeBlock>
+                {isPromocodeCorrect === false && (
+                  <NoPromo>Такого промокода не существует</NoPromo>
+                )}
+              </div>
+            )}
           </Price>
           <Info>
             <Checkboxes>
@@ -114,8 +223,9 @@ const Payment = ({ state }) => {
             <InputWrapper>
               <Input
                 placeholder="Имя и фамилия ученика"
-                value={name}
-                onChange={(evt) => setName(evt.target.value)}
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
               />
             </InputWrapper>
             <BtnWrapper>
@@ -136,6 +246,69 @@ const Payment = ({ state }) => {
     </PaymentWrapper>
   );
 };
+
+const OldPrice = styled.span`
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--gray-400);
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: var(--gray-400);
+    left: 0;
+    top: 50%;
+  }
+`;
+
+const NoPromo = styled(P)`
+  position: relative;
+  left: 16px;
+  top: 100%;
+  ${font(14, 20)};
+  display: inline-block;
+`;
+
+const PromocodeInput = styled(Input)`
+  ${({ isEmpty }) => (isEmpty ? "" : "padding: 17px 16px 7px")};
+`;
+
+const InputTitle = styled.span`
+  position: absolute;
+  ${font(12, 16)};
+  top: 7px;
+  left: 16px;
+  ${stretch(105)};
+  color: var(--gray-400);
+  ${({ isPromocodeCorrect }) =>
+    isPromocodeCorrect === false && "color: var(--error)"};
+`;
+
+const Close = styled.button`
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+`;
+
+const PromocodeInputWrapper = styled.div`
+  position: relative;
+  margin-right: 8px;
+  flex-grow: 1;
+  flex-shrink: 0;
+`;
+
+const PromocodeBlock = styled.div`
+  ${flex("row", "center")}
+  margin-top: 16px;
+`;
 
 const BtnWrapper = styled.div`
   margin-bottom: 15px;

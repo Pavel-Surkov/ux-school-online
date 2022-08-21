@@ -7,7 +7,7 @@ import PrimaryBtn from "../constant/PrimaryButtonSmall";
 import Input from "../constant/Input";
 import { font, stretch, flex } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
-import { styled, connect } from "frontity";
+import { styled, connect, css } from "frontity";
 
 import { useFormik } from "formik";
 
@@ -91,6 +91,49 @@ const Payment = ({ state }) => {
     setIsPromocodeCorrect(null);
   };
 
+  const renderPrice = () => {
+    if (isPromocodeCorrect) {
+      return (
+        <Sum color="black">
+          <OldPrice>{priceString}</OldPrice>
+          {`${salePriceString} ₽`}
+        </Sum>
+      );
+    }
+
+    if (installmentCheckbox) {
+      return (
+        <>
+          <Sum color="black">
+            313.33 BYN{" "}
+            <span
+              css={css`
+                color: var(--gray-300);
+              `}
+            >
+              x 3 месяца
+            </span>
+          </Sum>
+          <P>
+            Следующий платёж производится через месяц после осуществления
+            предыдущего платежа.
+          </P>
+        </>
+      );
+    }
+
+    if (graduateCheckbox) {
+      return (
+        <Sum color="black">
+          <OldPrice>{priceString}</OldPrice>
+          {`${salePriceString} ₽`}
+        </Sum>
+      );
+    }
+
+    return <Sum color="black">{`${priceString} ₽`}</Sum>;
+  };
+
   return (
     <PaymentWrapper>
       <Content>
@@ -123,16 +166,7 @@ const Payment = ({ state }) => {
         <PaymentBlock>
           <Price>
             <SumTitle>Сумма для оплаты</SumTitle>
-            <Sum color="black">
-              {isPromocodeCorrect ? (
-                <>
-                  <OldPrice>{priceString}</OldPrice>
-                  {`${salePriceString} ₽`}
-                </>
-              ) : (
-                `${priceString} ₽`
-              )}
-            </Sum>
+            <PriceContent>{renderPrice()}</PriceContent>
             <Promocode htmlFor="switch">
               <SwitchInput
                 checked={promocodeFieldOpened}
@@ -146,7 +180,9 @@ const Payment = ({ state }) => {
             {promocodeFieldOpened && (
               <div>
                 <PromocodeBlock>
-                  <PromocodeInputWrapper>
+                  <PromocodeInputWrapper
+                    isPromocodeCorrect={isPromocodeCorrect}
+                  >
                     <PromocodeInput
                       isEmpty={formik.values.promocode === ""}
                       name="promocode"
@@ -155,7 +191,7 @@ const Payment = ({ state }) => {
                       placeholder="Промокод"
                     />
                     {formik.values.promocode !== "" && (
-                      <Close onClick={handlePromocodeClear}>
+                      <Close aria-label="close" onClick={handlePromocodeClear}>
                         <svg
                           width="24"
                           height="24"
@@ -176,6 +212,11 @@ const Payment = ({ state }) => {
                       <InputTitle isPromocodeCorrect={isPromocodeCorrect}>
                         Промокод
                       </InputTitle>
+                    )}
+                    {isPromocodeCorrect === false && (
+                      <NoPromoMobile>
+                        Такого промокода не существует
+                      </NoPromoMobile>
                     )}
                   </PromocodeInputWrapper>
                   <PrimaryBtn
@@ -247,6 +288,25 @@ const Payment = ({ state }) => {
   );
 };
 
+const NoPromoMobile = styled.span`
+  display: none;
+  position: absolute;
+  ${font(14, 20)};
+  color: var(--gray-500);
+  padding-left: 16px;
+  left: 0;
+  top: 100%;
+  ${stretch(110)};
+  z-index: 1;
+  @media screen and (max-width: 576px) {
+    display: inline-block;
+  }
+`;
+
+const PriceContent = styled.div`
+  margin-bottom: 16px;
+`;
+
 const OldPrice = styled.span`
   display: inline-block;
   margin-right: 8px;
@@ -269,6 +329,9 @@ const NoPromo = styled(P)`
   top: 100%;
   ${font(14, 20)};
   display: inline-block;
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
 `;
 
 const PromocodeInput = styled(Input)`
@@ -296,6 +359,8 @@ const Close = styled.button`
   display: grid;
   place-items: center;
   padding: 0;
+  width: 24px;
+  height: 24px;
 `;
 
 const PromocodeInputWrapper = styled.div`
@@ -303,11 +368,27 @@ const PromocodeInputWrapper = styled.div`
   margin-right: 8px;
   flex-grow: 1;
   flex-shrink: 0;
+  @media screen and (max-width: 576px) {
+    width: 100%;
+    ${({ isPromocodeCorrect }) =>
+      isPromocodeCorrect === false && "margin-bottom: 20px;"}
+  }
 `;
 
 const PromocodeBlock = styled.div`
   ${flex("row", "center")}
   margin-top: 16px;
+  & button {
+    max-width: 176px;
+  }
+  @media screen and (max-width: 576px) {
+    ${flex("column")};
+    & button:not([aria-label="close"]) {
+      max-width: 100%;
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
 `;
 
 const BtnWrapper = styled.div`
@@ -399,9 +480,7 @@ const Promocode = styled.label`
   ${flex("row", "center")}
 `;
 
-const Sum = styled(TitleS)`
-  margin-bottom: 16px;
-`;
+const Sum = styled(TitleS)``;
 
 const SumTitle = styled(P)`
   margin-bottom: 1px;

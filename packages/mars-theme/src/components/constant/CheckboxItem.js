@@ -59,6 +59,7 @@ const CheckboxWrapper = styled.div`
   padding-left: 32px;
   position: relative;
   ${flex()};
+  cursor: pointer;
   @media screen and (max-width: 991px) {
     & p {
       ${font(14, 20)};

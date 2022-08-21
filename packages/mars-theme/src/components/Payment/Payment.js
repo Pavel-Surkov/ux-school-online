@@ -87,6 +87,7 @@ const Payment = ({ state }) => {
                 <CheckboxItem
                   checked={installmentCheckbox}
                   setChecked={() => setInstallmentCheckbox((prev) => !prev)}
+                  top={true}
                 >
                   Рассрочка на 3 месяца от UX Mind School
                 </CheckboxItem>
@@ -95,6 +96,7 @@ const Payment = ({ state }) => {
                 <CheckboxItem
                   checked={graduateCheckbox}
                   setChecked={() => setGraduateCheckbox((prev) => !prev)}
+                  top={true}
                 >
                   Скидка 10% выпускникам UX Mind School
                 </CheckboxItem>
@@ -119,7 +121,7 @@ const Payment = ({ state }) => {
             <BtnWrapper>
               <PrimaryBtn content="Перейти к оплате" />
             </BtnWrapper>
-            <CheckboxWrapper>
+            <CheckboxAgreementWrapper>
               <CheckboxItem
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
@@ -127,7 +129,7 @@ const Payment = ({ state }) => {
                 Я согласен с условиями обработки{" "}
                 <a href="/">персональных данных</a>
               </CheckboxItem>
-            </CheckboxWrapper>
+            </CheckboxAgreementWrapper>
           </Info>
         </PaymentBlock>
       </Content>
@@ -139,6 +141,7 @@ const BtnWrapper = styled.div`
   margin-bottom: 15px;
   & button {
     width: 100%;
+    max-width: 100%;
   }
 `;
 
@@ -166,6 +169,17 @@ const CheckboxWrapper = styled.div`
   margin-bottom: 16px;
   &:last-child {
     margin-bottom: 0;
+  }
+  @media screen and (max-width: 991px) {
+    & p {
+      ${font(16, 24)}
+    }
+  }
+`;
+
+const CheckboxAgreementWrapper = styled(CheckboxWrapper)`
+  & p {
+    ${font(14, 20)}
   }
 `;
 
@@ -224,11 +238,17 @@ const SumTitle = styled(P)`
 
 const Info = styled.div`
   padding: 31px 52px 50px;
+  @media screen and (max-width: 991px) {
+    padding: 31px 24px 29px;
+  }
 `;
 
 const Price = styled.div`
   border-bottom: 1px dashed var(--gray-300);
   padding: 25px 52px 30px;
+  @media screen and (max-width: 991px) {
+    padding: 25px 24px 30px;
+  }
 `;
 
 const PaymentBlock = styled.div`
@@ -236,6 +256,9 @@ const PaymentBlock = styled.div`
   background: var(--gray-50);
   border-radius: 12px;
   overflow: hidden;
+  @media screen and (max-width: 991px) {
+    margin-top: 24px;
+  }
 `;
 
 const Drop = styled.div`

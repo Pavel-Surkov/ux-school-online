@@ -340,13 +340,76 @@ const Terms = ({ state }) => {
               </P>
             </Subtitle>
           </Info>
-          <Navigation></Navigation>
-          <TermsContent></TermsContent>
+          <NavigationWrapper>
+            <Navigation></Navigation>
+          </NavigationWrapper>
+          <TermsContent>
+            {terms.map((term) => {
+              const termNumber = term.id;
+
+              return (
+                <TermsItem key={termNumber}>
+                  <TitleS mb={isMobile ? 15 : 23} color="black">
+                    {`${termNumber}. ${term.title}`}
+                  </TitleS>
+                  {term.terms.map((termItem) => {
+                    const termItemNumber = termItem.id;
+
+                    return (
+                      <>
+                        <Term size="l">
+                          {`${termNumber}.${termItemNumber}. `}
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: termItem.content,
+                            }}
+                          />
+                        </Term>
+                        {termItem.terms &&
+                          termItem.terms.map((underTermItem) => {
+                            const underTermItemNumber = underTermItem.id;
+
+                            return (
+                              <Term size="l">
+                                {`${termNumber}.${termItemNumber}.${underTermItemNumber}. `}
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: underTermItem.content,
+                                  }}
+                                />
+                              </Term>
+                            );
+                          })}
+                      </>
+                    );
+                  })}
+                </TermsItem>
+              );
+            })}
+          </TermsContent>
         </Content>
       </Container>
     </TermsWrapper>
   );
 };
+
+const Navigation = styled.nav``;
+
+const Term = styled(P)`
+  color: var(--black-900);
+  margin-bottom: 14px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const TermsItem = styled.li`
+  padding: 0;
+  margin-bottom: 47px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
 
 const Subtitle = styled.div`
   & p {
@@ -354,9 +417,13 @@ const Subtitle = styled.div`
   }
 `;
 
-const TermsContent = styled.div``;
+const TermsContent = styled.ul`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;
 
-const Navigation = styled.nav``;
+const NavigationWrapper = styled.div``;
 
 const Info = styled.div`
   grid-column-start: 2;

@@ -139,7 +139,7 @@ const Rates = ({ state, actions }) => {
               setChecked={() => setIsApproved((prev) => !prev)}
             >
               Я согласен с условиями обработки{" "}
-              <a href="/">персональных данных</a>
+              <a href="/terms/">персональных данных</a>
             </CheckboxItem>
           </CheckboxWrapper>
         </SignupForm>

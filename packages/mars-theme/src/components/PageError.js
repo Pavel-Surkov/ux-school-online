@@ -24,6 +24,15 @@ const Page404 = ({ state }) => {
   const title = "Oops! Something went wrong";
   const title404 = "Oops! 404";
 
+  if (data.is404) {
+    return (
+      <Container>
+        <Title></Title>
+        <Description>{data.is404 ? description404 : description}</Description>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Title>{data.is404 ? title404 : title}</Title>
@@ -35,9 +44,9 @@ const Page404 = ({ state }) => {
 export default connect(Page404);
 
 const Container = styled.div`
-  width: 800px;
+  max-width: 587px;
   margin: 0;
-  padding: 24px;
+  padding: 112px 205px;
   text-align: center;
 `;
 

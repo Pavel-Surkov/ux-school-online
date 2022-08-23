@@ -393,9 +393,9 @@ const Terms = ({ state }) => {
       <Container>
         <Content>
           <Info>
-            <TitleM color="black" mb={isMobile ? 15 : 23}>
+            <TermsTitleM color="black" mb={isMobile ? 15 : 23}>
               Политика конфиденциальности
-            </TitleM>
+            </TermsTitleM>
             <Subtitle>
               <P size="l">
                 Настоящая Политика конфиденциальности регулирует порядок
@@ -470,6 +470,10 @@ const Terms = ({ state }) => {
   );
 };
 
+const TermsTitleM = styled(TitleM)`
+  word-wrap: break-word;
+`;
+
 const NavButton = styled.button`
   background: transparent;
   display: inline;
@@ -506,6 +510,14 @@ const Term = styled(P)`
   &:last-child {
     margin-bottom: 0;
   }
+  @media screen and (max-width: 991px) {
+    ${font(21, 32)};
+    ${stretch(109)};
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const TermsItem = styled.li`
@@ -514,11 +526,19 @@ const TermsItem = styled.li`
   &:last-child {
     margin-bottom: 0;
   }
+  @media screen and (max-width: 991px) {
+    margin-bottom: 34px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const Subtitle = styled.div`
   & p {
     color: var(--black-900);
+    ${font(21, 32)};
+    ${stretch(109)};
   }
 `;
 
@@ -530,10 +550,16 @@ const TermsContent = styled.ul`
 
 const NavigationWrapper = styled.nav`
   padding-top: 14px;
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
 `;
 
 const Info = styled.div`
   grid-column-start: 2;
+  @media screen and (max-width: 991px) {
+    grid-column-start: 1;
+  }
 `;
 
 const Content = styled.div`
@@ -543,10 +569,17 @@ const Content = styled.div`
     );
   grid-column-gap: calc(((1 / 12) * 100%) - 16px);
   grid-row-gap: 55px;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 100%;
+    grid-gap: 39px;
+  }
 `;
 
 const TermsWrapper = styled.div`
   padding: 96px 0 184px;
+  @media screen and (max-width: 991px) {
+    padding: 54px 0 218px;
+  }
 `;
 
 export default connect(Terms);

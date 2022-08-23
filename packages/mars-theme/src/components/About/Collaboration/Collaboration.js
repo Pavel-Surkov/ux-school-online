@@ -4,6 +4,7 @@ import P from "../../constant/Paragraph";
 import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import Input from "../../constant/Input";
 import CheckboxItem from "../../constant/CheckboxItem";
+import CommonModal from "../../constant/CommonModal";
 import { TitleM } from "../../constant/Title";
 import { flex, font } from "../../base/functions";
 import { styled } from "frontity";
@@ -13,9 +14,14 @@ import { useFormik } from "formik";
 const Collaboration = () => {
   const [isUserAgree, setIsUserAgree] = useState(true);
 
+  const [submitModalOpened, setSubmitModalOpened] = useState(false);
+
   const formik = useFormik({
     initialValues: { name: "", tel: "" },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      console.log(values);
+      setSubmitModalOpened(true);
+    },
   });
 
   return (
@@ -67,6 +73,15 @@ const Collaboration = () => {
           </FormWrapper>
         </Content>
       </Container>
+      <ModalWrapper>
+        <CommonModal
+          isOpened={submitModalOpened}
+          setIsOpened={setSubmitModalOpened}
+        >
+          <ModalTitle>Заявка отправлена</ModalTitle>
+          <P size="l">Наш менеджер скоро свяжется с вами</P>
+        </CommonModal>
+      </ModalWrapper>
     </section>
   );
 };
@@ -79,6 +94,25 @@ const SubmitWrapper = styled.div`
     & button {
       max-width: 100%;
     }
+  }
+`;
+
+const ModalWrapper = styled.div`
+  & .modal {
+    max-width: 670px;
+    box-sizing: border-box;
+  }
+  @media screen and (max-width: 991px) {
+    & .modal {
+      max-width: calc(100% - 32px);
+    }
+  }
+`;
+
+const ModalTitle = styled(TitleM)`
+  margin-bottom: 23px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
   }
 `;
 

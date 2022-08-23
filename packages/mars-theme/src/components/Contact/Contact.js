@@ -191,6 +191,7 @@ const Icon = styled.div`
   display: grid;
   place-items: center;
   margin-right: 16px;
+  flex-shrink: 0;
 `;
 
 const SocialItem = styled.li`

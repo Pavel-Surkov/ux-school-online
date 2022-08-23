@@ -349,6 +349,9 @@ const Subtitle = styled.div`
   margin: 0 auto 63px;
   z-index: 2;
   position: relative;
+  & p {
+    text-align: center;
+  }
   @media screen and (max-width: 991px) {
     margin-bottom: 33px;
   }
@@ -377,10 +380,8 @@ const Wrapper = styled.div`
     padding: 110px 0 104px;
     margin-bottom: -372px;
 
-    @media screen and (max-width: 991px) {
-      & .modal {
-        max-width: calc(100% - 32px);
-      }
+    & .modal {
+      max-width: calc(100% - 32px);
     }
 
     & .modal-wrapper {

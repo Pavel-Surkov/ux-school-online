@@ -34,7 +34,11 @@ const TitleSection = () => {
                   использовать, что стоит делать.
                 </P>
               </InfoText>
-              <InfoLink link="http://ux-mind.pro">
+              <InfoLink
+                target="_blank"
+                rel="noopener noreferrer"
+                link="http://ux-mind.pro"
+              >
                 ux-mind.pro
                 <img width="24" height="24" src={linkExternal} alt="" />
               </InfoLink>

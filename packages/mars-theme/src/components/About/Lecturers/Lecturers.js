@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import { TitleS } from "../../constant/Title";
@@ -10,19 +10,19 @@ import teacher2x from "../../../assets/images/teacher@2x.png";
 
 const lecturers = [
   {
-    name: "Игорь Колесень",
+    name: "Александр Колесень",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Игорь Колесень",
+    name: "Олег Колесень",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Игорь Колесень",
+    name: "Игорь Луцик",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
@@ -46,13 +46,13 @@ const lecturers = [
     image2x: teacher2x,
   },
   {
-    name: "Оля Казанза",
+    name: "Наташа Казанза",
     position: "Преподаватель курса «веб-дизайн»",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Ксюша Лебедева",
+    name: "Ксюша Ефремова",
     position: "Преподаватель курса «дизайн старт»",
     image: teacher,
     image2x: teacher2x,
@@ -70,7 +70,7 @@ const lecturers = [
     image2x: teacher2x,
   },
   {
-    name: "Ксюша Лебедева",
+    name: "Ксюша Суркова",
     position: "Преподаватель курса «дизайн старт»",
     image: teacher,
     image2x: teacher2x,
@@ -84,6 +84,40 @@ const lecturers = [
 ];
 
 const Lecturers = ({ state }) => {
+  const [isLaptop, setIsLaptop] = useState(false);
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth > 1400) {
+      setIsLaptop(false);
+    } else {
+      setIsLaptop(true);
+    }
+
+    window.addEventListener("resize", () => {
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth > 1400) {
+        setIsLaptop(false);
+      } else {
+        setIsLaptop(true);
+      }
+    });
+
+    return () => {
+      window.removeEventListener(() => {
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth > 1400) {
+          setIsLaptop(false);
+        } else {
+          setIsLaptop(true);
+        }
+      });
+    };
+  }, []);
+
   return (
     <Section>
       <Container>
@@ -94,7 +128,11 @@ const Lecturers = ({ state }) => {
                 return null;
               }
 
-              return (
+              if (isLaptop && idx > 9) {
+                return null;
+              }
+
+              return idx > 11 ? null : (
                 <Lecturer key={lecturer.name}>
                   <ImgWrapper>
                     <img

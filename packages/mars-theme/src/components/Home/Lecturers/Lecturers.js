@@ -42,11 +42,12 @@ const Lecturers = ({ state }) => {
               breakpoints={{
                 992: {
                   slidesPerView: 3,
+                  centeredSlides: false,
                 },
                 577: {
+                  centeredSlides: false,
                   slidesPerView: 2,
                   spaceBetween: 24,
-                  centeredSlides: false,
                 },
               }}
             >

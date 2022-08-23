@@ -4,6 +4,7 @@ import Link from "../constant/TextLink";
 import Input from "../constant/Input";
 import CheckboxItem from "../constant/CheckboxItem";
 import PrimaryBtn from "../constant/PrimaryButton";
+import CommonModal from "../constant/CommonModal";
 import { flex, font, grayRgba, stretch } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
@@ -54,11 +55,13 @@ const Contact = ({ state }) => {
   const { isMobile } = state.theme;
 
   const [isUserAgree, setIsUserAgree] = useState(true);
+  const [submitModalOpened, setSubmitModalOpened] = useState(false);
 
   const formik = useFormik({
     initialValues: { name: "", tel: "", email: "" },
     onSubmit: (values) => {
       console.log(values);
+      setSubmitModalOpened(true);
     },
   });
 
@@ -111,6 +114,7 @@ const Contact = ({ state }) => {
           <ContactForm>
             <div>
               <Input
+                required
                 type="text"
                 placeholder="Имя"
                 value={formik.values.name}
@@ -120,6 +124,7 @@ const Contact = ({ state }) => {
             </div>
             <div>
               <Input
+                required
                 type="tel"
                 placeholder="Телефон"
                 value={formik.values.tel}
@@ -146,9 +151,37 @@ const Contact = ({ state }) => {
           </ContactForm>
         </FormBlock>
       </Content>
+      <ModalWrapper>
+        <CommonModal
+          isOpened={submitModalOpened}
+          setIsOpened={setSubmitModalOpened}
+        >
+          <ModalTitle>Заявка отправлена</ModalTitle>
+          <P size="l">Наш менеджер скоро свяжется с вами</P>
+        </CommonModal>
+      </ModalWrapper>
     </ContactsWrapper>
   );
 };
+
+const ModalWrapper = styled.div`
+  & .modal {
+    max-width: 670px;
+    box-sizing: border-box;
+  }
+  @media screen and (max-width: 991px) {
+    & .modal {
+      max-width: calc(100% - 32px);
+    }
+  }
+`;
+
+const ModalTitle = styled(TitleM)`
+  margin-bottom: 23px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
+  }
+`;
 
 const SubmitWrapper = styled.div`
   padding-top: 16px;

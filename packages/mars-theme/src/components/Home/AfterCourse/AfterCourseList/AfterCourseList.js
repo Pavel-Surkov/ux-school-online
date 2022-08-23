@@ -190,6 +190,7 @@ const ClosedItem = styled.div`
   height: 100%;
   box-sizing: border-box;
   position: relative;
+  cursor: pointer;
   @media screen and (max-width: 991px) {
     padding: 12px 24px;
   }

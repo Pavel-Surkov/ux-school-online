@@ -33,13 +33,13 @@ const socials = [
   {
     id: 3,
     icon: whatsapp,
-    link: "https://wa.me/375298630657",
+    link: "https://api.whatsapp.com/send?phone=375(29)%20863-06-57",
     content: "+375 (29) 863-06-57",
   },
   {
     id: 4,
     icon: viber,
-    link: "viber://chat?number=%2B375298630657",
+    link: "https://viber.click/375(29)%20863-06-57",
     content: "+375 (29) 863-06-57",
   },
   {

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Container from "../constant/Container";
 import TextLink from "../constant/TextLink";
 import P from "../constant/Paragraph";
+import { font, stretch } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
 
@@ -319,6 +320,74 @@ const terms = [
 const Terms = ({ state }) => {
   const { isMobile } = state.theme;
 
+  const contentRef = useRef(null);
+
+  const [scrollValues, setScrollValues] = useState(null);
+  const [windowPosition, setWindowPosition] = useState(0);
+  const [hoveredElementIndex, setHoveredElementIndex] = useState(0);
+
+  const scrollToTerm = (index) => {
+    const contentBlock = contentRef.current;
+
+    const term = contentBlock.children[index];
+
+    term.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (contentRef) {
+      const contentBlock = contentRef.current;
+
+      const scrollValues = [];
+
+      Array.from(contentBlock.children).forEach((el, idx) => {
+        const topScroll = el.getBoundingClientRect().top + window.pageYOffset;
+
+        scrollValues.push({ index: idx, top: topScroll });
+      });
+
+      setScrollValues(scrollValues);
+    }
+  }, [contentRef]);
+
+  useEffect(() => {
+    if (scrollValues !== null) {
+      const doc = document.documentElement;
+
+      window.addEventListener("scroll", () => {
+        const topPosition =
+          (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+
+        setWindowPosition(topPosition);
+      });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", () => {
+        const topPosition =
+          (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+
+        setWindowPosition(topPosition);
+      });
+    };
+  }, [scrollValues]);
+
+  useEffect(() => {
+    if (scrollValues !== null) {
+      const termsScrolls = scrollValues;
+
+      const activeTermIndex = termsScrolls.reduce((activeIdx, current, idx) => {
+        if (windowPosition > current.top) {
+          return idx;
+        }
+
+        return activeIdx;
+      }, 0);
+
+      setHoveredElementIndex(activeTermIndex);
+    }
+  }, [windowPosition]);
+
   return (
     <TermsWrapper>
       <Container>
@@ -341,9 +410,17 @@ const Terms = ({ state }) => {
             </Subtitle>
           </Info>
           <NavigationWrapper>
-            <Navigation></Navigation>
+            <Navigation>
+              {terms.map((term, idx) => (
+                <NavItem key={term.id} onClick={() => scrollToTerm(idx)}>
+                  <NavButton
+                    active={hoveredElementIndex === idx}
+                  >{`${term.id}. ${term.title}`}</NavButton>
+                </NavItem>
+              ))}
+            </Navigation>
           </NavigationWrapper>
-          <TermsContent>
+          <TermsContent ref={contentRef}>
             {terms.map((term) => {
               const termNumber = term.id;
 
@@ -356,7 +433,7 @@ const Terms = ({ state }) => {
                     const termItemNumber = termItem.id;
 
                     return (
-                      <>
+                      <React.Fragment key={termItemNumber}>
                         <Term size="l">
                           {`${termNumber}.${termItemNumber}. `}
                           <span
@@ -370,7 +447,7 @@ const Terms = ({ state }) => {
                             const underTermItemNumber = underTermItem.id;
 
                             return (
-                              <Term size="l">
+                              <Term size="l" key={underTermItemNumber}>
                                 {`${termNumber}.${termItemNumber}.${underTermItemNumber}. `}
                                 <span
                                   dangerouslySetInnerHTML={{
@@ -380,7 +457,7 @@ const Terms = ({ state }) => {
                               </Term>
                             );
                           })}
-                      </>
+                      </React.Fragment>
                     );
                   })}
                 </TermsItem>
@@ -393,7 +470,35 @@ const Terms = ({ state }) => {
   );
 };
 
-const Navigation = styled.nav``;
+const NavButton = styled.button`
+  background: transparent;
+  display: inline;
+  border: none;
+  padding: 0;
+  color: ${({ active }) => (active ? "var(--gray-200)" : "var(--black-900)")};
+  ${font(14, 20)};
+  ${stretch(110)};
+  text-align: left;
+  &:hover {
+    color: var(--link-500);
+  }
+`;
+
+const NavItem = styled.li`
+  padding: 0;
+  margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const Navigation = styled.ol`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: sticky;
+  top: 80px;
+`;
 
 const Term = styled(P)`
   color: var(--black-900);
@@ -423,7 +528,9 @@ const TermsContent = styled.ul`
   list-style: none;
 `;
 
-const NavigationWrapper = styled.div``;
+const NavigationWrapper = styled.nav`
+  padding-top: 14px;
+`;
 
 const Info = styled.div`
   grid-column-start: 2;

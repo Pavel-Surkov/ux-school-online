@@ -8,6 +8,17 @@ import { TitleM } from "./constant/Title";
 import page404 from "../assets/images/page404.png";
 import page4042x from "../assets/images/page404@2x.png";
 
+const description = (
+  <TitleS
+    css={css`
+      text-align: center;
+    `}
+  >
+    Don&apos;t panic! Seems like you encountered an error. If this persists, try
+    to refresh your browser.
+  </TitleS>
+);
+
 // The 404 page component
 const Page404 = ({ state }) => {
   const data = state.source.get(state.router.link);
@@ -74,6 +85,12 @@ const Picture = styled.div`
   }
 `;
 
+const Container = styled.div`
+  max-width: 587px;
+  margin: 0 auto;
+  text-align: center;
+`;
+
 const Container404 = styled(Container)`
   padding: 112px 0 205px;
   text-align: center;
@@ -81,10 +98,6 @@ const Container404 = styled(Container)`
     padding-top: 56px;
     padding-bottom: 184px;
   }
-`;
-
-const Title = styled(TitleM)`
-  margin-bottom: 13px;
 `;
 
 export default connect(Page404);

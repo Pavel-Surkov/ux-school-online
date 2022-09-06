@@ -1,9 +1,9 @@
-import { styled, connect } from "frontity";
-import Container from "./constant/Container";
+import { styled, connect, css } from "frontity";
+// import Container from "./constant/Container";
 import P from "./constant/Paragraph";
 import TextLink from "./constant/TextLink";
 import { flex, font, stretch } from "./base/functions";
-import { TitleM } from "./constant/Title";
+import { TitleS, TitleM } from "./constant/Title";
 
 import page404 from "../assets/images/page404.png";
 import page4042x from "../assets/images/page404@2x.png";
@@ -42,6 +42,10 @@ const Page404 = ({ state }) => {
     </Container404>
   );
 };
+
+const Title = styled(TitleM)`
+  margin-bottom: 13px;
+`;
 
 const TextLink404 = styled(TextLink)`
   ${font(16, 24)};
@@ -87,6 +91,7 @@ const Picture = styled.div`
 
 const Container = styled.div`
   max-width: 587px;
+  width: calc(100% - 48px);
   margin: 0 auto;
   text-align: center;
 `;

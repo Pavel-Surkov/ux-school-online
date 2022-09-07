@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Container from "../../constant/Container";
 import SkillsSwiper from "./SkillsSwiper/SkillsSwiper";
 import { TitleM } from "../../constant/Title";
@@ -8,16 +8,6 @@ import { font } from "../../base/functions";
 import poster from "../../../assets/images/about-video.png";
 
 const Skills = () => {
-  const skillsVideoRef = useRef(null);
-
-  const playVideo = () => {
-    const videoElement = skillsVideoRef.current;
-
-    console.log(videoElement);
-
-    videoElement.play();
-  };
-
   return (
     <SkillsSection>
       <VideoContainer>
@@ -27,22 +17,17 @@ const Skills = () => {
               position: relative;
             `}
           >
-            <video width="100%" poster={poster} ref={skillsVideoRef}>
-              <source
-                src="https://www.youtube.com/watch?v=EJWL0ZACABc"
-                type="video/mp4"
-              />
-            </video>
-            {/* <iframe
-              width="560"
-              height="315"
+            <img src={poster} alt="" />
+            <iframe
+              width="100%"
+              height="675"
               src="https://www.youtube.com/embed/EJWL0ZACABc"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-            ></iframe> */}
-            <Play aria-label="play video" onClick={playVideo}>
+            ></iframe>
+            {/* <Play aria-label="play video" onClick={playVideo}>
               <svg
                 width="72"
                 height="72"
@@ -71,7 +56,7 @@ const Skills = () => {
                   strokeOpacity="0.3"
                 />
               </svg>
-            </Play>
+            </Play> */}
           </div>
         </VideoWrapper>
       </VideoContainer>
@@ -116,15 +101,39 @@ const VideoWrapper = styled.div`
   position: absolute;
   top: -272px;
   left: 0;
+  width: 100%;
+  & button {
+    display: none;
+  }
+  & img {
+    position: relative;
+    max-width: 100%;
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  & iframe {
+    border-radius: 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   & video {
     position: relative;
     border-radius: 48px;
   }
   @media screen and (max-width: 991px) {
     top: -88px;
+    & iframe {
+      border-radius: 32px;
+    }
     & video {
       border-radius: 32px;
     }
+  }
+  @media screen and (max-width: 767px) {
   }
   @media screen and (max-width: 576px) {
     width: calc(100vw - 48px);

@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "frontity";
 
-import video from "../../../assets/videos/hero-video.mov";
+import YouTube from "react-youtube";
+
 import poster from "../../../assets/images/about-video-large.png";
 import posterMobile from "../../../assets/images/about-video-large-mobile.png";
 import play from "../../../assets/images/svg/play-large.svg";
 
 const HeroVideo = () => {
   const [isPosterMobile, setIsPosterMobile] = useState(false);
+  const [videoPlayer, setVideoPlayer] = useState(null);
+  const [videoPlays, setVideoPlays] = useState(false);
+
+  const videoOptions = {
+    height: "100%",
+    width: "100%",
+  };
+
+  const _onReady = (e) => {
+    e.target.pauseVideo();
+
+    setVideoPlayer(e.target);
+  };
+
+  const playVideo = () => {
+    if (videoPlayer) {
+      videoPlayer.playVideo();
+      setVideoPlays(true);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -35,11 +56,10 @@ const HeroVideo = () => {
 
   return (
     <Section>
-      <VideoWrapper>
-        <video width="100%" poster={isPosterMobile ? posterMobile : poster}>
-          <source src={video} type="video/mp4" />
-        </video>
-        <Play>
+      <VideoWrapper videoPlays={videoPlays}>
+        <img src={isPosterMobile ? posterMobile : poster} alt="" />
+        <YouTube videoId="EJWL0ZACABc" opts={videoOptions} onReady={_onReady} />
+        <Play onClick={() => playVideo()}>
           <img src={play} alt="play" />
         </Play>
         <Drop>
@@ -64,8 +84,11 @@ const HeroVideo = () => {
   );
 };
 
-const Drop = styled.div`
+const Drop = styled.span`
+  display: block;
   position: absolute;
+  width: 24px;
+  height: 24px;
   left: 50%;
   transform: translateX(-50%);
   bottom: 128px;
@@ -90,8 +113,20 @@ const VideoWrapper = styled.div`
   position: relative;
   max-width: 100%;
   display: flex;
-  & video {
+  & > div {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    ${({ videoPlays }) => (videoPlays ? "z-index: 1" : "z-index: -1")};
+    & iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  & img {
+    max-width: 100vw;
   }
 `;
 

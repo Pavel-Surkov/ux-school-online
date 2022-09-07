@@ -63,7 +63,7 @@ const History = () => {
                             x2="0.499981"
                             y2="438"
                             stroke="#D8DCEC"
-                            stroke-dasharray="3 3"
+                            strokeDasharray="3 3"
                           />
                         </svg>
                         <Point />

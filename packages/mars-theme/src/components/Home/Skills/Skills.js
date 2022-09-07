@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Container from "../../constant/Container";
 import SkillsSwiper from "./SkillsSwiper/SkillsSwiper";
 import { TitleM } from "../../constant/Title";
@@ -8,6 +8,16 @@ import { font } from "../../base/functions";
 import poster from "../../../assets/images/about-video.png";
 
 const Skills = () => {
+  const skillsVideoRef = useRef(null);
+
+  const playVideo = () => {
+    const videoElement = skillsVideoRef.current;
+
+    console.log(videoElement);
+
+    videoElement.play();
+  };
+
   return (
     <SkillsSection>
       <VideoContainer>
@@ -17,10 +27,22 @@ const Skills = () => {
               position: relative;
             `}
           >
-            <video width="100%" poster={poster}>
-              <source src="" type="video/mp4" />
+            <video width="100%" poster={poster} ref={skillsVideoRef}>
+              <source
+                src="https://www.youtube.com/watch?v=EJWL0ZACABc"
+                type="video/mp4"
+              />
             </video>
-            <Play aria-label="play video">
+            {/* <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/EJWL0ZACABc"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe> */}
+            <Play aria-label="play video" onClick={playVideo}>
               <svg
                 width="72"
                 height="72"

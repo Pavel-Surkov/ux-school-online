@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { styled } from "frontity";
-
-import YouTube from "react-youtube";
 
 import poster from "../../../assets/images/about-video-large.png";
 import posterMobile from "../../../assets/images/about-video-large-mobile.png";
 import play from "../../../assets/images/svg/play-large.svg";
 
+import aboutVideo from "../../../assets/videos/UX_Mind_School.mp4";
+
 const HeroVideo = () => {
+  const videoElementRef = useRef(null);
+
   const [isPosterMobile, setIsPosterMobile] = useState(false);
-  const [videoPlayer, setVideoPlayer] = useState(null);
   const [videoPlays, setVideoPlays] = useState(false);
 
-  const videoOptions = {
-    height: "100%",
-    width: "100%",
-  };
+  const toggleVideo = () => {
+    if (videoElementRef.current) {
+      videoPlays
+        ? videoElementRef.current.pause()
+        : videoElementRef.current.play();
 
-  const _onReady = (e) => {
-    e.target.pauseVideo();
-
-    setVideoPlayer(e.target);
-  };
-
-  const playVideo = () => {
-    if (videoPlayer) {
-      videoPlayer.playVideo();
-      setVideoPlays(true);
+      setVideoPlays((prev) => !prev);
     }
   };
 
@@ -57,10 +50,25 @@ const HeroVideo = () => {
   return (
     <Section>
       <VideoWrapper videoPlays={videoPlays}>
-        <img src={isPosterMobile ? posterMobile : poster} alt="" />
-        <YouTube videoId="EJWL0ZACABc" opts={videoOptions} onReady={_onReady} />
-        <Play onClick={() => playVideo()}>
-          <img src={play} alt="play" />
+        <video
+          width="100%"
+          height="1080"
+          loop={true}
+          nocontrols="true"
+          playsInline
+          preload="auto"
+          poster={isPosterMobile ? posterMobile : poster}
+          ref={videoElementRef}
+        >
+          <source src={aboutVideo} type="video/mp4" />
+          Тег video не поддерживается вашим браузером.
+        </video>
+        <Play onClick={() => toggleVideo()}>
+          {videoPlays ? (
+            <img src={play} alt="play" />
+          ) : (
+            <img src={play} alt="play" />
+          )}
         </Play>
         <Drop>
           <svg
@@ -113,6 +121,9 @@ const VideoWrapper = styled.div`
   position: relative;
   max-width: 100%;
   display: flex;
+  & video {
+    object-fit: cover;
+  }
   & > div {
     position: absolute;
     top: 0;
@@ -127,6 +138,16 @@ const VideoWrapper = styled.div`
   }
   & img {
     max-width: 100vw;
+  }
+  @media screen and (max-width: 1400px) {
+    & video {
+      max-height: 800px;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    & video {
+      max-height: 640px;
+    }
   }
 `;
 

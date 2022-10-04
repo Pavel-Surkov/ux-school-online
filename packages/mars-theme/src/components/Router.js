@@ -1,7 +1,7 @@
 import React from "react";
 import Home from "./Home/Home";
 import About from "./About/About";
-import Payment from "./Payment/Payment";
+// import Payment from "./Payment/Payment";
 import Contact from "./Contact/Contact";
 import Terms from "./Terms/Terms";
 import PageError from "./PageError";
@@ -15,8 +15,8 @@ const Router = ({ state }) => {
       return <Home />;
     case "/about/":
       return <About />;
-    case "/payment/":
-      return <Payment />;
+    // case "/payment/":
+    // return <Payment />;
     case "/contacts/":
       return <Contact />;
     case "/terms/":

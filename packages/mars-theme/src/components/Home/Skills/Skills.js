@@ -23,9 +23,8 @@ const Skills = () => {
               height="675"
               src="https://www.youtube.com/embed/EJWL0ZACABc"
               title="YouTube video player"
-              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen=""
             ></iframe>
             {/* <Play aria-label="play video" onClick={playVideo}>
               <svg

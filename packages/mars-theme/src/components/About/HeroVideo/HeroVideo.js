@@ -4,6 +4,7 @@ import { styled } from "frontity";
 import poster from "../../../assets/images/about-video-large.png";
 import posterMobile from "../../../assets/images/about-video-large-mobile.png";
 import play from "../../../assets/images/svg/play-large.svg";
+import pause from "../../../assets/images/svg/pause-large.svg";
 
 import aboutVideo from "../../../assets/videos/UX_Mind_School.mp4";
 
@@ -65,7 +66,7 @@ const HeroVideo = () => {
         </video>
         <Play onClick={() => toggleVideo()}>
           {videoPlays ? (
-            <img src={play} alt="play" />
+            <img src={pause} alt="pause" />
           ) : (
             <img src={play} alt="play" />
           )}

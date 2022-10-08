@@ -21,7 +21,7 @@ const marsTheme = {
       autoPrefetch: "in-view",
       courseModalOpened: false,
       menu: [
-        ["Oплатить курс", "/payment"],
+        ["Oплатить курс", "https://ux-school.by/oplatit-kurs-online/"],
         ["О школе", "/about"],
         ["Контакты", "/contacts"],
       ],
@@ -66,9 +66,11 @@ const marsTheme = {
       toggleCourseModal: ({ state }) => {
         state.theme.courseModalOpened = !state.theme.courseModalOpened;
       },
-      setRatesElement: ({ state }) => (el) => {
-        state.theme.ratesElement = el;
-      },
+      setRatesElement:
+        ({ state }) =>
+        (el) => {
+          state.theme.ratesElement = el;
+        },
       setHeaderTheme: ({ state }) => {
         switch (state.router.link) {
           case "/": {
